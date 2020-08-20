@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "imoveis",
+    "label": "Imóveis",
+    "icon": "house",
+    "to": "/index"
+  },
+  {
+    "id": 2,
+    "name": "auto_pecas",
+    "label": "Auto Peças",
+    "icon": "directions_car",
+    "to": "/index"
+  },
+  {
+    "id": 3,
+    "name": "Esportes",
+    "label": "Esportes",
+    "icon": "sports_handball",
+    "to": "/index"
+  },
+  {
+    "id": 4,
+    "name": "Servicos",
+    "label": "Serviços",
+    "icon": "handyman",
+    "to": "/index"
+  },
+  {
+    "id": 5,
+    "name": "para_casa",
+    "label": "Para Casa",
+    "icon": "local_laundry_service",
+    "to": "/index"
+  },
+  {
+    "id": 6,
+    "name": "infantil",
+    "label": "Artigo Infantis",
+    "icon": "child_friendly",
+    "to": "/index"
+  },
+  {
+    "id": 7,
+    "name": "pets",
+    "label": "Pets",
+    "icon": "pets",
+    "to": "/index"
+  },
+  {
+    "id": 8,
+    "name": "eletronicos",
+    "label": "Eletrônicos",
+    "icon": "phonelink_ring",
+    "to": "/index"
+  },
+  {
+    "id": 9,
+    "name": "fitness",
+    "label": "Fitness",
+    "icon": "fitness_center",
+    "to": "/index"
+  },
+  {
+    "id": 10,
+    "name": "musica",
+    "label": "Música",
+    "icon": "music_note",
+    "to": "/index"
+  }
+]
