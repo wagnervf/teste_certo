@@ -131,7 +131,7 @@ export default {
     return {
       leftDrawerOpen: false,
       links1: [
-        { icon: 'home', text: 'Home' },
+        { icon: 'home', text: 'Imóveis' },
         { icon: 'whatshot', text: 'Trending' },
         { icon: 'subscriptions', text: 'Subscriptions' }
       ],

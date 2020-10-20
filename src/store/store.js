@@ -50,11 +50,13 @@ const actions = {
     firebaseAuth.signInWithEmailAndPassword(payload.email, payload.password)
       .then(response => {
         console.log(response)
+        this.$router.push('/index')
       })
       .catch(error => {
         console.log(error.message)
       })
   },
+
   logoutUser () {
     firebaseAuth.signOut()
   },

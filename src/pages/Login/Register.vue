@@ -1,69 +1,97 @@
 <template>
-  <div>
-    <q-card-section class="q-pa-sm q-pa-xs">
-      <q-input
-        clearable
-        outlined
-        label="Nome"
-        v-model="formData.name"
-        lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Obrigatório']"
-      >
-        <template v-slot:prepend>
-          <q-icon name="account_box" />
-        </template>
-      </q-input>
-
-      <q-input
-        v-model="formData.email"
-        clearable
-        outlined
-        label="Email"
-        class="q-py-md"
-        lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Obrigatório']"
-      >
-        <template v-slot:prepend>
-          <q-icon name="email" />
-        </template>
-      </q-input>
-      <q-input
-        v-model="formData.password"
-        clearable
-        label="Senha"
-        outlined
-        class="q-py-md"
-        lazy-rules
-        :type="isPwd ? 'password' : 'text'"
-        :rules="[ val => val && val.length > 0 || 'Obrigatório']"
-      >
-        <template v-slot:prepend>
-          <q-icon name="lock" />
-        </template>
-        <template v-slot:append>
-          <q-icon
-            :name="isPwd ? 'visibility_off' : 'visibility'"
-            class="cursor-pointer"
-            @click="isPwd = !isPwd"
-          />
-        </template>
-      </q-input>
-
+  <div class="q-pa-sm">
+    <q-card-section class="text-center">
+      <div class="text-h5  text-grey">Crie sua conta. É grátis!</div>
     </q-card-section>
 
-    <q-card-actions
-      align="right"
-      class="q-pa-sm"
+    <q-form
+      @submit="submitForm"
+      @reset="onReset"
+      class="q-gutter-md"
     >
-      <q-btn
-        label="Cadastrar"
-        type="submit"
-        color="primary"
-        con-right="send"
-        class="full-width"
-      />
-    </q-card-actions>
-    <q-separator />
+      <q-card-section class="q-pa-sm">
+        <q-input
+          v-model="formData.nome"
+          ref="nome"
+          outlined
+          label="Nome"
+          class="q-py-md"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Obrigatório'] "
+          v-autofocus
+          clearable
+        >
+          <template v-slot:prepend>
+            <q-icon name="account_box" />
+          </template>
+        </q-input>
+
+        <q-input
+          v-model="formData.email"
+          ref="email"
+          outlined
+          label="Email"
+          class="q-py-md"
+          :rules="[
+                val => !! val || '* Obrigatório',
+                val => isValidEmail(val) || 'Digite um email válido!'
+              ]"
+          lazy-rules
+          clearable
+          type="email"
+        >
+          <template v-slot:prepend>
+            <q-icon name="email" />
+          </template>
+        </q-input>
+        <q-input
+          v-model="formData.senha"
+          label="Senha"
+          ref="senha"
+          outlined
+          class="q-py-md"
+          lazy-rules
+          :type="isPwd ? 'password' : 'text'"
+          :rules="[
+                val => !!val || '* Obrigatório',
+                val => val.length >=6 || 'Digite no mínimo 6 caracteres.'
+              ]"
+          clearable
+        >
+          <template v-slot:prepend>
+            <q-icon name="lock" />
+          </template>
+          <template v-slot:append>
+            <q-icon
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwd = !isPwd"
+            />
+          </template>
+        </q-input>
+
+      </q-card-section>
+
+      <q-card-actions
+        align="right"
+        class="q-pa-xs q-mt-none"
+      >
+        <q-btn
+          :loading="loading"
+          color="primary"
+          type="submit"
+          con-right="send"
+          class="full-width"
+          style="width: 150px"
+        >
+          Cadastrar
+          <template v-slot:loading>
+            <q-spinner-hourglass class="on-left" />
+            Cadastrando...
+          </template>
+        </q-btn>
+      </q-card-actions>
+    </q-form>
 
   </div>
 
@@ -71,12 +99,13 @@
 
 <script>
 import { mapActions } from 'vuex'
+
 export default {
-  props: ['tab'],
+
   data () {
     return {
       formData: {
-        name: '',
+        nome: '',
         email: 'vanelli@teste.com',
         password: '123456'
       },
@@ -84,37 +113,47 @@ export default {
       name: null,
       age: null,
       accept: false,
-      icons: ''
+      icons: '',
+      loading: false,
+    }
+  },
+
+  directives: {
+    autofocus: {
+      inserted (el) {
+        el.focus()
+      }
     }
   },
 
   methods: {
-    ...mapActions('store', ['registerUser', 'loginUser']),
-    submitForm () {
-      if (this.tab == 'login') {
-        this.loginUser(this.formData)
-      } else {
-        this.registerUser(this.formData)
+    ...mapActions('store_auth', ['criarUsuario']),
 
+
+    submitForm () {
+
+      this.$refs.nome.validate()
+      this.$refs.email.validate()
+      this.$refs.senha.validate()
+
+      if (!this.$refs.nome.hasError && !this.$refs.email.hasError && !this.$refs.senha.hasError) {
+        this.simulateProgress()
+        this.criarUsuario(this.formData)
       }
+
+
     },
-    onSubmit () {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to accept the license and terms first'
-        })
-      }
-      else {
-        this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Submitted'
-        })
-      }
+
+    isValidEmail (email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    },
+
+    simulateProgress () {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
     },
 
     onReset () {
@@ -128,5 +167,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
+.auth-tabs {
+  max-width: 600px;
+  margin: 0 auto;
+}
 </style>

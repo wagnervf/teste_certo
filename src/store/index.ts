@@ -3,6 +3,7 @@ import Vue from "vue"
 import Vuex from "vuex"
 
 import store from "./store"
+import store_auth from "./myStores/store-auth"
 
 /*
  * If not building with SSR mode, you can
@@ -19,7 +20,8 @@ export interface StoreInterface {
 export default (function () {
   const Store = new Vuex.Store({
     modules: {
-      store
+      store,
+      store_auth
     },
 
     // enable strict mode (adds overhead!)

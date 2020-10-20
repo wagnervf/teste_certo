@@ -68,7 +68,7 @@
         aria-hidden="true"
         v-if="!userDetails.userId"
         name="Entrar"
-        to="/login"
+        to="/auth"
         exact
       >
         <q-item-section avatar>
@@ -85,7 +85,7 @@
         v-else
         @click="logoutUser"
         name="sair"
-        to="/login"
+        to="/auth"
         exact
       >
         <q-item-section avatar>

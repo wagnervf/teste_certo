@@ -7,7 +7,7 @@
         class="bg-primary text-white shadow-2 py-0"
         style="height: 100px;"
       >
-        <q-tab
+        <q-route-tab
           v-for="tab in tabs"
           :key="tab.id"
           :name="tab.name"

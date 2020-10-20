@@ -1,22 +1,24 @@
 // Config file
-import * as firebases from "firebase/app";
+import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyD_Xin2UhstFacQ_yjqHoFFoVtZ9T_W1ME",
-  authDomain: "smartchat-8db51.firebaseapp.com",
-  databaseURL: "https://smartchat-8db51.firebaseio.com",
-  projectId: "smartchat-8db51",
-  storageBucket: "smartchat-8db51.appspot.com",
-  messagingSenderId: "118267131433",
-  appId: "1:118267131433:web:a60d05cad52c16e000ce38"
+const firebaseConfig = {
+  apiKey: "AIzaSyBU9xGRxje7QSf2BzRErbNfRwDPCMlxMbY",
+  authDomain: "olugarcerto-6aefb.firebaseapp.com",
+  databaseURL: "https://olugarcerto-6aefb.firebaseio.com",
+  projectId: "olugarcerto-6aefb",
+  storageBucket: "olugarcerto-6aefb.appspot.com",
+  messagingSenderId: "186006302647",
+  appId: "1:186006302647:web:6aa1138587c4558bf30232",
+  measurementId: "G-FBZ12QB448"
 };
 // Initialize Firebase
-firebases.initializeApp(firebaseConfig);
-//let firebaseApp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-let firebaseAuth = firebases.auth();
-let firebaseDb = firebases.database();
+//firebase.analytics();
+let firebaseApp = firebase.initializeApp(firebaseConfig);
+
+let firebaseAuth = firebaseApp.auth()
+let firebaseDb = firebaseApp.database();
 
 export { firebaseAuth, firebaseDb }
+

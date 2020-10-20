@@ -4,7 +4,7 @@
     "name": "imoveis",
     "label": "Imóveis",
     "icon": "house",
-    "to": "/index"
+    "to": "/imoveis"
   },
   {
     "id": 2,
