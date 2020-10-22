@@ -88,14 +88,16 @@
 
 <script>
 import { mapActions } from 'vuex'
+
 export default {
   props: ['tab'],
+
   data () {
     return {
       formData: {
         name: '',
-        email: '',
-        password: ''
+        email: 'vanelli@teste.com',
+        password: '123456'
       },
       isPwd: true,
       name: null,
@@ -113,8 +115,12 @@ export default {
       this.$refs.password.validate()
 
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
+
         this.loginUsuario(this.formData)
+
+
       }
+
 
     },
 
@@ -124,9 +130,9 @@ export default {
     },
 
     onReset () {
-      this.name = null
-      this.age = null
-      this.accept = false
+      // this.name = null
+      // this.age = null
+      // this.accept = false
     }
   },
 

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="auth-tabs q-py-md">
+  <div class="auth-tabs">
     <q-card>
       <q-tabs
         v-model="tab"
@@ -23,15 +23,18 @@
 
       <q-separator />
 
-      <div class="row q-pl-md q-pt-md ">
-        <div class="col-8 q-pl-md text-center">
+      <div class="row q-pa-sm">
+        <div class="col text-center">
           <div class="text-h5 q-mt-sm q-mb-xs">O Lugar Certo</div>
           <div class="text-caption text-grey">
             Desapegar do que você já não é mais apegado.
           </div>
         </div>
 
-        <div class="col-4 offset-md-4">
+        <div
+          class="col-3"
+          v-if="!isMobile"
+        >
           <q-img
             class="rounded-borders"
             src="icons/olc/logo_olc2.png"
@@ -120,9 +123,11 @@
 <script>
 import PageLogin from './Login'
 import PageRegister from './Register'
+import mixinUtils from 'src/mixins/mixin-utils'
 
 export default {
 
+  mixins: [mixinUtils],
 
   components: {
     PageLogin,

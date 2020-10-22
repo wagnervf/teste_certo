@@ -1,76 +1,28 @@
 <template>
-  <q-layout
-    view="hHh lpR lF"
-    class="bg-grey-1"
-  >
-    <q-header class="bg-white text-grey-8 shadow-box shadow-1">
+  <q-layout class="bg-grey-1">
 
-      <div class="row q-py-md">
-        <div class="col-1"><span class="q-ml-sm">Título</span></div>
+    <div v-if="isMobile || telaWidth < 1024">
+      <DrawerMobile />
+      <!-- <HeaderMobile /> -->
+    </div>
 
-        <div class="col-sm ">
-          <q-input
-            class="col q-px-md"
-            standout="bg-primary"
-            v-model="search"
-            placeholder="Pesquisar"
-          >
-            <template v-slot:prepend>
-              <q-icon
-                v-if="search === ''"
-                name="search"
-              />
-              <q-icon
-                v-else
-                name="clear"
-                class="cursor-pointer"
-                @click="search = ''"
-              />
-            </template>
-          </q-input>
-        </div>
+    <q-header v-else>
+      <HeaderDesktop />
 
-        <div class="right-align">
-          <q-btn
-            align="left"
-            size="lg"
-            class="btn-fixed-width q-px-md"
-            color="primary"
-            label="Anunciar"
-            :to="{ name: 'index'}"
-          />
-          <q-btn
-            flat
-            dense
-            no-wrap
-            color="primary"
-            icon="account_circle"
-            no-caps
-            label="Entrar"
-            class="q-ml-sm q-px-md"
-          />
-          <q-btn-dropdown
-            unelevated
-            v-model="userInfoOpen"
-            no-caps
-            class="col"
-          >
-            <template v-slot:label>
-              <div class="row items-center no-wrap">
-                <div class="text-center q-pa-sm">
-                  John Smith
-                </div>
-              </div>
-            </template>
-            <user-info></user-info>
-          </q-btn-dropdown>
-        </div>
-
-      </div>
-
+      <div class="q-py-sm">
+        <q-btn
+          align="left"
+          size="lg"
+          class="btn-fixed-width q-px-md"
+          color="primary"
+          rounded
+          :to="{ name: 'administracao'}"
+          label="Administracao"
+        />
+      </div> <!-- Entrar -->
     </q-header>
 
-    <Drawer />
+    <!-- <Drawer /> -->
 
     <q-page-container>
       <router-view />
@@ -90,24 +42,31 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-import { mapState, mapActions } from 'vuex'
-import store from '../store/store'
-import { METHODS } from 'http'
-import mixinOtherUserDetails from 'src/mixins/mixin-other-user-details'
+//import { mapState, mapActions } from 'vuex'
+// import store from '../store/store'
+// import { METHODS } from 'http'
+import mixinUtils from 'src/mixins/mixin-utils'
 import UserInfo from '../components/menu/userinfo.vue';
+
+import HeaderDesktop from './headerDesktop'
+import HeaderMobile from './headerMobile'
 import Drawer from './Drawer'
+import DrawerMobile from './DrawerMobile'
 
+//import { Screen } from 'quasar'
 
-//import Drawer from './Drawer'
 
 export default {
   name: 'LayoutPadrao',
 
-  mixins: [mixinOtherUserDetails],
+  mixins: [mixinUtils],
 
   components: {
     UserInfo,
-    Drawer
+    HeaderDesktop,
+    Drawer,
+    HeaderMobile,
+    DrawerMobile
   },
 
   data () {
@@ -118,32 +77,63 @@ export default {
       openSearch: false,
       search: '',
       userInfoOpen: false,
-      pesquisarVisible: true
+      pesquisarVisible: true,
+      tipoPlataforma: null
 
     }
   },
 
   computed: {
-    ...mapState('store', ['userDetails']),
+    // ...mapState('store_auth', ['loggedIn']),
+    // ...mapState('store_plataform', ['mobile', 'desktop']),
+
+    // userEstaLogado () {
+    //   return this.loggedIn
+    // },
+
+    // isMobile () {
+    //   return this.mobile
+    // },
+    // telaWidth () {
+    //   return this.$q.screen.width
+    // },
+
+    // telaHeight () {
+    //   return this.$q.screen.height
+    // },
+
 
 
     title () {
       //return this.$route.fullPath == '/' ? 'Home' : this.$route.fullPath.substr(1).toLocaleUpperCase()
-      let currentPath = this.$route.fullPath
-      if (currentPath == '/') return 'FireChat'
-      else if (currentPath.includes('/chat')) return this.mixinOtherUserDetails.name
-      else if (currentPath == '/auth') return 'Login'
+      // let currentPath = this.$route.fullPath
+      // if (currentPath == '/') return 'FireChat'
+      // else if (currentPath.includes('/chat')) return this.mixinOtherUserDetails.name
+      // else if (currentPath == '/auth') return 'Login'
     },
 
     retornar () {
-      return this.$route.fullPath.includes('/chat')
+      //   return this.$route.fullPath.includes('/chat')
     },
+
+    // mobile () {
+    //   return this.tipoPlataforma.is.mobile
+    // }
   },
+
+  methods: {
+
+
+    // isMobile (ssrContext) {
+    //   this.tipoPlataforma = process.env.SERVER
+    //     ? Platform.parseSSR(ssrContext)
+    //     : Platform // otherwise we're on client
+
+    //   console.log(this.tipoPlataforma.is.mobile)
+
+    // }
+  }
 
 
 }
 </script>
-<style lang="sass">
-</style>
-
-

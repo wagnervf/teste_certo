@@ -1,0 +1,47 @@
+{
+  "olc_db": {
+    "users": {
+      "ikmAw1UQGFRqPhKv5ISBTd3kWV52": {
+        "name": "User",
+        "email": "user@gmail.com",
+        "created": "2019/03/12",
+        "update": "2019/03/12",
+        "permission_id": "ID1",
+        "active": "true"
+      },
+      "0TiIWbsyXYXNPJeQMlAZ7dWiJeW2": {
+        "name": "Vanelli",
+        "email": "vanelli@teste.com",
+        "created": "2019/05/12",
+        "update": "2019/05/12",
+        "permission_id": "ID2",
+        "active": "true"
+      },
+      "BcT3RBp8WRSqVLlGqUts8DSUV9n2": {
+        "name": "Wagner",
+        "email": "wagner@gmail.com",
+        "created": "2019/08/12",
+        "update": "2019/08/12",
+        "permission_id": "ID99",
+        "active": "false"
+      }
+    },
+    "permissions": {
+      "ID1": {
+        "desciption": "PUBLIC",
+        "created": "2019/03/12",
+        "active": "true"
+      },
+      "ID2": {
+        "desciption": "COMERCIAL",
+        "created": "2019/03/12",
+        "active": "true"
+      },
+      "ID99": {
+        "desciption": "ADMIN",
+        "created": "2019/03/12",
+        "active": "true"
+      }
+    }
+  }
+}

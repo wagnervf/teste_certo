@@ -4,6 +4,8 @@ import Vuex from "vuex"
 
 import store from "./store"
 import store_auth from "./myStores/store-auth"
+import store_plataform from "./myStores/store-plataform"
+import store_db_firebase from "./myStores/store-db-firebase"
 
 /*
  * If not building with SSR mode, you can
@@ -21,7 +23,9 @@ export default (function () {
   const Store = new Vuex.Store({
     modules: {
       store,
-      store_auth
+      store_auth,
+      store_plataform,
+      store_db_firebase
     },
 
     // enable strict mode (adds overhead!)

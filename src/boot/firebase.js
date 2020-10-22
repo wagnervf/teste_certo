@@ -3,6 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBU9xGRxje7QSf2BzRErbNfRwDPCMlxMbY",
   authDomain: "olugarcerto-6aefb.firebaseapp.com",
@@ -19,6 +20,10 @@ let firebaseApp = firebase.initializeApp(firebaseConfig);
 
 let firebaseAuth = firebaseApp.auth()
 let firebaseDb = firebaseApp.database();
+
+
+
+
 
 export { firebaseAuth, firebaseDb }
 

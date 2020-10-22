@@ -1,10 +1,34 @@
 <template>
-  <div class="q-px-0">
-    <div class="q-gutter-y-md full-width pa-0">
+  <div style="position: relative">
+
+    <div class="full-width">
+      <div class="col">
+        <q-input
+          v-model="search"
+          filled
+          placeholder="Buscar"
+        >
+          <template v-slot:prepend>
+            <q-icon
+              v-if="search === ''"
+              name="search"
+            />
+            <q-icon
+              v-else
+              name="clear"
+              class="cursor-pointer"
+              @click="search = ''"
+            />
+          </template>
+        </q-input>
+      </div>
+    </div>
+
+    <div class="q-gutter-y-sm full-width">
       <q-tabs
         outside-arrows
         mobile-arrows
-        class="bg-primary text-white shadow-2 py-0"
+        class="bg-primary text-white shadow-2 "
         style="height: 100px;"
       >
         <q-route-tab
@@ -18,7 +42,7 @@
         />
       </q-tabs>
 
-      <q-tabs
+      <!-- <q-tabs
         id="tabsEstados"
         outside-arrows
         mobile-arrows
@@ -34,23 +58,34 @@
           :label="tab.Sigla"
         />
 
-      </q-tabs>
+      </q-tabs> -->
 
     </div>
+
   </div>
 </template>
 
 <script>
 import tabsJson from '../dados/TabsIndex.json'
 import tabsEstados from '../dados/TabsEstados.json'
+import { mapState, mapActions } from 'vuex'
+import mixinUtils from 'src/mixins/mixin-utils'
+
 export default {
   name: 'Index',
+
+  mixins: [mixinUtils],
 
   data () {
     return {
       tabs: tabsJson,
-      tabsEstados: tabsEstados
+      tabsEstados: tabsEstados,
+      search: ''
     }
+  },
+
+  computed: {
+
   }
 }
 </script>

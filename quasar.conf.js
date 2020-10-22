@@ -21,6 +21,7 @@ module.exports = configure(function (/* ctx */) {
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
       'firebase',
+      'router-auth',
       'composition-api',
       'i18n',
       'axios',
@@ -89,7 +90,11 @@ module.exports = configure(function (/* ctx */) {
       importStrategy: 'auto',
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Dialog',
+        'LocalStorage',
+        'SessionStorage'
+      ]
     },
 
     // animations: 'all', // --- includes all animations

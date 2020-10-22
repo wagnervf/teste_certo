@@ -15,7 +15,10 @@ const routes: RouteConfig[] = [
       { path: '/chat/:otherUserId', component: () => import('pages/Chat.vue') },
       //{ path: '/auth', component: () => import('pages/Auth/Auth.vue') }
 
-      { name: 'imoveis', path: 'imoveis', component: () => import('pages/categorias/Imoveis.vue') }
+      { name: 'imoveis', path: 'imoveis', component: () => import('pages/categorias/Imoveis.vue') },
+
+
+      { name: 'administracao', path: 'pages/configuracoes', component: () => import('pages/configuracoes/administracao.vue') }
 
     ],
   },
@@ -27,7 +30,7 @@ const routes: RouteConfig[] = [
     component: () => import('pages/Error404.vue')
   },
 
-  { path: '/auth', component: () => import('pages/Login/Auth.vue') }
+  { name: 'auth', path: '/auth', component: () => import('pages/Login/Auth.vue') }
 
   //{ name: 'login', path: '/login', component: () => import('pages/Login/Login.vue') },
 
