@@ -85,6 +85,21 @@
 
       <q-separator spaced />
 
+      <div v-if="userEstaLogado">
+        <q-item
+          clickable
+          v-ripple
+          v-close-popup
+          aria-hidden="true"
+          :to="{ name: 'administracao'}"
+        >
+          <q-item-section avatar>
+            <q-icon name="settings" />
+          </q-item-section>
+          <q-item-section>Configurações</q-item-section>
+        </q-item>
+      </div>
+
       <p>Conectado: <b> {{userEstaLogado}}</b> </p>
 
       <q-footer>

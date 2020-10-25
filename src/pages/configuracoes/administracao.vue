@@ -1,157 +1,143 @@
 <template>
 
-  <div>
-    <q-splitter
-      v-model="splitterModel"
-      reverse
-      unit="px"
-      style="height: 900px"
-    >
+  <div class="q-ma-sm">
 
-      <template v-slot:after>
-        <div class="q-pa-md">
-          <q-tabs
-            v-model="tab"
-            vertical
-            class="text-teal"
+    <q-card>
+      <q-tabs
+        v-model="tab"
+        dense
+        class="text-grey"
+        active-color="primary"
+        indicator-color="primary"
+        align="justify"
+        narrow-indicator
+      >
+        <q-tab
+          name="users"
+          label="users"
+        />
+        <q-tab
+          name="alarms"
+          label="Alarms"
+        />
+
+      </q-tabs>
+
+      <q-separator />
+
+      <q-tab-panels
+        v-model="tab"
+        animated
+      >
+        <q-tab-panel name="users">
+          <div class="text-h6">users</div>
+
+          <q-btn
+            @click="getAllUsers"
+            label="Buscar"
+            color="primary"
+            con-right="send"
+          />
+
+          <q-table
+            title="Treats"
+            :data="data"
+            :columns="columns"
+            row-key="name"
+            binary-state-sort
           >
-            <q-tab
-              name="users"
-              icon="account_circle"
-              label="users"
-            />
-            <q-tab
-              name="configs"
-              icon="alarm"
-              label="configs"
-            />
+            <template v-slot:body="props">
 
-          </q-tabs>
-        </div>
-      </template>
+              <q-tr :props="props">
+                <q-td
+                  key="id"
+                  :props="props"
+                >{{ props.row.id }}</q-td>
 
-      <template v-slot:before>
-        <q-card>
-          <q-tab-panels
-            v-model="tab"
-            animated
-            swipeable
-            vertical
-            transition-prev="jump-up"
-            transition-next="jump-up"
-          >
-            <q-tab-panel name="users">
-              <div class="text-h4 q-mb-md">users</div>
-              <div class="q-pa-md">
-                <q-btn
-                  @click="getAllUsers"
-                  label="Buscar"
-                  color="primary"
-                  con-right="send"
-                />
-                <q-table
-                  title="Treats"
-                  :data="data"
-                  :columns="columns"
-                  row-key="name"
-                  binary-state-sort
+                <q-td
+                  key="name"
+                  :props="props"
                 >
-                  <template v-slot:body="props">
+                  {{ props.row.name }}
+                  <q-popup-edit v-model="props.row.name">
+                    <q-input
+                      v-model="props.row.name"
+                      dense
+                      autofocus
+                      counter
+                    />
+                  </q-popup-edit>
+                </q-td>
+                <q-td
+                  key="email"
+                  :props="props"
+                >
+                  {{ props.row.email }}
+                  <q-popup-edit
+                    v-model="props.row.email"
+                    title="Update email"
+                    buttons
+                  >
+                    <q-input
+                      type="number"
+                      v-model="props.row.email"
+                      dense
+                      autofocus
+                    />
+                  </q-popup-edit>
+                </q-td>
+                <q-td
+                  key="permission_id"
+                  :props="props"
+                >
+                  <div class="text-pre-wrap">{{ props.row.permission_id }}</div>
+                  <q-popup-edit v-model="props.row.permission_id">
+                    <q-input
+                      type="textarea"
+                      v-model="props.row.permission_id"
+                      dense
+                      autofocus
+                    />
+                  </q-popup-edit>
+                </q-td>
 
-                    <q-tr :props="props">
-                      <q-td
-                        key="id"
-                        :props="props"
-                      >{{ props.row.id }}</q-td>
+                <q-td
+                  key="active"
+                  :props="props"
+                >
+                  <div class="text-pre-wrap">{{ props.row.active }}</div>
+                  <q-popup-edit v-model="props.row.active">
+                    <q-input
+                      type="textarea"
+                      v-model="props.row.active"
+                      dense
+                      autofocus
+                    />
+                  </q-popup-edit>
+                </q-td>
 
-                      <q-td
-                        key="name"
-                        :props="props"
-                      >
-                        {{ props.row.name }}
-                        <q-popup-edit v-model="props.row.name">
-                          <q-input
-                            v-model="props.row.name"
-                            dense
-                            autofocus
-                            counter
-                          />
-                        </q-popup-edit>
-                      </q-td>
-                      <q-td
-                        key="email"
-                        :props="props"
-                      >
-                        {{ props.row.email }}
-                        <q-popup-edit
-                          v-model="props.row.email"
-                          title="Update email"
-                          buttons
-                        >
-                          <q-input
-                            type="number"
-                            v-model="props.row.email"
-                            dense
-                            autofocus
-                          />
-                        </q-popup-edit>
-                      </q-td>
-                      <q-td
-                        key="permission_id"
-                        :props="props"
-                      >
-                        <div class="text-pre-wrap">{{ props.row.permission_id }}</div>
-                        <q-popup-edit v-model="props.row.permission_id">
-                          <q-input
-                            type="textarea"
-                            v-model="props.row.permission_id"
-                            dense
-                            autofocus
-                          />
-                        </q-popup-edit>
-                      </q-td>
+                <q-td
+                  key="created"
+                  :props="props"
+                >{{ props.row.created }}</q-td>
+                <q-td
+                  key="update"
+                  :props="props"
+                >{{ props.row.update }}</q-td>
 
-                      <q-td
-                        key="active"
-                        :props="props"
-                      >
-                        <div class="text-pre-wrap">{{ props.row.active }}</div>
-                        <q-popup-edit v-model="props.row.active">
-                          <q-input
-                            type="textarea"
-                            v-model="props.row.active"
-                            dense
-                            autofocus
-                          />
-                        </q-popup-edit>
-                      </q-td>
+              </q-tr>
+            </template>
+          </q-table>
 
-                      <q-td
-                        key="created"
-                        :props="props"
-                      >{{ props.row.created }}</q-td>
-                      <q-td
-                        key="update"
-                        :props="props"
-                      >{{ props.row.update }}</q-td>
+        </q-tab-panel>
 
-                    </q-tr>
-                  </template>
-                </q-table>
-              </div>
-            </q-tab-panel>
+        <q-tab-panel name="alarms">
+          <div class="text-h6">Alarms</div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </q-tab-panel>
 
-            <q-tab-panel name="configs">
-              <div class="text-h4 q-mb-md">configs</div>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            </q-tab-panel>
-
-          </q-tab-panels>
-        </q-card>
-      </template>
-
-    </q-splitter>
+      </q-tab-panels>
+    </q-card>
 
   </div>
 
@@ -166,6 +152,10 @@ export default {
   name: 'Administracao',
 
   mixins: [mixinUtils],
+  components: {
+
+  },
+
 
   data () {
     return {
@@ -210,42 +200,44 @@ export default {
     ...mapActions('store_db_firebase', ['getAllUsersDb']),
 
 
-
-
-
-
     // Start listing users from the beginning, 1000 at a time.
-
     getAllUsers (nextPageToken) {
-      let results = {}
-      let userTasks = firebaseDb.ref("olc_db/olc_db/users")
+      let userTasks = firebaseDb.ref()
+      //   userTasks.on("value", snapshot => {
+      //     let values = snapshot.val()
+      //     this.mapedUsers(Object.entries(snapshot.val()))
 
-      userTasks.on("value", snapshot => {
-
-        let values = snapshot.val()
-
-        console.log(Object.keys(snapshot.val()))
-        // console.log(Object.values(snapshot.val()))
-        //  console.log(Object.entries(snapshot.val()))
+      //   }, function (errorObject) {
+      //     console.log("The read failed: " + errorObject.code);
+      //   });
 
 
+      // Ler todos os dados dos users
+      userTasks.on('child_added', snapshot => {
+        let tasks = snapshot.val()
+        this.mapedUsers(Object.entries(tasks.users))
+      })
 
-        //this.data = Object.entries(snapshot.val())
+      // Monitora o banco e inicia sempre que há mudanças
+      userTasks.on('child_changed', snapshot => {
+        let tasks = snapshot.val()
+        this.mapedUsers(Object.entries(tasks.users))
 
-        this.mapedUsers(Object.entries(snapshot.val()))
+      })
 
-
-
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-
-      });
-
-      //  this.data = this.mapedUsers()
-      // console.log(this.data)
+      //Identificar dados deletados
+      /* userTasks.on('child_removed', snapshot => {
+         let taskId = snapshot.key
+ 
+         console.log(taskId)
+       })
+       */
 
 
     },
+
+
+
 
 
     mapedUsers (values) {
@@ -255,14 +247,9 @@ export default {
         let v0 = element[0]
         let v1 = element[1]
         v1.id = v0
-
         result.push(v1)
-
-
       }
-
       this.data = result
-
     }
 
 

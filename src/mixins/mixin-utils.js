@@ -1,11 +1,11 @@
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { Screen } from 'quasar'
 
 export default {
   computed: {
     ...mapState('store_auth', ['loggedIn']),
     ...mapState('store_plataform', ['mobile', 'desktop']),
-
+    ...mapGetters('store_auth', ['getUserLogged']),
     userEstaLogado () {
       return this.loggedIn
     },
@@ -20,6 +20,19 @@ export default {
     telaHeight () {
       return this.$q.screen.height
     },
+
+    userLogado () {
+      return this.getUserLogged
+    },
+
+    nomeUserLogado () {
+      return this.getUserLogged.name
+    },
+    emailUserLogado () {
+      return this.getUserLogged.email
+    }
+
+
 
   },
 

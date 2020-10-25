@@ -28,7 +28,7 @@
       <q-tabs
         outside-arrows
         mobile-arrows
-        class="bg-primary text-white shadow-2 "
+        class="bg-white text-grey-9 shadow-2 "
         style="height: 100px;"
       >
         <q-route-tab

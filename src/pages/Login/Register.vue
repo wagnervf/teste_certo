@@ -11,8 +11,8 @@
     >
       <q-card-section class="q-pa-sm">
         <q-input
-          v-model="formData.nome"
-          ref="nome"
+          v-model="formData.name"
+          ref="name"
           outlined
           label="Nome"
           class="q-py-md"
@@ -105,7 +105,7 @@ export default {
   data () {
     return {
       formData: {
-        nome: '',
+        name: '',
         email: 'vanelli@teste.com',
         password: '123456'
       },
@@ -127,18 +127,18 @@ export default {
   },
 
   methods: {
-    ...mapActions('store_auth', ['criarUsuario']),
+    ...mapActions('store_auth', ['registrarLoginUsuario']),
 
 
     submitForm () {
 
-      this.$refs.nome.validate()
+      this.$refs.name.validate()
       this.$refs.email.validate()
       this.$refs.senha.validate()
 
-      if (!this.$refs.nome.hasError && !this.$refs.email.hasError && !this.$refs.senha.hasError) {
+      if (!this.$refs.name.hasError && !this.$refs.email.hasError && !this.$refs.senha.hasError) {
         this.simulateProgress()
-        this.criarUsuario(this.formData)
+        this.registrarLoginUsuario(this.formData)
       }
 
 
