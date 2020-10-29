@@ -1,61 +1,97 @@
 <template>
-  <div>
-    <q-btn-dropdown
-      dense
-      color="indigo"
-      class="q-pa-xs"
-      flat
-      icon="menu"
-      label="Categorias"
-      auto-close
-      @click="leftShown = !leftShown"
-      style="border-right: 1px solid #dddddd6b;"
-    >
-
-      <q-list
-        bordered
-        class="rounded-borders"
+  <div class="q-pa-md full-width">
+    <div class="row">
+      <div
+        class="col"
+        style="border-right: 1px solid #dddddd6b;"
       >
-        <q-item-label header>Categorias</q-item-label>
-        <div
-          v-for="tab in tabs"
-          :key="tab.id"
-          style="max-width: 650px"
+        <q-btn-dropdown
+          dense
+          color="indigo"
+          class="q-pa-xs"
+          flat
+          icon="apps"
+          label="Categorias"
+          auto-close
+          @click="leftShown = !leftShown"
         >
-          <q-item
-            clickable
-            v-ripple
-            v-close-popup
-            @click="leftShown"
-            :to="tab.to"
-            exact
-            class="full-width"
+
+          <q-list
+            bordered
+            class="rounded-borders"
           >
-            <q-item-section avatar>
-              <q-avatar
-                :icon="tab.icon"
-                color="primary"
-                text-color="white"
-              />
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label lines="1">{{tab.label}}</q-item-label>
-              <q-item-label
-                caption
-                lines="2"
+            <q-item-label header>Categorias</q-item-label>
+            <div
+              v-for="tab in tabs"
+              :key="tab.id"
+              style="max-width: 650px"
+            >
+              <q-item
+                clickable
+                v-ripple
+                v-close-popup
+                @click="leftShown"
+                :to="tab.to"
+                exact
+                class="full-width"
               >
-                <span class="text-weight-bold">Janet</span>
-                -- I'll be in your
-              </q-item-label>
-            </q-item-section>
+                <q-item-section avatar>
+                  <q-avatar
+                    :icon="tab.icon"
+                    color="primary"
+                    text-color="white"
+                  />
+                </q-item-section>
 
-          </q-item>
-          <q-separator inset="item" />
-        </div>
-      </q-list>
+                <q-item-section>
+                  <q-item-label lines="1">{{tab.label}}</q-item-label>
+                  <q-item-label
+                    caption
+                    lines="2"
+                  >
+                    <span class="text-weight-bold">Janet</span>
+                    -- I'll be in your
+                  </q-item-label>
+                </q-item-section>
 
-    </q-btn-dropdown>
+                <q-item-section avatar>
+                  <q-avatar
+                    icon="arrow_right"
+                    text-color="primary"
+                  />
+                </q-item-section>
+
+              </q-item>
+              <q-separator inset="item" />
+            </div>
+          </q-list>
+
+        </q-btn-dropdown>
+      </div>
+
+      <div class="col text-right">
+        <q-btn-dropdown
+          dense
+          color="indigo"
+          class="q-pa-xs text-right"
+          flat
+          icon="filter_alt"
+          label="Filtros"
+          auto-close
+          @click="leftShown = !leftShown"
+        >
+
+          <q-list
+            bordered
+            class="rounded-borders"
+          >
+            <q-item-label header>Filtros</q-item-label>
+
+          </q-list>
+
+        </q-btn-dropdown>
+      </div>
+    </div>
   </div>
 </template>
 <script>

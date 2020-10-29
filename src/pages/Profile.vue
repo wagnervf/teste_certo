@@ -6,115 +6,129 @@
         @reset="onReset"
         class="col-lg-8 col-md-8 col-xs-12 col-sm-12"
       >
-        <q-card>
-          <q-card-section class="text-h6 ">
-            <div class="text-h6">Editar Meus Dados</div>
-          </q-card-section>
-          <q-card-section class="q-pa-sm">
-            <q-list class="row">
-              <q-item class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <q-item-section side>
-                  <q-avatar size="100px">
-                    <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section>
-                  <q-btn
-                    label="Adicionar Foto"
-                    class="text-capitalize"
-                    rounded
-                    color="info"
-                    style="max-width: 120px"
-                  ></q-btn>
-                </q-item-section>
-              </q-item>
 
-              <q-item class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <q-item-section>
-                  <q-input
-                    v-model="formData.name"
-                    ref="name"
-                    label="Nome"
-                    class="q-py-md"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Obrigatório'] "
-                    v-autofocus
-                    clearable
-                  >
-                    <template v-slot:prepend>
-                      <q-icon name="account_box" />
-                    </template>
-                  </q-input>
+        <div
+          v-if="dadosUpdate"
+          class="absolute-center"
+        >
+          <q-spinner
+            color="primary"
+            size="3em"
+          />
+        </div>
 
-                </q-item-section>
-              </q-item>
-              <q-item class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <q-item-section>
-                  <q-input
-                    v-model="formData.email"
-                    ref="email"
-                    label="Email"
-                    class="q-py-md"
-                    :rules="[
+        <div v-else>
+          <q-card>
+            <q-card-section class="text-h6 ">
+              <div class="text-h6">Editar Meus Dados</div>
+            </q-card-section>
+            <q-card-section class="q-pa-sm">
+              <q-list class="row">
+                <q-item class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <q-item-section side>
+                    <q-avatar size="100px">
+                      <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section>
+                    <q-btn
+                      label="Adicionar Foto"
+                      class="text-capitalize"
+                      rounded
+                      color="info"
+                      style="max-width: 120px"
+                    ></q-btn>
+                  </q-item-section>
+                </q-item>
+
+                <q-item class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <q-item-section>
+                    <q-input
+                      v-model="formData.name"
+                      ref="name"
+                      label="Nome"
+                      class="q-py-md"
+                      lazy-rules
+                      :rules="[ val => val && val.length > 0 || 'Obrigatório'] "
+                      v-autofocus
+                      clearable
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="account_box" />
+                      </template>
+                    </q-input>
+
+                  </q-item-section>
+                </q-item>
+                <q-item class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <q-item-section>
+                    <q-input
+                      v-model="formData.email"
+                      ref="email"
+                      label="Email"
+                      class="q-py-md"
+                      :rules="[
                         val => !! val || '* Obrigatório',
                         val => isValidEmail(val) || 'Digite um email válido!'
                       ]"
-                    lazy-rules
-                    clearable
-                    type="email"
-                  >
-                    <template v-slot:prepend>
-                      <q-icon name="email" />
-                    </template>
-                  </q-input>
-                </q-item-section>
-              </q-item>
-              <q-item class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <q-item-section>
-                  <q-input
-                    v-model="formData.cep"
-                    ref="cep"
-                    label="Cep"
-                    class="q-py-md"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Obrigatório'] "
-                    clearable
-                  >
-                    <template v-slot:prepend>
-                      <q-icon name="account_box" />
-                    </template>
-                  </q-input>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-card-section>
-          <q-card-actions align="right">
-            <q-btn
-              :loading="loading"
-              size="large"
-              color="info"
-              type="submit"
-              con-right="send"
-              class="text-capitalize"
-            >
-              Salvar Dados
-              <template v-slot:loading>
-                <q-spinner-hourglass class="on-left" />
-                Salvando...
-              </template>
-            </q-btn>
-          </q-card-actions>
-        </q-card>
+                      lazy-rules
+                      clearable
+                      type="email"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="email" />
+                      </template>
+                    </q-input>
+                  </q-item-section>
+                </q-item>
+                <q-item class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <q-item-section>
+                    <q-input
+                      v-model="formData.cep"
+                      ref="cep"
+                      label="Cep"
+                      class="q-py-md"
+                      lazy-rules
+                      :rules="[ val => val && val.length > 0 || 'Obrigatório'] "
+                      clearable
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="account_box" />
+                      </template>
+                    </q-input>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-card-section>
+            <q-card-actions align="right">
+              <q-btn
+                :loading="loading"
+                size="large"
+                color="info"
+                type="submit"
+                con-right="send"
+                class="text-capitalize"
+              >
+                Salvar Dados
+                <template v-slot:loading>
+                  <q-spinner-hourglass class="on-left" />
+                  Salvando...
+                </template>
+              </q-btn>
+            </q-card-actions>
+          </q-card>
+
+        </div>
 
       </q-form>
 
-      <pre>
+      <!-- <pre>
           {{formData}}
       </pre>
 
       <pre>
           {{userLogado}}
-      </pre>
+      </pre> -->
 
       <!-- <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
       <q-card>
@@ -208,8 +222,7 @@ export default {
       },
       user_details: {},
       password_dict: {},
-
-
+      dadosUpdate: true,
 
       isPwd: true,
       name: null,
@@ -220,12 +233,12 @@ export default {
     }
   },
   mounted () {
-    this.mapedDadosUser()
+    this.loadDadosUpdate()
   },
 
-  updated () {
-    this.mapedDadosUser()
-  },
+  // updated () {
+  //   this.mapedDadosUser()
+  // },
 
   directives: {
     autofocus: {
@@ -237,7 +250,6 @@ export default {
 
   components: {
     ...mapGetters('store_auth', ['getUserLogged'])
-
   },
 
   methods: {
@@ -250,9 +262,8 @@ export default {
       //formData.cep = '79051510'
       this.formData.created = this.getUserLogged.created
       this.formData.ultimoLogin = this.getUserLogged.ultimoLogin
-      this.formData.permission_id = 1547
+      this.formData.permission_id = 'ID1'
       this.formData.active = true
-
     },
 
     submitForm () {
@@ -261,11 +272,8 @@ export default {
 
       if (!this.$refs.name.hasError && !this.$refs.email.hasError) {
         this.simulateProgress()
-
         this.addUserProfileFB(this.formData)
         this.updateProfileLogin(this.formData)
-
-
       }
 
 
@@ -274,6 +282,14 @@ export default {
     isValidEmail (email) {
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
+    },
+
+    loadDadosUpdate () {
+      setTimeout(() => {
+        this.dadosUpdate = false
+        this.mapedDadosUser()
+      }, 2000)
+
     },
 
     simulateProgress () {

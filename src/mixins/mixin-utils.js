@@ -21,6 +21,14 @@ export default {
       return this.$q.screen.height
     },
 
+    telaMd () {
+      return this.$q.screen.md
+    },
+
+    telaSM () {
+      return this.$q.screen.md
+    },
+
     userLogado () {
       return this.getUserLogged
     },
@@ -36,8 +44,9 @@ export default {
 
   },
 
-
   methods: {
+    ...mapActions('store_auth', ['logoutUser']),
+
     home () {
       this.$router.push('/').catch(err => { })
     },
@@ -45,6 +54,8 @@ export default {
     profile () {
       this.$router.push('/profile').catch(err => { })
     },
+
+
 
 
   }

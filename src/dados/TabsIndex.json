@@ -11,14 +11,14 @@
     "name": "auto_pecas",
     "label": "Auto Peças",
     "icon": "directions_car",
-    "to": "/index"
+    "to": "/auto-pecas"
   },
   {
     "id": 3,
     "name": "Esportes",
     "label": "Esportes",
     "icon": "sports_handball",
-    "to": "/index"
+    "to": "/esportes"
   },
   {
     "id": 4,

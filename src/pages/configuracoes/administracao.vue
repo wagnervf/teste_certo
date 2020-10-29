@@ -1,12 +1,12 @@
 <template>
 
-  <div class="q-ma-sm">
+  <div class="q-ma-md">
 
     <q-card>
       <q-tabs
         v-model="tab"
         dense
-        class="text-grey"
+        class="text-grey q-pa-sm"
         active-color="primary"
         indicator-color="primary"
         align="justify"
@@ -29,9 +29,10 @@
         v-model="tab"
         animated
       >
-        <q-tab-panel name="users">
-          <div class="text-h6">users</div>
-
+        <q-tab-panel
+          name="users"
+          class="q-pa-xs"
+        >
           <q-btn
             @click="getAllUsers"
             label="Buscar"
@@ -39,95 +40,58 @@
             con-right="send"
           />
 
-          <q-table
-            title="Treats"
-            :data="data"
-            :columns="columns"
-            row-key="name"
-            binary-state-sort
-          >
-            <template v-slot:body="props">
-
-              <q-tr :props="props">
-                <q-td
-                  key="id"
-                  :props="props"
-                >{{ props.row.id }}</q-td>
-
-                <q-td
-                  key="name"
-                  :props="props"
-                >
-                  {{ props.row.name }}
-                  <q-popup-edit v-model="props.row.name">
-                    <q-input
-                      v-model="props.row.name"
-                      dense
-                      autofocus
-                      counter
-                    />
-                  </q-popup-edit>
-                </q-td>
-                <q-td
-                  key="email"
-                  :props="props"
-                >
-                  {{ props.row.email }}
-                  <q-popup-edit
-                    v-model="props.row.email"
-                    title="Update email"
-                    buttons
+          <template>
+            <div class="q-pa-xs">
+              <q-table
+                title="Usuários Cadastrados"
+                :data="data"
+                :columns="columns"
+                row-key="id"
+                selection="single"
+                :loading="loading"
+                :filter="filter"
+                :selected.sync="selected"
+              >
+                <template v-slot:top-right>
+                  <q-input
+                    borderless
+                    dense
+                    debounce="300"
+                    v-model="filter"
+                    placeholder="Search"
                   >
-                    <q-input
-                      type="number"
-                      v-model="props.row.email"
-                      dense
-                      autofocus
-                    />
-                  </q-popup-edit>
-                </q-td>
-                <q-td
-                  key="permission_id"
-                  :props="props"
-                >
-                  <div class="text-pre-wrap">{{ props.row.permission_id }}</div>
-                  <q-popup-edit v-model="props.row.permission_id">
-                    <q-input
-                      type="textarea"
-                      v-model="props.row.permission_id"
-                      dense
-                      autofocus
-                    />
-                  </q-popup-edit>
-                </q-td>
+                    <template v-slot:append>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
+                </template>
 
-                <q-td
-                  key="active"
-                  :props="props"
-                >
-                  <div class="text-pre-wrap">{{ props.row.active }}</div>
-                  <q-popup-edit v-model="props.row.active">
-                    <q-input
-                      type="textarea"
-                      v-model="props.row.active"
-                      dense
-                      autofocus
+                <template v-slot:body-cell-action="props">
+                  <q-td :props="props">
+                    <q-btn
+                      round
+                      size="sm"
+                      color="grey-9"
+                      icon="edit"
+                      @click="updateUser(props.row)"
                     />
-                  </q-popup-edit>
-                </q-td>
+                    <q-btn
+                      round
+                      size="sm"
+                      color="red"
+                      icon="delete"
+                      @click="promptToDelete(props.row)"
+                    />
 
-                <q-td
-                  key="created"
-                  :props="props"
-                >{{ props.row.created }}</q-td>
-                <q-td
-                  key="update"
-                  :props="props"
-                >{{ props.row.update }}</q-td>
+                  </q-td>
+                </template>
+              </q-table>
 
-              </q-tr>
-            </template>
-          </q-table>
+              <div class="q-mt-md">
+                Selected: {{ JSON.stringify(selected) }}
+              </div>
+            </div>
+          </template>
 
         </q-tab-panel>
 
@@ -138,6 +102,39 @@
 
       </q-tab-panels>
     </q-card>
+
+    <q-dialog
+      v-model="updateU"
+      persistent
+    >
+      <q-card>
+        <q-card-section class="row items-center">
+
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            flat
+            label="Cancel"
+            color="primary"
+            v-close-popup
+          />
+          <q-btn
+            flat
+            label="Turn on Wifi"
+            color="primary"
+            v-close-popup
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+    <q-btn
+      @click="getPermisisonsUser"
+      label="Users"
+      color="primary"
+      con-right="send"
+    />
 
   </div>
 
@@ -160,25 +157,33 @@ export default {
   data () {
     return {
       usersResult: [],
+      selected: [],
+      updateU: false,
+      filter: '',
+      loading: false,
       right: true,
       tab: 'users',
       splitterModel: 150,
       data: [],
       columns: [
         {
-          name: 'id',
-          required: true,
-          label: 'ID',
+          name: 'action',
+          label: 'action',
+          field: 'action',
           align: 'left',
-          sortable: true
+        },
+
+        {
+          name: 'id',
+          label: 'ID',
+          field: 'id',
+          align: 'left',
         },
         {
           name: 'name',
-          required: true,
           label: 'Nome',
+          field: 'name',
           align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
           sortable: true
         },
         { name: 'email', align: 'center', label: 'email', field: 'email', sortable: true },
@@ -187,8 +192,7 @@ export default {
         { name: 'created', align: 'center', label: 'created', field: 'created', sortable: true },
         { name: 'update', align: 'center', label: 'update', field: 'update', sortable: true },
 
-      ],
-
+      ]
     }
   },
 
@@ -196,9 +200,15 @@ export default {
 
   },
 
+  watch: {
+
+  },
+
+
+
   methods: {
     ...mapActions('store_db_firebase', ['getAllUsersDb']),
-
+    ...mapActions('store_auth', ['deleteDataFirebase']),
 
     // Start listing users from the beginning, 1000 at a time.
     getAllUsers (nextPageToken) {
@@ -210,8 +220,6 @@ export default {
       //   }, function (errorObject) {
       //     console.log("The read failed: " + errorObject.code);
       //   });
-
-
       // Ler todos os dados dos users
       userTasks.on('child_added', snapshot => {
         let tasks = snapshot.val()
@@ -222,7 +230,6 @@ export default {
       userTasks.on('child_changed', snapshot => {
         let tasks = snapshot.val()
         this.mapedUsers(Object.entries(tasks.users))
-
       })
 
       //Identificar dados deletados
@@ -232,25 +239,52 @@ export default {
          console.log(taskId)
        })
        */
-
-
     },
 
-
-
-
-
+    getPermisisonsUser () {
+      var fb = firebaseDb.ref('olc_db')
+      fb.child('users/0TiIWbsyXYXNPJeQMlAZ7dWiJeW2').once('value', function (userSnap) {
+        fb.child('permissions').once('value', function (mediaSnap) {
+          // extend function: https://gist.github.com/katowulf/6598238
+          console.log(({}, userSnap.val(), mediaSnap.val()));
+        });
+      });
+    },
     mapedUsers (values) {
       let result = []
+
       for (let index = 0; index < values.length; index++) {
         const element = values[index];
         let v0 = element[0]
         let v1 = element[1]
         v1.id = v0
         result.push(v1)
+
       }
       this.data = result
+      console.log(this.data)
+    },
+
+    promptToDelete (value) {
+      this.$q.dialog({
+        title: 'Confirmação',
+        message: 'Deseja deletar o usuário?',
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        if (value) {
+          this.deleteDataFirebase(value.uid)
+        }
+      })
+    },
+
+    updateUser (value) {
+      this.updateU = true
+      console.log(value)
     }
+
+
+
 
 
   }

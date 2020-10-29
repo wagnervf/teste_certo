@@ -77,8 +77,62 @@
         rounded
         label="Esqueceu a senha?"
         class="text-grey"
+        @click="openDialogRedefinirSenha"
       />
     </div>
+
+    <q-dialog
+      v-model="dialogRedefinirSenha"
+      persistent
+    >
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="text-h6">E-mail para redefinir</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+
+          <q-input
+            v-model="emailRedefinirSenha"
+            ref="emailRedefinir"
+            outlined
+            dense
+            class="q-py-md"
+            :rules="[
+                val => !! val || '* Obrigatório',
+                val => isValidEmail(val) || 'Digite um email válido!'
+              ]"
+            lazy-rules
+            autofocus
+            type="email"
+            clearable
+            @keyup.enter="prompt = false"
+          >
+            <template v-slot:prepend>
+              <q-icon name="email" />
+            </template>
+          </q-input>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            flat
+            label="Cancelar"
+            color="negative"
+            v-close-popup
+            class=" text-capitalize"
+          />
+          <q-btn
+            flat
+            color="primary"
+            label="Enviar"
+            class=" text-capitalize"
+            v-close-popup
+            @click="redefinirSenhaLogin"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 
     <q-separator class="q-ma-sm" />
 
@@ -95,10 +149,12 @@ export default {
   data () {
     return {
       formData: {
-        name: '',
-        email: 'vanelli@teste.com',
+        displayName: '',
+        email: 'maria@teste.com',
         password: '123456'
       },
+      emailRedefinirSenha: null,
+      dialogRedefinirSenha: false,
       isPwd: true,
       name: null,
       age: null,
@@ -108,7 +164,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('store_auth', ['loginUsuario']),
+    ...mapActions('store_auth', ['loginUsuario', 'redifirSenhaUsuario']),
 
     onSubmit () {
       this.$refs.email.validate()
@@ -117,8 +173,23 @@ export default {
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
 
         this.loginUsuario(this.formData)
+      }
 
+    },
 
+    openDialogRedefinirSenha () {
+      this.dialogRedefinirSenha = true
+      this.emailRedefinirSenha = this.formData.email
+    },
+
+    redefinirSenhaLogin () {
+
+      this.$refs.emailRedefinir.validate()
+      //console.log(this.$refs)
+
+      if (!this.$refs.emailRedefinir.hasError) {
+        console.log(this.emailRedefinirSenha)
+        this.redifirSenhaUsuario(this.emailRedefinirSenha)
       }
 
 

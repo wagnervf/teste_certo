@@ -1,55 +1,38 @@
 <template>
-  <div>
+
+  <div class="q-pa-none">
+
+    <!-- <div v-if="isMobile || telaWidth < 1024 || grid === true">
+      <latyouAnunciosMobile />
+    </div> -->
+    <!-- <div v-else> -->
+    <latyouAnunciosDesktop />
+    <!-- </div> -->
 
   </div>
 </template>
 
 <script>
-const menuList = [
-  {
-    icon: 'inbox',
-    label: 'Inbox',
-    separator: true
-  },
-  {
-    icon: 'send',
-    label: 'Outbox',
-    separator: false
-  },
-  {
-    icon: 'delete',
-    label: 'Trash',
-    separator: false
-  },
-  {
-    icon: 'error',
-    label: 'Spam',
-    separator: true
-  },
-  {
-    icon: 'settings',
-    label: 'Settings',
-    separator: false
-  },
-  {
-    icon: 'feedback',
-    label: 'Send Feedback',
-    separator: false
-  },
-  {
-    icon: 'help',
-    iconColor: 'primary',
-    label: 'Help',
-    separator: false
-  }
-]
+import latyouAnunciosMobile from 'src/components/anuncios/layoutAnunciosMobile'
+import latyouAnunciosDesktop from 'src/components/anuncios/layoutAnunciosDesktop'
+import mixinUtils from 'src/mixins/mixin-utils'
+
 
 export default {
+  name: 'Imoveis',
+  mixins: [mixinUtils],
+
   data () {
     return {
-      drawer: false,
-      menuList
+      list: null,
+      grid: false,
+
     }
+  },
+
+  components: {
+    latyouAnunciosMobile,
+    latyouAnunciosDesktop
   }
 }
 </script>

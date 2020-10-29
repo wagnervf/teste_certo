@@ -11,7 +11,7 @@
     >
       <q-card-section class="q-pa-sm">
         <q-input
-          v-model="formData.name"
+          v-model="formData.displayName"
           ref="name"
           outlined
           label="Nome"
@@ -105,8 +105,8 @@ export default {
   data () {
     return {
       formData: {
-        name: '',
-        email: 'vanelli@teste.com',
+        displayName: '',
+        email: 'maria@teste.com',
         password: '123456'
       },
       isPwd: true,
