@@ -8,28 +8,28 @@
   },
   {
     "id": 2,
-    "name": "auto_pecas",
+    "name": "auto-pecas",
     "label": "Auto Peças",
     "icon": "directions_car",
     "to": "/auto-pecas"
   },
   {
     "id": 3,
-    "name": "Esportes",
+    "name": "esportes",
     "label": "Esportes",
     "icon": "sports_handball",
     "to": "/esportes"
   },
   {
     "id": 4,
-    "name": "Servicos",
+    "name": "servicos",
     "label": "Serviços",
     "icon": "handyman",
     "to": "/index"
   },
   {
     "id": 5,
-    "name": "para_casa",
+    "name": "para-casa",
     "label": "Para Casa",
     "icon": "local_laundry_service",
     "to": "/index"

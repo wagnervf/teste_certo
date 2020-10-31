@@ -5,8 +5,6 @@ import { Screen } from 'quasar'
 const state = {
   mobile: false,
   desktop: false,
-  telaWidth: '',
-  telaHeight: ''
 }
 
 const mutations = {
@@ -16,12 +14,7 @@ const mutations = {
 
   SET_TIPO_PLATAFORM_DESKTOP (state, value) {
     state.desktop = value
-  },
-
-  SET_TAMANHO_TELA (state, height, width) {
-    state.telaWidth = width
-    state.telaHeight = height
-  },
+  }
 
 }
 
@@ -38,18 +31,6 @@ const actions = {
     }
 
   },
-
-  // setTamanhoTela ({ commit }) {
-  //   const height = this.$q.Screen.height
-  //   const width = this.$q.Screen.width
-
-  //   console.log(screen)
-
-  //   commit('SET_TAMANHO_TELA', height, width)
-
-  // }
-
-
 
 
 }

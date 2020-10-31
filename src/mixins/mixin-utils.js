@@ -21,12 +21,22 @@ export default {
       return this.$q.screen.height
     },
 
-    telaMd () {
+    telaXL () {
+      return this.$q.screen.xl
+    },
+    telaLG () {
+      return this.$q.screen.lg
+    },
+
+    telaMD () {
       return this.$q.screen.md
     },
 
     telaSM () {
-      return this.$q.screen.md
+      return this.$q.screen.sm
+    },
+    telaXS () {
+      return this.$q.screen.xs
     },
 
     userLogado () {
@@ -38,6 +48,9 @@ export default {
     },
     emailUserLogado () {
       return this.getUserLogged.email
+    },
+    fotoUserLogado () {
+      return this.getUserLogged.photoUrl
     }
 
 

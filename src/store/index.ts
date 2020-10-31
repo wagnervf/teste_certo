@@ -6,6 +6,7 @@ import store from "./store"
 import store_auth from "./myStores/store-auth"
 import store_plataform from "./myStores/store-plataform"
 import store_db_firebase from "./myStores/store-db-firebase"
+import store_db_anuncios from "./myStores/store-db-anuncios"
 
 /*
  * If not building with SSR mode, you can
@@ -25,7 +26,8 @@ export default (function () {
       store,
       store_auth,
       store_plataform,
-      store_db_firebase
+      store_db_firebase,
+      store_db_anuncios
     },
 
     // enable strict mode (adds overhead!)

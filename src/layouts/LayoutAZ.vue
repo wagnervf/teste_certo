@@ -18,6 +18,17 @@
         <q-toolbar-title class="text-caption"><span class="material-icons">
             copyright
           </span> Wagner - 2020</q-toolbar-title>
+        <q-item
+          clickable
+          v-ripple
+          v-close-popup
+          aria-hidden="true"
+        >
+          <q-item-section avatar>
+            <q-icon name="help" />
+          </q-item-section>
+          <q-item-section>Ajuda</q-item-section>
+        </q-item>
       </q-toolbar>
     </q-footer>
 
@@ -26,19 +37,14 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-//import { mapState, mapActions } from 'vuex'
-// import store from '../store/store'
-// import { METHODS } from 'http'
 import mixinUtils from 'src/mixins/mixin-utils'
 import UserInfo from '../components/menu/userinfo.vue';
 import headerMenu from './HeaderMenu'
 
 
-//import { Screen } from 'quasar'
-
 
 export default {
-  name: 'LayoutPadrao',
+  name: 'LayoutAZ',
 
   mixins: [mixinUtils],
 
@@ -54,6 +60,7 @@ export default {
       settingsOpen: false,
       userInfoOpen: false,
       tab: 'mails',
+      text: ''
 
 
 

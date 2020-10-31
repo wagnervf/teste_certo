@@ -1,226 +1,469 @@
 <template>
-  <div class="row q-ma-md justify-center">
 
-    <div
-      class="q-ma-auto"
-      style="max-width: 300px;"
-    >
-      <q-list
-        bordered
-        padding
-      >
-        <q-item-label header>User Controls</q-item-label>
+  <div class="q-ma-none responsive">
 
-        <q-item
-          clickable
-          v-ripple
+    <div v-if="telaMD || telaLG || telaXL">
+      <div class="row justify-center">
+        <img
+          src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg"
+          class="avatar q-ma-sm responsive"
         >
-          <q-item-section>
-            <q-item-label>Content filtering</q-item-label>
-            <q-item-label caption>
-              Set the content filtering level to restrict
-              apps that can be downloaded
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+      </div>
 
-        <q-item
-          clickable
-          v-ripple
-        >
-          <q-item-section>
-            <q-item-label>Password</q-item-label>
-            <q-item-label caption>
-              Require password for purchase or use
-              password to restrict purchase
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+      <q-list class="q-pl-none responsive shadow-1">
+        <div class="text-center ">
+          <q-card class="bg-grey-3 q-py-sm shadow-0">
+            Escolha a Categorias
+          </q-card>
+        </div>
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="house"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Imóveis
+            </q-item-section>
+          </template>
 
-        <q-separator spaced />
-        <q-item-label header>General</q-item-label>
+          <q-card class="responsive">
+            <q-list class="responsive">
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+                exact
+                :to="{ name: 'novo-imovel'}"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Venda</q-item-label>
+                  <q-item-label caption>Casas e Apartamentos</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
 
-        <q-item
-          tag="label"
-          v-ripple
-        >
-          <q-item-section
-            side
-            top
-          >
-            <q-checkbox v-model="check1" />
-          </q-item-section>
+              <q-separator
+                class="q-my-xs"
+                spaced
+              />
 
-          <q-item-section>
-            <q-item-label>Notifications</q-item-label>
-            <q-item-label caption>
-              Notify me about updates to apps or games that I downloaded
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Aluguel</q-item-label>
+                  <q-item-label caption>Casas e Apartamentos</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
 
-        <q-item
-          tag="label"
-          v-ripple
-        >
-          <q-item-section
-            side
-            top
-          >
-            <q-checkbox v-model="check2" />
-          </q-item-section>
+              <q-separator spaced />
 
-          <q-item-section>
-            <q-item-label>Sound</q-item-label>
-            <q-item-label caption>
-              Auto-update apps at anytime. Data charges may apply
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Terrenos</q-item-label>
+                  <q-item-label caption>Sítios e Fazendas</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
 
-        <q-item
-          tag="label"
-          v-ripple
-        >
-          <q-item-section
-            side
-            top
-          >
-            <q-checkbox v-model="check3" />
-          </q-item-section>
+              <q-separator spaced />
 
-          <q-item-section>
-            <q-item-label>Auto-add widgets</q-item-label>
-            <q-item-label caption>
-              Automatically add home screen widgets
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Comércio</q-item-label>
+                  <q-item-label caption>Galpões e Indústrias</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
 
-        <q-separator spaced />
-        <q-item-label header>Notifications</q-item-label>
+              <q-separator spaced />
 
-        <q-item
-          tag="label"
-          v-ripple
-        >
-          <q-item-section>
-            <q-item-label>Battery too low</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-toggle
-              color="blue"
-              v-model="notif1"
-              val="battery"
-            />
-          </q-item-section>
-        </q-item>
+            </q-list>
+          </q-card>
+        </q-expansion-item>
 
-        <q-item
-          tag="label"
-          v-ripple
-        >
-          <q-item-section>
-            <q-item-label>Friend request</q-item-label>
-            <q-item-label caption>Allow notification</q-item-label>
-          </q-item-section>
-          <q-item-section
-            side
-            top
-          >
-            <q-toggle
-              color="green"
-              v-model="notif2"
-              val="friend"
-            />
-          </q-item-section>
-        </q-item>
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="directions_car"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Auto Peças
+            </q-item-section>
+          </template>
 
-        <q-item
-          tag="label"
-          v-ripple
-        >
-          <q-item-section>
-            <q-item-label>Picture uploaded</q-item-label>
-            <q-item-label caption>Allow notification when uploading images</q-item-label>
-          </q-item-section>
-          <q-item-section
-            side
-            top
-          >
-            <q-toggle
-              color="red"
-              v-model="notif3"
-              val="picture"
-            />
-          </q-item-section>
-        </q-item>
+          <q-card>
+            <q-card-section>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+              commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+              eveniet doloribus ullam aliquid.
+            </q-card-section>
+          </q-card>
+          <q-separator spaced />
+        </q-expansion-item>
 
-        <q-separator spaced />
-        <q-item-label header>Other settings</q-item-label>
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="sports_handball"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Esportes
+            </q-item-section>
+          </template>
 
-        <q-item>
-          <q-item-section side>
-            <q-icon
-              color="teal"
-              name="volume_down"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-slider
-              v-model="volume"
-              :min="0"
-              :max="10"
-              label
-              color="teal"
-            />
-          </q-item-section>
-          <q-item-section side>
-            <q-icon
-              color="teal"
-              name="volume_up"
-            />
-          </q-item-section>
-        </q-item>
+          <q-card>
+            <q-card-section>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+              commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+              eveniet doloribus ullam aliquid.
+            </q-card-section>
+          </q-card>
+          <q-separator spaced />
+        </q-expansion-item>
 
-        <q-item>
-          <q-item-section side>
-            <q-icon
-              color="deep-orange"
-              name="brightness_medium"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-slider
-              v-model="brightness"
-              :min="0"
-              :max="10"
-              label
-              color="deep-orange"
-            />
-          </q-item-section>
-        </q-item>
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="house"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Imóveis
+            </q-item-section>
+          </template>
 
-        <q-item>
-          <q-item-section side>
-            <q-icon
-              color="primary"
-              name="mic"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-slider
-              v-model="mic"
-              :min="0"
-              :max="50"
-              label
-            />
-          </q-item-section>
-        </q-item>
+          <q-card class="responsive">
+            <q-list class="responsive">
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Venda</q-item-label>
+                  <q-item-label caption>Casas e Apartamentos</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator
+                class="q-my-xs"
+                spaced
+              />
+
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Aluguel</q-item-label>
+                  <q-item-label caption>Casas e Apartamentos</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator spaced />
+
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Terrenos</q-item-label>
+                  <q-item-label caption>Sítios e Fazendas</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator spaced />
+
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Comércio</q-item-label>
+                  <q-item-label caption>Galpões e Indústrias</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator spaced />
+
+            </q-list>
+          </q-card>
+        </q-expansion-item>
+
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="directions_car"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Auto Peças
+            </q-item-section>
+          </template>
+
+          <q-card>
+            <q-card-section>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+              commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+              eveniet doloribus ullam aliquid.
+            </q-card-section>
+          </q-card>
+          <q-separator spaced />
+        </q-expansion-item>
+
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="sports_handball"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Esportes
+            </q-item-section>
+          </template>
+
+          <q-card>
+            <q-card-section>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+              commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+              eveniet doloribus ullam aliquid.
+            </q-card-section>
+          </q-card>
+          <q-separator spaced />
+        </q-expansion-item>
+
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="house"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Imóveis
+            </q-item-section>
+          </template>
+
+          <q-card class="responsive">
+            <q-list class="responsive">
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Venda</q-item-label>
+                  <q-item-label caption>Casas e Apartamentos</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator
+                class="q-my-xs"
+                spaced
+              />
+
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Aluguel</q-item-label>
+                  <q-item-label caption>Casas e Apartamentos</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator spaced />
+
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Terrenos</q-item-label>
+                  <q-item-label caption>Sítios e Fazendas</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator spaced />
+
+              <q-item
+                clickable
+                v-ripple
+                class="q-pb-none"
+              >
+                <q-item-section>
+                  <q-item-label class="text-primary">Comércio</q-item-label>
+                  <q-item-label caption>Galpões e Indústrias</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="primary"
+                    name="arrow_right"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <q-separator spaced />
+
+            </q-list>
+          </q-card>
+        </q-expansion-item>
+
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="directions_car"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Auto Peças
+            </q-item-section>
+          </template>
+
+          <q-card>
+            <q-card-section>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+              commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+              eveniet doloribus ullam aliquid.
+            </q-card-section>
+          </q-card>
+          <q-separator spaced />
+        </q-expansion-item>
+
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar
+                icon="sports_handball"
+                color="primary"
+                text-color="white"
+              />
+            </q-item-section>
+            <q-item-section class="text-subtitle2">
+              Esportes
+            </q-item-section>
+          </template>
+
+          <q-card>
+            <q-card-section>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+              commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+              eveniet doloribus ullam aliquid.
+            </q-card-section>
+          </q-card>
+          <q-separator spaced />
+        </q-expansion-item>
+
       </q-list>
     </div>
 
   </div>
+
 </template>
 <style>
 .q-table__middle .q-tablet.body.td:after {
@@ -233,22 +476,14 @@
 
 <script>
 import { Screen } from 'quasar'
+import tabsJson from 'src/dados/TabsIndex.json'
+import mixinUtils from 'src/mixins/mixin-utils'
+
 export default {
+  mixins: [mixinUtils],
   data () {
     return {
-      slide: 1,
-      filter: '',
-      check1: true,
-      check2: false,
-      check3: false,
-
-      notif1: true,
-      notif2: true,
-      notif3: false,
-
-      volume: 6,
-      brightness: 3,
-      mic: 8,
+      tabs: tabsJson,
     }
   }
 }

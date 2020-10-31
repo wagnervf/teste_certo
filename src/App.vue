@@ -20,7 +20,6 @@ export default {
   },
   updated() {
     this.alterTipoPlataform();
-    // this.setTamanhoTela();
   },
 };
 </script>

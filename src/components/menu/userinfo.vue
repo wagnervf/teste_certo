@@ -1,123 +1,74 @@
 <template>
+  <q-list class="full-width text-indigo-10">
 
-  <div
-    class="q-pa-md"
-    style="max-width: 280px"
-  >
-    <q-list
-      class="text-grey-8"
-      style="min-width: 100px; width: 260px"
-    >
-      <!-- <q-item>
-        <q-item-section class="text-center">
-          <q-item-label lines="1">
-            <div class="text-h5">John Smith</div>
-          </q-item-label>
+    <div v-if="userEstaLogado">
+      <q-item
+        clickable
+        v-ripple
+        v-close-popup
+        aria-hidden="true"
+        :to="{ name: 'profile'}"
+      >
+        <q-item-section avatar>
+          <q-icon name="account_circle" />
         </q-item-section>
-      </q-item> -->
+        <q-item-section>Minha Conta</q-item-section>
+      </q-item>
+      <q-separator spaced />
+      <q-item
+        clickable
+        v-ripple
+        v-close-popup
+        aria-hidden="true"
+        name="sair"
+        @click="logoutUser"
+        exact
+        class="text-indigo-10 text-h6"
+      >
+        <q-item-section avatar>
+          <q-icon name="logout" />
+        </q-item-section>
+        <q-item-section>Sair</q-item-section>
+      </q-item>
+      <q-separator spaced />
+      <q-separator spaced />
+      <q-item
+        clickable
+        v-ripple
+        v-close-popup
+        aria-hidden="true"
+        :to="{ name: 'administracao'}"
+      >
+        <q-item-section avatar>
+          <q-icon name="settings" />
+        </q-item-section>
+        <q-item-section>Configurações</q-item-section>
+      </q-item>
+    </div>
 
-      <!-- <q-separator spaced /> -->
-      <div v-if="userEstaLogado">
-        <q-item
-          clickable
-          v-ripple
-          v-close-popup
-          aria-hidden="true"
-          :to="{ name: 'profile'}"
-        >
-          <q-item-section avatar>
-            <q-icon name="account_circle" />
-          </q-item-section>
-          <q-item-section>Minha Conta</q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          v-ripple
-          v-close-popup
-          aria-hidden="true"
-        >
-          <q-item-section avatar>
-            <q-icon name="notifications" />
-          </q-item-section>
-          <q-item-section>Notificações</q-item-section>
-          <q-item-section side>
-            <q-badge
-              color="red"
-              label="5"
-            />
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          v-ripple
-          v-close-popup
-          aria-hidden="true"
-          name="sair"
-          @click="logoutUser"
-          exact
-        >
-          <q-item-section avatar>
-            <q-icon name="logout" />
-          </q-item-section>
-          <q-item-section>Sair</q-item-section>
-        </q-item>
-      </div>
-
-      <div v-else>
-        <q-item
-          clickable
-          v-ripple
-          v-close-popup
-          aria-hidden="true"
-          name="Entrar"
-          to="/auth"
-          exact
-          class="text-primary text-h6"
-        >
-          <q-item-section avatar>
-            <q-icon name="login" />
-          </q-item-section>
-          <q-item-section>Entrar</q-item-section>
-        </q-item>
-      </div>
-
+    <div v-else>
       <q-separator spaced />
 
-      <div v-if="userEstaLogado">
-        <q-item
-          clickable
-          v-ripple
-          v-close-popup
-          aria-hidden="true"
-          :to="{ name: 'administracao'}"
-        >
-          <q-item-section avatar>
-            <q-icon name="settings" />
-          </q-item-section>
-          <q-item-section>Configurações</q-item-section>
-        </q-item>
-      </div>
+      <q-item
+        clickable
+        v-ripple
+        v-close-popup
+        aria-hidden="true"
+        name="Entrar"
+        to="/auth"
+        exact
+        class="text-primary text-h6"
+      >
+        <q-item-section avatar>
+          <q-icon name="login" />
+        </q-item-section>
+        <q-item-section>Entrar</q-item-section>
+      </q-item>
+      <q-separator spaced />
 
-      <p>Conectado: <b> {{userEstaLogado}}</b> </p>
+    </div>
 
-      <q-footer>
-        <q-item
-          clickable
-          v-ripple
-          v-close-popup
-          aria-hidden="true"
-        >
-          <q-item-section avatar>
-            <q-icon name="help" />
-          </q-item-section>
-          <q-item-section>Ajuda</q-item-section>
-        </q-item>
-      </q-footer>
-    </q-list>
-
-  </div>
+  </q-list>
 </template>
 <script>
 import { computed } from '@vue/composition-api'

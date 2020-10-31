@@ -1,6 +1,6 @@
 <template>
-
   <div class="q-pa-sm">
+
     <q-form
       @submit="onSubmit"
       @reset="onReset"
@@ -79,7 +79,53 @@
         class="text-grey"
         @click="openDialogRedefinirSenha"
       />
-    </div>
+    </div> <!-- Esqueceu a senha -->
+
+    <q-separator class="q-ma-sm" />
+
+    <div>
+      <q-card-section class="q-pt-xs">
+        <span class="text-grey q-pr-md">Não tem uma conta?</span>
+        <div class="q-pa-xs q-gutter-sm">
+          <q-btn
+            left
+            outline
+            color="accent full-width"
+            label="Cadastre-se"
+            v-on:click="registerSelect"
+          >
+          </q-btn>
+
+          <q-item-section class="content-center">
+            <q-item-label caption>
+              Ou acesse com sua conta
+            </q-item-label>
+          </q-item-section>
+
+          <q-btn
+            outline
+            left
+            color="primary full-width"
+            label="Google"
+            icon="img:icons/google_icon.png"
+            :loading="false"
+            @click="LoginWithGoogle"
+          >
+          </q-btn>
+
+          <q-btn
+            left
+            outline
+            color="primary full-width"
+            label="Facebook"
+            icon="img:icons/facebook_icon.png"
+            :loading="false"
+            @click="LoginWithFacebook"
+          >
+          </q-btn>
+        </div>
+      </q-card-section>
+    </div> <!-- Acesso com Google ou Facebook -->
 
     <q-dialog
       v-model="dialogRedefinirSenha"
@@ -134,8 +180,6 @@
       </q-card>
     </q-dialog>
 
-    <q-separator class="q-ma-sm" />
-
   </div>
 
 </template>
@@ -164,14 +208,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('store_auth', ['loginUsuario', 'redifirSenhaUsuario']),
+    ...mapActions('store_auth', ['loginUsuario', 'redifirSenhaUsuario', 'loginInWithGoogle', 'loginInWithFacebook']),
 
     onSubmit () {
       this.$refs.email.validate()
       this.$refs.password.validate()
-
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
-
         this.loginUsuario(this.formData)
       }
 
@@ -183,17 +225,21 @@ export default {
     },
 
     redefinirSenhaLogin () {
-
       this.$refs.emailRedefinir.validate()
-      //console.log(this.$refs)
-
       if (!this.$refs.emailRedefinir.hasError) {
         console.log(this.emailRedefinirSenha)
         this.redifirSenhaUsuario(this.emailRedefinirSenha)
       }
-
-
     },
+
+    LoginWithGoogle () {
+      this.loginInWithGoogle()
+    },
+
+    LoginWithFacebook () {
+      this.loginInWithFacebook()
+    },
+
 
     isValidEmail (email) {
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -204,7 +250,12 @@ export default {
       // this.name = null
       // this.age = null
       // this.accept = false
+    },
+
+    registerSelect () {
+      this.$emit('tab-register', 'register')
     }
+
   },
 
   //utilizado em coisas mais simples que não altera

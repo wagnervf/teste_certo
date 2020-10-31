@@ -71,10 +71,12 @@
                     <q-btn
                       round
                       size="sm"
-                      color="grey-9"
+                      color="primary"
+                      class="q-mr-xs"
                       icon="edit"
                       @click="updateUser(props.row)"
                     />
+
                     <q-btn
                       round
                       size="sm"
@@ -250,6 +252,7 @@ export default {
         });
       });
     },
+
     mapedUsers (values) {
       let result = []
 
@@ -273,7 +276,7 @@ export default {
         persistent: true
       }).onOk(() => {
         if (value) {
-          this.deleteDataFirebase(value.uid)
+          this.deleteDataFirebase(value)
         }
       })
     },
