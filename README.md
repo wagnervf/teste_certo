@@ -5,6 +5,9 @@ Teste
 ## Install the dependencies
 ```bash
 npm install
+$  npm install -g @vue/cli
+$ vue add quasar
+$ npm install --save firebase
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
