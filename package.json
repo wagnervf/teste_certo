@@ -1,28 +1,32 @@
 {
   "name": "olugarcerto",
   "version": "0.0.1",
-  "description": "O Lugar Certo",
-  "productName": "olugarcerto",
-  "author": "Wagner Freiria <wagner.freiria@ufms.br>",
   "private": true,
+  "description": "O Lugar Certo",
+  "author": "Wagner Freiria <wagner.freiria@ufms.br>",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
     "@quasar/cli": "^1.1.2",
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "^1.9.10",
     "@vue/composition-api": "^0.6.4",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
     "firebase": "^7.24.0",
-    "quasar": "^1.0.0",
+    "gulp-sass": "^4.1.0",
+    "quasar": "^1.14.3",
     "to": "^0.2.9",
     "update": "^0.7.4",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0",
-    "@types/node": "^10.17.15"
+    "@quasar/app": "^2.1.6",
+    "@types/node": "^10.17.15",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-quasar": "~3.0.1",
+    "webpack-cli": "^4.1.0"
   },
   "browserslist": [
     "ie >= 11",
@@ -40,5 +44,6 @@
     "node": ">= 10.18.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
-  }
+  },
+  "productName": "olugarcerto"
 }

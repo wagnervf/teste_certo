@@ -121,7 +121,7 @@
       behavior="mobile"
       v-model="drawer"
       show-if-above
-      :width="telaWidth"
+      :width="isMobile ? telaWidth : (telaWidth * 0.3)"
       :breakpoint="500"
     >
       <q-scroll-area style="height: calc(100% - 130px); margin-top: 80px;">

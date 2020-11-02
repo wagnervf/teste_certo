@@ -11,7 +11,7 @@ export default {
     },
 
     isMobile () {
-      return this.mobile
+      return this.mobile 
     },
     telaWidth () {
       return this.$q.screen.width

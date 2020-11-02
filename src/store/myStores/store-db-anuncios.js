@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
 import { LocalStorage, Loading, Notify } from 'quasar'
 import { notifyGenericPositive, notifyGenericNegative } from 'src/functions/functions-notify'
-i
+
 //gerador de ID
 import { uid } from 'quasar'
 
@@ -10,14 +10,16 @@ const state = {
   users: {},
 }
 
-const mutations = {}
+const mutations = {
+
+}
 
 const actions = {
   // Action é tulizada lá no @click e o Action Chama o Mutations que irá atualizar o states
-  addUserProfileFB ({ }, payload) {
-    let taskRef = firebaseDb.ref('olc_db/users/' + payload.uid)
-    taskRef.set(payload)
-  },
+  // addUserProfileFB ({ }, payload) {
+  //   let taskRef = firebaseDb.ref('olc_db/users/' + payload.uid)
+  //   taskRef.set(payload)
+  // },
 
   addImovelFB ({ }, payload) {
 
@@ -71,22 +73,22 @@ const actions = {
 
 }
 
-const getters = {
-  // Ordenacao das tarefas
+// const getters = {
+//   // Ordenacao das tarefas
 
-  //Filtrando o objeto
-
-
-  //Recebendo os valores filtrados
+//   //Filtrando o objeto
 
 
+//   //Recebendo os valores filtrados
 
-}
+
+
+// }
 
 export default {
   namespaced: true,
   state,
   mutations,
   actions,
-  getters
+  //getters
 }
