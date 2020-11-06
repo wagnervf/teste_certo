@@ -1,20 +1,33 @@
 <template>
   <div>
     <q-toolbar class="q-pa-sm">
-      <q-btn
-        dense
-        flat
-        round
-        icon="menu"
-        @click="drawer = !drawer"
-      />
+      <div class="col-3">
+        <q-btn
+          dense
+          flat
+          round
+          icon="menu"
+          @click="drawer = !drawer"
+        />
+        <q-btn
+          dense
+          flat
+          to="/"
+        > OL<span class="tituloC">C</span> </q-btn>
+      </div>
 
-      <q-btn
-        dense
-        flat
-        to="/"
-      > OL<span class="tituloC">C</span> </q-btn>
+      <q-space />
 
+      <div class="text-capitalize">
+        <q-btn
+          class="q-py-sm q-px-md bg-orange"
+          push
+          rounded
+          flat
+          label="ANUNCIAR"
+          @click="goAnunciar"
+        />
+      </div>
       <q-space />
 
       <div v-if="userEstaLogado">
@@ -28,15 +41,9 @@
             <div class="row items-right no-wrap">
               <div
                 class="text-right"
-                style="margin-rigth: -10px!important"
+                style="margin-rigth: -80px!important"
               >
-                <q-icon
-                  v-if="isMobile"
-                  name="account_circle"
-                  class="q-ml-none"
-                />
-
-                olá, {{labelUsuario}}
+                {{labelUsuario}}
               </div>
             </div>
           </template>
@@ -73,39 +80,29 @@
       expand-icon-class="text-indigo-10"
     >
       <q-card>
-        <q-toolbar class="bg-white shadow-1">
-          <q-input
-            dense
-            standout="bg-grey-4 text-white"
-            placeholder="Buscar"
-            v-model="text"
-            input-class="text-right"
-            class="q-ma-sm q-pa-sm full-width "
-            type="search"
-          >
-            <template v-slot:append>
-              <q-icon
-                v-if="text === ''"
-                name="search"
-              />
-              <q-icon
-                v-else
-                name="clear"
-                class="cursor-pointer"
-                @click="text = ''"
-              />
-            </template>
-          </q-input>
-
-          <div class="text-capitalize">
-            <q-btn
-              class="q-pa-xs bg-orange"
-              rounded
-              flat
-              label="ANUNCIAR"
+        <q-input
+          dense
+          outlined
+          filled
+          placeholder="Buscar"
+          v-model="text"
+          input-class="text-right"
+          class="q-ma-sm q-pa-sm"
+          type="search"
+        >
+          <template v-slot:append>
+            <q-icon
+              v-if="text === ''"
+              name="search"
             />
-          </div>
-        </q-toolbar> <!-- Buscar todo site Mobile -->
+            <q-icon
+              v-else
+              name="clear"
+              class="cursor-pointer"
+              @click="text = ''"
+            />
+          </template>
+        </q-input>
 
         <q-toolbar
           v-if="telaXS || telaSM"
@@ -209,6 +206,9 @@ export default {
   methods: {
     auth () {
       this.$router.push('/auth')
+    },
+    goAnunciar () {
+      this.$router.push('/imoveis/novo')
     }
   }
 

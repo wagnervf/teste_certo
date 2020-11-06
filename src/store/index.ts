@@ -2,11 +2,11 @@
 import Vue from "vue"
 import Vuex from "vuex"
 
-import store from "./store"
+//import store from "./store"
 import store_auth from "./myStores/store-auth"
-import store_plataform from "./myStores/store-plataform"
+import store_plataform from "./myStores/store_plataform"
 import store_db_firebase from "./myStores/store-db-firebase"
-import store_db_anuncios from "./myStores/store-db-anuncios"
+//import store_db_anuncios from "./myStores/store-db-anuncios"
 
 /*
  * If not building with SSR mode, you can
@@ -23,11 +23,10 @@ export interface StoreInterface {
 export default (function () {
   const Store = new Vuex.Store({
     modules: {
-      store,
+      //  store,
       store_auth,
       store_plataform,
       store_db_firebase,
-      store_db_anuncios
     },
 
     // enable strict mode (adds overhead!)

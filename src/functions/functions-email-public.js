@@ -33,7 +33,7 @@ export function alertEmailVerification (user, email) {
       let user = firebaseAuth.currentUser
       firebaseAuth.currentUser.sendEmailVerification(actionCodeSettings)
         .then(function () {
-          emailVerificationEnviado(user.email)
+          //  emailVerificationEnviado(user.email)
         })
     })
 }

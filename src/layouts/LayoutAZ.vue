@@ -1,9 +1,10 @@
 <template>
-  <q-layout view="lHh lpR lFf">
+  <q-layout view="lHh lpR lFr">
 
     <q-header
       reveal
-      class="background"
+      :reveal-offset="5"
+      class="bg-white text-indigo-10 shadow-1"
     >
       <headerMenu />
 
@@ -13,8 +14,47 @@
       <router-view />
     </q-page-container>
 
-    <q-footer class="bg-grey-1 text-grey-8 text-caption">
-      <q-toolbar>
+    <q-footer
+      reveal
+      class="bg-grey-1 text-caption "
+      height-hint="10"
+    >
+      <!-- <q-toolbar class="background text-grey">
+        <div class="q-pa-xs col-3 text-grey">
+          <q-list separator>
+            <span>Menu</span>
+            <q-item
+              clickable
+              v-ripple
+              dense
+            >
+              <q-item-section>Single line item</q-item-section>
+            </q-item>
+
+            <q-item
+              clickable
+              v-ripple
+              dense
+            >
+              <q-item-section style="border-bottom: 1px solid orange">
+                <q-item-label>Item with caption</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item
+              clickable
+              v-ripple
+              dense
+            >
+              <q-item-section>
+                <q-item-label>OVERLINE</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+      </q-toolbar> -->
+
+      <q-toolbar class="bg-grey-1 text-grey-8">
         <q-toolbar-title class="text-caption"><span class="material-icons">
             copyright
           </span> Wagner - 2020</q-toolbar-title>
@@ -60,7 +100,7 @@ export default {
       settingsOpen: false,
       userInfoOpen: false,
       tab: 'mails',
-      text: ''
+      text: '',
 
 
 
@@ -93,5 +133,9 @@ export default {
   font-size: x-large;
   font-family: system-ui;
   font-weight: bold;
+}
+
+.q-tree__node-header-content {
+  color: grey !important;
 }
 </style>

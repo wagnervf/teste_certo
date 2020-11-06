@@ -383,6 +383,78 @@
 
         </template>
       </q-table>
+
+      <q-table
+        title="Todos Anúncios"
+        :data="data"
+        :columns="columns"
+        row-key="name"
+        no-hover
+        class="wrap"
+        :dense="this.$q.screen.lt.sm"
+      >
+        <template v-slot:top-right>
+          <q-input
+            borderless
+            dense
+            outlined
+            debounce="300"
+            v-model="filter"
+            placeholder="Buscar"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+        <template v-slot:body-cell-name="props">
+          <q-td
+            :props="props"
+            no-hover
+            auto-width
+          >
+            <q-card
+              class="my-card"
+              flat
+            >
+
+              <q-card-section horizontal>
+                <q-card-section class="col-3">
+                  <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg">
+
+                    <div class="absolute-bottom-left text-subtitle2">
+                      <q-icon name="photo_camera"></q-icon>
+                      4
+                    </div>
+                  </q-img>
+                </q-card-section>
+
+                <q-card-section
+                  class="col"
+                  style="white-space: normal"
+                >
+                  <q-item-label class="text-subtitle1">{{props.row.name}}</q-item-label>
+                  <q-item-label caption>
+                    {{props.row.details}}
+                  </q-item-label>
+
+                  <q-card-actions class="absolute-bottom-right">
+                    <q-item-label class="text-subtitle1">{{props.row.valor}}</q-item-label>
+                  </q-card-actions>
+
+                  <q-card-actions class="absolute-bottom-left">
+                    <q-item-label>{{props.row.date}}</q-item-label>
+                  </q-card-actions>
+
+                </q-card-section>
+
+              </q-card-section>
+            </q-card>
+
+          </q-td>
+
+        </template>
+      </q-table>
     </div>
 
   </div>
@@ -396,7 +468,6 @@
 }
 </style>
 <style lang="sass" scoped>
-
 x
 
 .table .q-table tbody tr td.text-right

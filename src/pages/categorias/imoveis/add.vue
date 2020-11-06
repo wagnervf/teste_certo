@@ -1,11 +1,7 @@
 <template>
-  <q-page class="q-pa-md">
 
-    <div class="">
-      <formAdd />
-    </div>
+  <formAdd />
 
-  </q-page>
 </template>
 
 <script>

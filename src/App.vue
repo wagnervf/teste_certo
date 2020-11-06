@@ -8,18 +8,18 @@
 import { mapActions } from "vuex";
 
 export default {
-  //name: 'App'
+  name: "App",
   methods: {
-    ...mapActions("store", ["handleAuthStateChanged"]),
     ...mapActions("store_auth", ["onAuthStateChanged"]),
-    ...mapActions("store_plataform", ["alterTipoPlataform", "setTamanhoTela"]),
+    // ...mapActions("store_plataform", ["alterTipoPlataform"]),
   },
   mounted() {
     this.onAuthStateChanged();
-    this.alterTipoPlataform();
+    // this.alterTipoPlataform();
   },
+
   updated() {
-    this.alterTipoPlataform();
+    // this.alterTipoPlataform();
   },
 };
 </script>

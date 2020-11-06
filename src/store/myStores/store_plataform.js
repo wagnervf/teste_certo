@@ -1,6 +1,4 @@
-import Vue from 'vue'
 import { Platform } from 'quasar'
-import { Screen } from 'quasar'
 
 const state = {
   mobile: false,
@@ -15,11 +13,10 @@ const mutations = {
   SET_TIPO_PLATAFORM_DESKTOP (state, value) {
     state.desktop = value
   }
-
 }
 
 const actions = {
-  alterTipoPlataform ({ commit, ssrContext }) {
+  alterTipoPlataform ({ commit }, ssrContext) {
     const tipoPlataforma = process.env.SERVER
       ? Platform.parseSSR(ssrContext)
       : Platform
@@ -29,18 +26,12 @@ const actions = {
     } else {
       commit('SET_TIPO_PLATAFORM_DESKTOP', true)
     }
-
-  },
-
-
+  }
 }
-
-const getters = {}
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions,
-  getters
+  actions
 }

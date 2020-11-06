@@ -112,8 +112,7 @@ const actions = {
         }
         //Buscar dados de outro store-tasks
         //Adicionar o Root
-        // dispatch('verificationUserValidation', user)
-        dispatch('store_db_firebase/ReadDataFirebase', null, { root: true })
+        //dispatch('store_db_firebase/ReadDataFirebase', null, { root: true })
 
       } else {
         console.log(user)
@@ -189,9 +188,7 @@ const actions = {
   verificationUserValidation ({ commit, dispatch }, payload) {
     Loading.hide()
     let user = firebaseAuth.currentUser
-
     console.log(user)
-
     if (user.emailVerified == false) {
       alertEmailVerification(user.displayName, user.email)
       firebaseAuth.signOut()
@@ -261,18 +258,7 @@ const actions = {
     notifyGenericNegative(payload.mensagem)
   }
 
-
-
-
-
-
-
 }
-
-
-
-
-
 
 const getters = {
   getUserLogged: (state) => {

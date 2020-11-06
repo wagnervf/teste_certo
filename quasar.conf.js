@@ -46,6 +46,7 @@ module.exports = configure(function (/* ctx */) {
       'material-icons', // optional, you are not bound to it
     ],
 
+
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -67,14 +68,14 @@ module.exports = configure(function (/* ctx */) {
       // extractCSS: false,
 
       // https://quasar.dev/quasar-cli/handling-webpack
-      extendWebpack (cfg) {
+      extendWebpack (cfg, { isServer, isClient }) {
       },
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       https: false,
-      port: 9000,
+      port: 8000,
       open: true // opens browser window automatically
     },
 
@@ -94,7 +95,8 @@ module.exports = configure(function (/* ctx */) {
         'Dialog',
         'LocalStorage',
         'SessionStorage',
-        'Notify'
+        'Notify',
+        'Meta'
       ]
     },
 
@@ -104,7 +106,34 @@ module.exports = configure(function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false
+      pwa: false, // should a PWA take over (default: false), or just a SPA?
+      manualHydration: true / false, // (@quasar/app v1.4.2+) Manually hydrate the store
+
+      // -- @quasar/app v1.9.5+ --
+      // optional; add/remove/change properties
+      // of production generated package.json
+      extendPackageJson (pkg) {
+        // directly change props of pkg;
+        // no need to return anything
+      },
+
+      // -- @quasar/app v1.5+ --
+      // optional; webpack config Object for
+      // the Webserver part ONLY (/src-ssr/)
+      // which is invoked for production (NOT for dev)
+      extendWebpack (cfg) {
+        // directly change props of cfg;
+        // no need to return anything
+      },
+
+      // -- @quasar/app v1.5+ --
+      // optional; EQUIVALENT to extendWebpack() but uses webpack-chain;
+      // the Webserver part ONLY (/src-ssr/)
+      // which is invoked for production (NOT for dev)
+      chainWebpack (chain) {
+        // chain is a webpack-chain instance
+        // of the Webpack configuration
+      }
     },
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
@@ -144,6 +173,57 @@ module.exports = configure(function (/* ctx */) {
             src: 'icons/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png'
+          }
+        ]
+      },
+
+
+      // Use this OR metaVariablesFn, but not both;
+      // variables used to inject specific PWA
+      // meta tags (below are default values);
+      metaVariables: {
+        appleMobileWebAppCapable: 'yes',
+        appleMobileWebAppStatusBarStyle: 'default',
+        appleTouchIcon120: 'icons/apple-icon-120x120.png',
+        appleTouchIcon180: 'icons/apple-icon-180x180.png',
+        appleTouchIcon152: 'icons/apple-icon-152x152.png',
+        appleTouchIcon167: 'icons/apple-icon-167x167.png',
+        appleSafariPinnedTab: 'icons/safari-pinned-tab.svg',
+        msapplicationTileImage: 'icons/ms-icon-144x144.png',
+        msapplicationTileColor: '#000000'
+      },
+
+      // (@quasar/app v1.6.2+)
+      // Optional, overrides metaVariables above;
+      // Use this OR metaVariables, but not both;
+      metaVariablesFn (manifest) {
+        // ...
+        return [
+          {
+            // this entry will generate:
+            // <meta name="theme-color" content="ff0">
+
+            tagName: 'meta',
+            attributes: {
+              name: 'theme-color',
+              content: '#ff0'
+            }
+          },
+
+          {
+            // this entry will generate:
+            // <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+            // references /public/icons/icon-180.png
+
+            tagName: 'link',
+            attributes: {
+              rel: 'apple-touch-icon',
+              sizes: '180x180',
+              href: 'icons/icon-180.png'
+            },
+            closeTag: false // this is optional;
+            // specifies if tag also needs an explicit closing tag;
+            // it's Boolean false by default
           }
         ]
       }

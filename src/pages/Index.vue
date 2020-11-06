@@ -1,15 +1,10 @@
-<template>
-
-  <div class="row q-gutter-sm">
-    <div class="col-12">.col-9</div>
-
-    <div class="col-lg-1 col-md-1 col-sm-0">.</div>
-
-    <div class="col-lg-2 col-md-2 col-sm-2">
+<template >
+  <div class="row q-gutter-md q-pa-md justify-center">
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
       <colunaFilter />
     </div>
 
-    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12">
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-xs-12">
       <div class="q-pa-sm bg-blue-grey-2">
         <div class="q-gutter-md row items-start">
           <div style="min-width: 250px; max-width: 300px">
@@ -49,67 +44,6 @@
             />
           </div>
         </div>
-      </div>
-
-      <div class="col-12 q-pa-sm">
-        <q-carousel
-          v-model="slide"
-          transition-prev="slide-right"
-          transition-next="slide-left"
-          swipeable
-          animated
-          control-color="primary"
-          navigation
-          label="Destaques"
-          padding
-          arrows
-          height="300px"
-          class="rounded-borders"
-        >
-
-          <q-carousel-slide
-            :name="1"
-            class="column no-wrap"
-          >
-            <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-              <q-img
-                class="rounded-borders col-4 full-height"
-                src="https://cdn.quasar.dev/img/mountains.jpg"
-              />
-              <q-img
-                class="rounded-borders col-4 full-height"
-                src="https://cdn.quasar.dev/img/parallax1.jpg"
-              />
-              <q-img
-                class="rounded-borders col-4 full-height"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
-              />
-            </div>
-          </q-carousel-slide>
-
-          <q-carousel-slide
-            :name="2"
-            class="column no-wrap"
-          >
-            <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-
-              <q-img
-                class="rounded-borders col-4 full-height"
-                src="https://cdn.quasar.dev/img/quasar.jpg"
-              />
-
-              <q-img
-                class="rounded-borders col-4 full-height"
-                src="https://cdn.quasar.dev/img/cat.jpg"
-              />
-              <q-img
-                class="rounded-borders col-4 full-height"
-                src="https://cdn.quasar.dev/img/linux-avatar.png"
-              />
-            </div>
-          </q-carousel-slide>
-
-        </q-carousel>
       </div>
 
       <div class=" row q-pa-sm bg-grey-1 col-12">
@@ -171,8 +105,31 @@
           </template>
         </q-table>
       </div>
+
+      <div class="q-pa-sm">
+        <q-table
+          :data="data"
+          :columns="columns"
+          row-key="name"
+          flat
+        >
+          <template v-slot:body-cell-name="props">
+            <q-td :props="props">
+              <div>
+                <q-badge
+                  color="purple"
+                  :label="props.value"
+                />
+              </div>
+              <div class="my-table-details">
+                {{ props.row.details }}
+              </div>
+            </q-td>
+          </template>
+        </q-table>
+      </div>
     </div>
-    <div class="col-lg-2 col-md-2 col-sm-0 bg-grey-9">.</div>
+
   </div>
 
 </template>
@@ -185,6 +142,50 @@ import menuCards from 'src/components/menu/menuCards.vue';
 import tabsJson from 'src/dados/TabsIndex.json'
 
 export default {
+  meta: {
+    title: 'O LUgar Certo',
+    titleTemplate: title => `${title} - Wagner`,
+    meta: {
+      description: { name: 'description', content: 'Page 1' },
+      keywords: { name: 'keywords', content: 'Quasar website' },
+      equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' },
+      // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+      ogTitle: {
+        name: 'og:title',
+        // optional; similar to titleTemplate, but allows templating with other meta properties
+        template (ogTitle) {
+          return `${ogTitle} - My Website`
+        }
+      }
+    },
+    // CSS tags
+    link: {
+      material: { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
+    },
+    // JS tags
+    script: {
+      ldJson: {
+        type: 'application/ld+json',
+        innerHTML: `{ "@context": "http://schema.org" }`
+      }
+    },
+    // <html> attributes
+    htmlAttr: {
+      'xmlns:cc': 'http://creativecommons.org/ns#' // generates <html xmlns:cc="http://creativecommons.org/ns#">,
+    },
+
+    // <body> attributes
+    bodyAttr: {
+      'action-scope': 'xyz', // generates <body action-scope="xyz">
+      empty: undefined // generates <body empty>
+    },
+
+    // <noscript> tags
+    noscript: {
+      default: 'This is content for browsers with no JS (or disabled JS)'
+    }
+  },
+
   mixins: [mixinUtils],
   components: {
     colunaFilter,
