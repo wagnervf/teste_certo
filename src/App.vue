@@ -14,7 +14,7 @@ export default {
     // ...mapActions("store_plataform", ["alterTipoPlataform"]),
   },
   mounted() {
-    this.onAuthStateChanged();
+    //  this.onAuthStateChanged();
     // this.alterTipoPlataform();
   },
 

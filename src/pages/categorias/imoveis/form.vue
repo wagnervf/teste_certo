@@ -1,58 +1,159 @@
 <template>
-  <q-page class="row col-6 q-col-gutter-sm justify-center">
-    <q-form
-      @submit="submitForm"
-      class="col-lg-8 col-md-8 col-xs-12 col-sm-12 q-py-sm"
-    >
-      <q-tabs
-        v-model="tab"
-        dense
-        class="text-grey q-py-sm"
-        active-color="primary"
-        indicator-color="primary"
-        align="justify"
-        narrow-indicator
+  <q-page class="row col-8 q-col-gutter-sm justify-center">
+    <q-card>
+      <q-form
+        @submit="submitForm"
+        class="col-lg-8 col-md-8 col-xs-12 col-sm-8 q-pa-sm"
       >
-        <q-tab
-          name="categoria"
-          label="Categoria"
-        />
-        <q-tab
-          name="modalidade"
-          label="Modalidade"
-        />
-        <q-tab
-          name="informacoes"
-          label="Informações"
-        />
-
-        <q-tab
-          name="salvar"
-          label="Publicar"
-        />
-      </q-tabs>
-
-      <q-separator />
-
-      <q-tab-panels
-        v-model="tab"
-        animated
-        class="q-py-sm"
-      >
-        <q-tab-panel
-          name="categoria"
-          class="q-pa-md"
+        <q-tabs
+          v-model="tab"
+          dense
+          class="text-grey q-py-sm"
+          active-color="primary"
+          indicator-color="primary"
+          align="justify"
+          narrow-indicator
         >
-          <menuCards />
-        </q-tab-panel>
+          <!-- <q-tab
+            name="categoria"
+            label="Categoria"
+          />
+          <q-tab
+            name="modalidade"
+            label="Modalidade"
+          />
+          <q-tab
+            name="informacoes"
+            label="Informações"
+          /> -->
+        </q-tabs>
 
-        <q-tab-panel name="modalidade">
-          <q-card>
-            <q-card-section class="bg-grey-3 q-pa-sm">
-              <div class="text-h6 q-pa-sm">Anunciar imóvel</div>
-            </q-card-section>
-            <q-card-section class="q-py-xs">
-              <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-sm">
+        <!-- <q-separator /> -->
+
+        <q-tab-panels
+          v-model="tab"
+          animated
+          class="q-py-sm"
+        >
+          <q-tab-panel
+            name="categoria"
+            class="q-pa-xs"
+          >
+            <div class="justify-center row">
+              <div class="flex q-gutter-xs col-xl-8 col-md-8 col-sm-8 col-xs-12">
+                <q-btn-group
+                  v-for="tab in tabs"
+                  :key="tab.id"
+                >
+                  <q-btn
+                    color="indigo-8"
+                    style="width:110px; height: 90px;"
+                    no-caps
+                    @click="categoriaClick(tab)"
+                    push
+                  >
+                    <div class="text-center">
+                      <q-icon
+                        size="3em"
+                        :name="tab.icon"
+                      /><br>
+                      <span>{{tab.label}}</span>
+                    </div>
+                    <q-tooltip content-class="bg-accent">{{tab.label}}</q-tooltip>
+                  </q-btn>
+                </q-btn-group>
+              </div>
+            </div>
+
+          </q-tab-panel>
+
+          <q-tab-panel name="modalidade">
+            <q-banner>
+              <label class="text-capitalize text-grey">Categoria</label>
+              <br>
+              <q-btn
+                color="primary"
+                class="q-pa-sm"
+                :label="categoriaClicked"
+                no-caps
+                @click="tab ='categoria'"
+                outline
+                flat
+              />
+              <q-icon name="arrow_right"></q-icon>
+              <q-separator />
+            </q-banner>
+
+            <div class="justify-center flex q-gutter-sm">
+
+              <q-btn
+                color="orange"
+                style="width:110px; height: 90px;"
+                no-caps
+                @click="modalidadeClick('venda')"
+                push
+              >
+                <div class="text-center">
+                  <q-icon
+                    size="3em"
+                    name="monetization_on"
+                  /><br>
+                  <span>Venda</span>
+                </div>
+                <q-tooltip content-class="bg-accent">Venda</q-tooltip>
+              </q-btn>
+
+              <q-btn
+                color="orange"
+                style="width:110px; height: 90px;"
+                no-caps
+                @click="modalidadeClick('alugar')"
+                push
+              >
+                <div class="text-center">
+                  <q-icon
+                    size="3em"
+                    name="money_off"
+                  /><br>
+                  <span>Alugar</span>
+                </div>
+                <q-tooltip content-class="bg-accent">Alugar</q-tooltip>
+              </q-btn>
+
+            </div>
+
+          </q-tab-panel>
+
+          <q-tab-panel name="informacoes">
+
+            <q-card>
+              <q-card-section class="bg-grey-3 q-pa-sm">
+                <label class="text-capitalize text-grey">Categoria / Modalidade </label>
+                <br>
+                <q-btn
+                  color="primary"
+                  class="q-pa-sm"
+                  :label="categoriaClicked"
+                  no-caps
+                  @click="tab ='categoria'"
+                  outline
+                  flat
+                />
+                <q-icon name="arrow_right"></q-icon>
+
+                <q-btn
+                  color="primary"
+                  class="q-pa-sm"
+                  :label="madalidadeClicked"
+                  no-caps
+                  @click="tab ='modalidade'"
+                  outline
+                  flat
+                />
+              </q-card-section>
+              <q-card-section class="q-py-xs">
+
+                <!-- <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-sm">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <span class="text-subtitle2">Tipo</span>
                   <q-select
@@ -109,216 +210,217 @@
                     </template>
                   </q-select>
                 </div>
-              </div>
-              <!-- Tipo e Modalidade -->
+              </div> -->
 
-              <div class="q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
-                <span class="text-subtitle2">Título</span>
-                <q-input
-                  v-model="formData.titulo"
-                  ref="titulo"
-                  class="q-py-xs"
-                  lazy-rules
-                  :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
-                  outlined
-                  clearable
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="account_box" />
-                  </template>
-                </q-input>
-              </div>
-              <!-- Título -->
+                <!-- Tipo e Modalidade -->
 
-              <div class="q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
-                <span class="text-subtitle2">Descrição</span>
-                <q-input
-                  v-model="formData.descricao"
-                  ref="descricao"
-                  class="q-py-xs"
-                  lazy-rules
-                  :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
-                  outlined
-                  type="textarea"
-                  clearable
-                />
-              </div>
-              <!-- Descrição -->
-
-              <div class="row q-col-gutter-x-xs q-col-gutter-y-xs">
-                <div class="col-12">
-                  <span class="text-subtitle2">Cep do Imóvel</span>
-
+                <div class="q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
+                  <span class="text-subtitle2">Título</span>
                   <q-input
-                    bottom-slots
-                    outlined
-                    v-model="formData.cep"
-                    ref="cep"
+                    v-model="formData.titulo"
+                    ref="titulo"
+                    class="q-py-xs"
                     lazy-rules
-                    mask="#####-####"
                     :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+                    outlined
                     clearable
-                    class="text-h6"
                   >
-                    <template v-slot:after>
-                      <q-btn
-                        size="large"
-                        color="orange"
-                        class="text-capitalize"
-                        label="OK"
-                        @click="buscarCEP(formData.cep)"
-                      />
+                    <template v-slot:prepend>
+                      <q-icon name="account_box" />
                     </template>
                   </q-input>
                 </div>
-              </div>
-              <!-- cep -->
+                <!-- Título -->
 
-              <div class="row q-col-gutter-x-xs q-col-gutter-y-xs">
-                <div
-                  v-if="cepEncontrado"
-                  class="col-12 bg-grey-3 q-pa-md q-ma-none text-caption text-grey-8"
-                >
-                  {{ formData.logradouro }} | {{ formData.cidade }} |
-                  {{ formData.estado }}
-                </div>
-
-                <div
-                  v-if="cepNaoEncontrado"
-                  class="row col-md-12 q-col-gutter-x-sm"
-                >
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <span class="text-subtitle2">Estado</span>
-                    <q-input
-                      outlined
-                      v-model="formData.estado"
-                      ref="estado"
-                      dense
-                      readonly
-                      filled
-                    />
-                  </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <span class="text-subtitle2">Cidade</span>
-
-                    <q-input
-                      outlined
-                      v-model="formData.cidade"
-                      ref="cidade"
-                      dense
-                      readonly
-                      filled
-                    />
-                  </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <span class="text-subtitle2">Bairro</span>
-                    <q-input
-                      outlined
-                      v-model="formData.bairro"
-                      ref="bairro"
-                      dense
-                      readonly
-                      filled
-                    />
-                  </div>
-                </div>
-              </div>
-              <!-- cep -->
-
-              <div class="row q-col-gutter-x-md q-col-gutter-y-md q-my-sm q-pa-md text-grey-9">
-                <span class="text-subtitle2 col-12 q-py-xs bg-grey-2">Detalhes do imóvel</span>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 bg-grey-2 q-pa-sm">
-                  <span class="text-subtitle2">Garagem</span>
-                  <q-select
-                    outlined
-                    dense
-                    v-model="formData.garagem"
-                    :options="options"
-                    ref="garagem"
-                  />
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 bg-grey-2 q-pa-sm">
-                  <span class="text-subtitle2">Banheiros</span>
-                  <q-select
-                    outlined
-                    dense
-                    v-model="formData.banheiros"
-                    :options="options"
-                    ref="banheiros"
-                  />
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 bg-grey-2 q-pa-sm">
-                  <span class="text-subtitle2">Área</span>
+                <div class="q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
+                  <span class="text-subtitle2">Descrição</span>
                   <q-input
-                    outlined
-                    dense
-                    v-model="formData.area"
-                    ref="area"
-                  />
-                </div>
-              </div>
-
-              <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
-                <div class="col">
-                  <span class="text-subtitle2">Contato</span>
-                  <q-input
-                    outlined
-                    v-model="formData.contato"
-                    ref="contato"
-                    mask="(##)##### - ####"
-                    clearable
-                  />
-                </div>
-              </div>
-              <!-- Contato -->
-
-              <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
-                <div class="col-12">
-                  <span class="q-pa-none text-primary text-h6">Valor</span>
-                  <q-input
-                    outlined
-                    v-model="formData.valor"
-                    type="number"
-                    prefix="R$"
-                    class="text-h6"
-                    ref="valor"
+                    v-model="formData.descricao"
+                    ref="descricao"
+                    class="q-py-xs"
                     lazy-rules
                     :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+                    outlined
+                    type="textarea"
                     clearable
-                  >
-                  </q-input>
+                  />
                 </div>
-              </div>
-              <!-- Valor -->
+                <!-- Descrição -->
 
-              <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
-                <div class="col-12">
-                  <q-uploader
-                    url="http://localhost:4444/upload"
-                    label="Selecione as Fotos"
-                    ref="fotos"
-                    multiple
-                    batch
-                    max-files="3"
-                    auto-upload
-                    accept=".jpg, image/*"
-                    @rejected="onRejected"
-                    class="full-width bg-grey-2"
-                    style="min-height: 200px"
-                  >
-                  </q-uploader>
+                <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
+                  <div class="col-12">
+                    <q-uploader
+                      url="http://localhost:4444/upload"
+                      label="Selecione as Fotos"
+                      ref="fotos"
+                      multiple
+                      batch
+                      max-files="3"
+                      auto-upload
+                      accept=".jpg, image/*"
+                      @rejected="onRejected"
+                      class="full-width bg-grey-2"
+                      style="min-height: 200px"
+                    >
+                    </q-uploader>
+                  </div>
                 </div>
-              </div>
-              <!-- Fotos -->
+                <!-- Fotos -->
 
-              <q-expansion-item
-                expand-separator
-                icon="pool"
-                class="text-primary shadow-1 q-py-sm text-subtitle2"
-                label="Mais Informações"
-                caption="Banheiros / Garagem / Condomínio / "
-              >
-                <!-- 
+                <div class="row q-col-gutter-x-xs q-col-gutter-y-xs">
+                  <div class="col-12">
+                    <span class="text-subtitle2">Cep do Imóvel</span>
+
+                    <q-input
+                      bottom-slots
+                      outlined
+                      v-model="formData.cep"
+                      ref="cep"
+                      lazy-rules
+                      mask="#####-####"
+                      :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+                      clearable
+                      class="text-h6"
+                    >
+                      <template v-slot:after>
+                        <q-btn
+                          size="large"
+                          color="orange"
+                          class="text-capitalize q-px-md"
+                          label="OK"
+                          @click="buscarCEP(formData.cep)"
+                        />
+                      </template>
+                    </q-input>
+                  </div>
+                </div>
+                <!-- cep -->
+
+                <div class="row q-col-gutter-x-xs q-col-gutter-y-xs">
+                  <div
+                    v-if="cepEncontrado"
+                    class="col-12 bg-grey-3 q-pa-md q-ma-none text-caption text-grey-8"
+                  >
+                    {{ formData.logradouro }} | {{ formData.cidade }} |
+                    {{ formData.estado }}
+                  </div>
+
+                  <div
+                    v-if="cepNaoEncontrado"
+                    class="row col-md-12 q-col-gutter-x-sm"
+                  >
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <span class="text-subtitle2">Estado</span>
+                      <q-input
+                        outlined
+                        v-model="formData.estado"
+                        ref="estado"
+                        dense
+                        readonly
+                        filled
+                      />
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <span class="text-subtitle2">Cidade</span>
+
+                      <q-input
+                        outlined
+                        v-model="formData.cidade"
+                        ref="cidade"
+                        dense
+                        readonly
+                        filled
+                      />
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <span class="text-subtitle2">Bairro</span>
+                      <q-input
+                        outlined
+                        v-model="formData.bairro"
+                        ref="bairro"
+                        dense
+                        readonly
+                        filled
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- cep -->
+
+                <div class="row q-col-gutter-x-md q-col-gutter-y-md q-my-sm q-pa-md text-grey-9">
+                  <span class="text-subtitle2 col-12 q-py-xs bg-grey-2">Detalhes do imóvel</span>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 bg-grey-2 q-pa-sm">
+                    <span class="text-subtitle2">Garagem</span>
+                    <q-select
+                      outlined
+                      dense
+                      v-model="formData.garagem"
+                      :options="options"
+                      ref="garagem"
+                    />
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 bg-grey-2 q-pa-sm">
+                    <span class="text-subtitle2">Banheiros</span>
+                    <q-select
+                      outlined
+                      dense
+                      v-model="formData.banheiros"
+                      :options="options"
+                      ref="banheiros"
+                    />
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 bg-grey-2 q-pa-sm">
+                    <span class="text-subtitle2">Área</span>
+                    <q-input
+                      outlined
+                      dense
+                      v-model="formData.area"
+                      ref="area"
+                    />
+                  </div>
+                </div>
+
+                <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
+                  <div class="col">
+                    <span class="text-subtitle2">Contato</span>
+                    <q-input
+                      outlined
+                      v-model="formData.contato"
+                      ref="contato"
+                      mask="(##)##### - ####"
+                      clearable
+                    />
+                  </div>
+                </div>
+                <!-- Contato -->
+
+                <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-py-xs">
+                  <div class="col-12">
+                    <span class="q-pa-none text-primary text-h6">Valor</span>
+                    <q-input
+                      outlined
+                      v-model="formData.valor"
+                      type="number"
+                      prefix="R$"
+                      class="text-h6"
+                      ref="valor"
+                      lazy-rules
+                      :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+                      clearable
+                    >
+                    </q-input>
+                  </div>
+                </div>
+                <!-- Valor -->
+
+                <q-expansion-item
+                  expand-separator
+                  icon="pool"
+                  class="text-primary shadow-1 q-py-sm text-subtitle2"
+                  label="Mais Informações"
+                  caption="Banheiros / Garagem / Condomínio / "
+                >
+                  <!-- 
             <div class="row q-col-gutter-x-md q-col-gutter-y-md q-my-md q-pa-md text-grey-9">
               <span class="q-pt-none text-primary col-12">Mais informações do imóvel</span>
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -351,115 +453,111 @@
                 />
               </div>
             </div> -->
-                <!-- Detalhes -->
+                  <!-- Detalhes -->
 
-                <div class="col-12 q-col-gutter-x-md shadow-0 text-subtitle2 q-ma-md q-px-none text-grey-9">
-                  <q-card-section class="q-pa-none text-primary">Mais informações do imóvel</q-card-section>
-                  <q-toggle
-                    name="piscina"
-                    v-model="formData.piscina"
-                    true-value="piscina"
-                    label="Piscina"
-                    ref="piscina"
-                  />
-
-                  <q-toggle
-                    name="academia"
-                    v-model="formData.academia"
-                    true-value="academia"
-                    label="Academia"
-                    ref="academia"
-                  />
-
-                  <q-toggle
-                    name="portaria"
-                    v-model="formData.portaria"
-                    true-value="portaria"
-                    label="Portaria"
-                    ref="portaria"
-                  />
-                </div>
-
-                <!-- Mais informações -->
-
-                <div class="row q-col-gutter-x-md q-col-gutter-y-sm q-pa-md text-grey-9">
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <span class="q-pt-md"></span>
+                  <div class="col-12 q-col-gutter-x-md shadow-0 text-subtitle2 q-ma-md q-px-none text-grey-9">
+                    <q-card-section class="q-pa-none text-primary">Mais informações do imóvel</q-card-section>
                     <q-toggle
-                      name="condominio"
-                      ref="condominio"
-                      v-model="formData.condominio"
-                      label="Possui Condomínio"
-                      class="q-pt-md q-pl-md"
+                      name="piscina"
+                      v-model="formData.piscina"
+                      true-value="piscina"
+                      label="Piscina"
+                      ref="piscina"
+                    />
+
+                    <q-toggle
+                      name="academia"
+                      v-model="formData.academia"
+                      true-value="academia"
+                      label="Academia"
+                      ref="academia"
+                    />
+
+                    <q-toggle
+                      name="portaria"
+                      v-model="formData.portaria"
+                      true-value="portaria"
+                      label="Portaria"
+                      ref="portaria"
                     />
                   </div>
-                  <div
-                    v-if="formData.condominio"
-                    class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 text-grey-9"
-                  >
-                    <span class="text-subtitle2">Valor Condomínio</span>
-                    <q-input
-                      outlined
-                      v-model="formData.condominio_valor"
-                      dense
-                      ref="valor_condominio"
-                      type="number"
-                      prefix="R$"
-                      clearable
-                    />
+
+                  <!-- Mais informações -->
+
+                  <div class="row q-col-gutter-x-md q-col-gutter-y-sm q-pa-md text-grey-9">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                      <span class="q-pt-md"></span>
+                      <q-toggle
+                        name="condominio"
+                        ref="condominio"
+                        v-model="formData.condominio"
+                        label="Possui Condomínio"
+                        class="q-pt-md q-pl-md"
+                      />
+                    </div>
+                    <div
+                      v-if="formData.condominio"
+                      class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 text-grey-9"
+                    >
+                      <span class="text-subtitle2">Valor Condomínio</span>
+                      <q-input
+                        outlined
+                        v-model="formData.condominio_valor"
+                        dense
+                        ref="valor_condominio"
+                        type="number"
+                        prefix="R$"
+                        clearable
+                      />
+                    </div>
                   </div>
-                </div>
-                <!-- Condomínio -->
+                  <!-- Condomínio -->
 
-              </q-expansion-item>
-            </q-card-section>
-            <!-- Fotos -->
+                </q-expansion-item>
+              </q-card-section>
+              <!-- Fotos -->
 
-            <q-card-actions
-              align="right"
-              class="q-ma-sm"
-            >
-              <q-btn
-                flat
-                color="red"
-                icon="close"
-                class="text-capitalize"
-                @click="cancelar()"
-                type="onReset"
-              >
-                <span class="q-mx-sm">Cancelar</span>
-                <template v-slot:loading>
-                  <q-spinner-hourglass class="on-left" />
-                  Salvando...
-                </template>
-              </q-btn>
-              <q-btn
-                :loading="loading"
-                color="teal"
-                type="submit"
-                icon="check"
-                class="text-capitalize"
-              >
-                <span class="q-mx-sm">Publicar Anúncio</span>
-                <template v-slot:loading>
-                  <q-spinner-hourglass class="on-left" />
-                  Salvando...
-                </template>
-              </q-btn>
-            </q-card-actions>
-          </q-card>
-        </q-tab-panel>
+              <q-card-actions class="q-py-md q-col-gutter-xs">
+                <q-btn
+                  flat
+                  color="red"
+                  icon-right="close"
+                  class="text-capitalize q-py-none"
+                  @click="cancelar()"
+                  type="onReset"
+                >
+                  <span class="q-ma-xs">Cancelar Publicação</span>
+                  <template v-slot:loading>
+                    <q-spinner-hourglass class="on-left" />
+                    Salvando...
+                  </template>
+                </q-btn>
 
-        <q-tab-panel name="informacoes">
-          <div class="text-h6">Movies</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </q-tab-panel>
-      </q-tab-panels>
+                <q-space />
 
-      <!-- <pre>
+                <q-btn
+                  :loading="loading"
+                  color="teal"
+                  type="submit"
+                  icon-right="check"
+                  class="text-capitalize q-py-none"
+                >
+                  <span class="q-ma-xs">Publicar Anúncio</span>
+                  <template v-slot:loading>
+                    <q-spinner-hourglass class="on-left" />
+                    Salvando...
+                  </template>
+                </q-btn>
+              </q-card-actions>
+            </q-card>
+          </q-tab-panel>
+        </q-tab-panels>
+
+        <pre>
           {{ formData }}
-      </pre> -->
-    </q-form>
+      </pre>
+      </q-form>
+    </q-card>
   </q-page>
 </template>
 
@@ -470,6 +568,10 @@ import mixinUtils from "src/mixins/mixin-utils";
 import serviceCep from "src/services/cep/services-consulta-cep";
 import colunaFilter from 'src/components/menu/colunaFiltro'
 import menuCards from 'src/components/menu/menuCards'
+import tabsJson from 'src/dados/TabsIndex.json'
+import { date } from 'quasar'
+
+
 
 import {
   notifyGenericPositive,
@@ -487,14 +589,15 @@ export default {
 
   data () {
     return {
+      tabs: tabsJson,
       tab: 'categoria',
       formData: {
-        uid: "",
+        //  uid: "",
         titulo: "Casa nova",
         valor: "2514",
-        categoria: "casa",
+        categoria: "",
         cep: "79051510",
-        modalidade: "venda",
+        modalidade: "",
         tipo: "casa",
         piscina: false,
         academia: false,
@@ -511,8 +614,13 @@ export default {
         bairro: "",
         logradouro: "",
         ddd: "",
+        created: '',
+        updated: ''
       },
       step: 1,
+
+      categoriaClicked: '',
+      madalidadeClicked: '',
 
       user_details: {},
       password_dict: {},
@@ -545,15 +653,19 @@ export default {
 
   methods: {
     ...mapActions("store_auth", ["addUserProfileFB", "updateProfileLogin"]),
-    ...mapActions("store_db_anuncios", ["addImovelFB"]),
+    ...mapActions("store_db_firebase", ["addAnuncioImoveisVenda"]),
 
     submitForm () {
-      console.log(this.loggedIn);
-      this.$refs.tipo.validate();
-      this.$refs.modalidade.validate();
+      let timeStamp = Date.now()
+      this.formData.created = date.formatDate(timeStamp, 'DD-MM-YYYY HH:mm:ss')
+      this.formData.updated = date.formatDate(timeStamp, 'DD-MM-YYYY HH:mm:ss')
 
-      if (!this.$refs.tipo.hasError && !this.$refs.modalidade.hasError) {
-      }
+      // this.$refs.tipo.validate();
+      // this.$refs.modalidade.validate();
+
+      // if (!this.$refs.tipo.hasError && !this.$refs.modalidade.hasError) {
+      this.addAnuncioImoveisVenda(this.formData)
+      //  }
     },
 
     filterFn (val, update) {
@@ -608,6 +720,20 @@ export default {
     cancelar () {
       this.$router.push("/index").catch((err) => { });
     },
+
+    categoriaClick (value) {
+      console.log(value)
+      this.categoriaClicked = value.label
+      this.formData.categoria = value.label;
+      this.tab = 'modalidade'
+    },
+
+    modalidadeClick (value) {
+      console.log(value)
+      this.madalidadeClicked = value
+      this.formData.modalidade = value;
+      this.tab = 'informacoes'
+    }
   },
 };
 </script>

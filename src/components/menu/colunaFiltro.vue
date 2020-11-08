@@ -1,20 +1,19 @@
 <template>
-
   <div class="q-ma-none responsive">
 
-    <!-- <div class="row justify-center">
-        <img
-          src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg"
-          class="avatar q-ma-sm responsive"
-        >
-      </div> -->
+    <div class="row justify-center">
+      <img
+        src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg"
+        class="avatar q-ma-sm responsive"
+      >
+    </div>
 
     <q-list class="q-pa-none responsive">
-      <!-- <div class="text-center ">
+      <div class="text-center ">
         <q-card class="bg-grey-3 q-py-xs shadow-0">
           Escolha a Categorias
         </q-card>
-      </div> -->
+      </div>
       <q-expansion-item>
         <template v-slot:header>
           <q-item-section avatar>

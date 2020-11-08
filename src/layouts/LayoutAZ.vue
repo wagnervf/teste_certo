@@ -4,7 +4,7 @@
     <q-header
       reveal
       :reveal-offset="5"
-      class="bg-white text-indigo-10 shadow-1"
+      class="text-indigo-10"
     >
       <headerMenu />
 

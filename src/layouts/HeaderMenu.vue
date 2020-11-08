@@ -1,32 +1,11 @@
 <template>
   <div>
-    <q-toolbar class="q-pa-sm">
-      <div class="col-3">
-        <q-btn
-          dense
-          flat
-          round
-          icon="menu"
-          @click="drawer = !drawer"
-        />
-        <q-btn
-          dense
-          flat
-          to="/"
-        > OL<span class="tituloC">C</span> </q-btn>
-      </div>
-
+    <!-- <q-toolbar class="q-pa-sm">
+      
       <q-space />
 
       <div class="text-capitalize">
-        <q-btn
-          class="q-py-sm q-px-md bg-orange"
-          push
-          rounded
-          flat
-          label="ANUNCIAR"
-          @click="goAnunciar"
-        />
+       
       </div>
       <q-space />
 
@@ -69,40 +48,144 @@
           />
         </div>
       </div>
-    </q-toolbar>
+    </q-toolbar> -->
+
+    <div class="row no-wrap shadow-1">
+      <q-toolbar class="bg-grey-2 q-pa-sm">
+        <q-btn
+          flat
+          round
+          dense
+          icon="menu"
+          @click="drawer = !drawer"
+        />
+        <q-toolbar-title>
+          <q-btn
+            dense
+            flat
+            to="/"
+          > OL<span class="tituloC">C</span> </q-btn>
+
+        </q-toolbar-title>
+        <q-space />
+
+        <div
+          v-if="telaXL || telaMD"
+          class="col-8"
+        >
+          <q-input
+            outlined
+            filled
+            dense
+            label="Pesquisar"
+            v-model="text"
+            input-class="text-right"
+            class="q-ml-md col-12"
+          >
+            <template v-slot:append>
+              <q-icon
+                v-if="text === ''"
+                name="search"
+              />
+              <q-icon
+                v-else
+                name="clear"
+                class="cursor-pointer"
+                @click="text = ''"
+              />
+            </template>
+          </q-input>
+        </div>
+        <q-space />
+
+        <q-btn
+          flat
+          color="grey-9"
+          icon="search"
+          @click="pesquisar = true"
+          class="q-mx-sm"
+        />
+
+        <div class="text-right">
+          <q-btn
+            class="q-py-xs q-px-md bg-orange text-white"
+            push
+            rounded
+            flat
+            label="ANUNCIAR"
+            @click="goAnunciar()"
+          />
+          <q-btn
+            flat
+            round
+            dense
+            icon="more_vert"
+          />
+        </div>
+
+      </q-toolbar>
+
+      <q-dialog
+        v-model="pesquisar"
+        persistent
+      >
+        <q-card style="min-width: 350px">
+          <q-card-section>
+            <q-input
+              dense
+              outlined
+              filled
+              placeholder="Buscar"
+              v-model="text"
+              input-class="text-right"
+              class="full-width"
+              type="search"
+            >
+              <template v-slot:append>
+                <q-icon
+                  v-if="text === ''"
+                  name="search"
+                />
+                <q-btn
+                  v-else
+                  push
+                  name="clear"
+                  class="q-py-xs q-px-md bg-orange text-white"
+                  @click="text = ''"
+                />
+              </template>
+            </q-input>
+          </q-card-section>
+          <q-card-actions
+            align="right"
+            class="text-primary"
+          >
+            <q-btn
+              flat
+              color="red"
+              label="Cancelar"
+              v-close-popup
+            />
+            <q-btn
+              label="Pesquisar"
+              color="teal"
+              v-close-popup
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+    </div>
 
     <q-expansion-item
       icon="filter_list"
       label="Filtros"
       expand-separator
-      class="shadow-1 text-indigo-10"
-      header-class="bg-grey-3"
+      class="text-indigo-10"
+      header-class="bg-white"
       expand-icon-class="text-indigo-10"
     >
       <q-card>
-        <q-input
-          dense
-          outlined
-          filled
-          placeholder="Buscar"
-          v-model="text"
-          input-class="text-right"
-          class="q-ma-sm q-pa-sm"
-          type="search"
-        >
-          <template v-slot:append>
-            <q-icon
-              v-if="text === ''"
-              name="search"
-            />
-            <q-icon
-              v-else
-              name="clear"
-              class="cursor-pointer"
-              @click="text = ''"
-            />
-          </template>
-        </q-input>
 
         <q-toolbar
           v-if="telaXS || telaSM"
@@ -193,7 +276,8 @@ export default {
     return {
       userInfoOpen: false,
       drawer: false,
-      text: ''
+      text: '',
+      pesquisar: false,
 
 
     };

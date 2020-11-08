@@ -1,14 +1,15 @@
 <template>
-  <div class="justify-center row q-gutter-sm">
+  <div class="justify-center flex q-gutter-xs">
     <q-btn-group
       v-for="tab in tabs"
       :key="tab.id"
     >
       <q-btn
         :color=" pageActive == tab.name ? 'orange' : 'primary'"
-        style="width:100px; height: 80px;"
+        style="width:110px; height: 90px;"
         no-caps
         @click="categoriaClick(tab)"
+        push
       >
         <div class="text-center">
           <q-icon
@@ -16,8 +17,8 @@
             :name="tab.icon"
           /><br>
           <span>{{tab.label}}</span>
-          <q-tooltip content-class="bg-accent">{{tab.label}}</q-tooltip>
         </div>
+        <q-tooltip content-class="bg-accent">{{tab.label}}</q-tooltip>
       </q-btn>
     </q-btn-group>
   </div>
