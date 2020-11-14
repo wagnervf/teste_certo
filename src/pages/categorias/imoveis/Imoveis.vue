@@ -1,291 +1,24 @@
-<template >
-  <div>
-    <!-- <q-page-container class="fit row no-wrap justify-start  content-start q-gutter-x-md ">
-      <div class="col-3 self-start q-gutter-x-sm bg-grey-6">
-        <colunaFilter />
-      </div>
+<template>
 
-      <div class="fit flex justify-center self-start bg-grey q-gutter-y-md">
-        <div class="fit justify-center items-start">
-          <div class="row q-pa-xs bg-grey-1 col-12">
-
-            <div class="col text-left text-primary q-pa-sm">
-              <q-breadcrumbs>
-                <q-breadcrumbs-el
-                  label="Home"
-                  icon="home"
-                  to="/index"
-                />
-                <q-breadcrumbs-el :label="this.$route.name" />
-
-              </q-breadcrumbs>
-            </div>
-
-            <q-space />
-
-            <div class="col-4 q-pr-sm text-right">
-
-              <q-btn
-                flat
-                color="grey-9"
-                icon="view_list"
-              />
-              <q-btn
-                flat
-                color="grey-9"
-                icon="view_module"
-              />
-
-            </div>
-
-          </div>
-        </div>
-
-        <div
-          v-for="anuncio in data"
-          :key="anuncio.id"
-          class="q-mx-sm"
-        >
-
-          <q-card
-            class="col"
-            style="min-width: 255px;"
-          >
-            <q-card-section class="text-center">
-              <q-img
-                :src="anuncio.foto"
-                class="center"
-                :ratio="4/3"
-              >
-                <div class="absolute-bottom-left text-subtitle2">
-                  <q-icon name="photo_camera" /> 4
-                </div>
-              </q-img>
-            </q-card-section>
-
-            <q-card-section>
-              <q-btn
-                fab
-                color="primary"
-                :label="'R$ ' + anuncio.valor"
-                class="absolute"
-                style="top: 0; right: 12px; transform: translateY(-50%);"
-              />
-
-              <div class="row no-wrap items-center">
-                <div class="col text-h6 ellipsis">
-                  {{anuncio.titulo}}
-                </div>
-              </div>
-            </q-card-section>
-
-            <q-card-section class="q-pt-none">
-              <div class="text-subtitle1">
-                {{anuncio.tipo}}
-              </div>
-              <div class="text-subtitle1">
-                {{anuncio.modalidade}}
-              </div>
-              <div class="text-caption text-grey">
-                {{anuncio.descricao}}
-              </div>
-              <div class="col-auto text-grey justify-end text-caption q-pt-md row no-wrap items-center">
-                <q-icon name="today" />
-                {{anuncio.updated}}
-              </div>
-            </q-card-section>
-
-            <q-separator />
-
-            <q-card-actions class="justify-end text-secondary">
-              <span class="q-px-xs">Vendedor</span>
-
-              <q-icon
-                class="q-px-xs"
-                name="chat"
-                de
-              />
-
-              <q-icon
-                class="q-px-xs"
-                name="call"
-              />
-
-              <q-rating
-                v-model="stars"
-                :max="5"
-                size="18px"
-              />
-            </q-card-actions>
-
-            <q-separator />
-
-            <q-card-actions class="justify-end">
-              <q-btn
-                color="orange"
-                no-caps
-                @click="verAnuncio(anuncio)"
-                label="Ver Anúncio"
-              />
-            </q-card-actions>
-          </q-card>
-
-        </div>
+  <div class="q-pa-md fit row wrap  ">
+    <div class="q-pa-md-xs">
+      <div class="row">
+        <q-breadcrumbs>
+          <q-breadcrumbs-el
+            label="Home"
+            icon="home"
+            to="/index"
+          />
+          <q-breadcrumbs-el :label="this.$route.name" />
+        </q-breadcrumbs>
 
       </div>
-
-    </q-page-container> -->
-
-    <div class="fit row inline no-wrap justify-center  content-start  q-gutter-y-md">
-      <div
-        v-if="!telaXS"
-        class="col-2 q-py-md"
-      >
-        <colunaFilter />
-      </div>
-
-      <!-- <div class="col-6 bg-grey-3 q-gutter-x-sm q-gutter-y-sm">
-        <q-card
-          v-for="anuncio in data"
-          :key="anuncio.id"
-          class="row"
-        >
-          <q-card-section
-            class="col-12 col-md-4 q-pa-xs "
-            style="border: 1px solid #ddd"
-          >
-            <q-img
-              :src="anuncio.foto"
-              :ratio="4/3"
-              style="max-width: 300px; "
-            />
-            <div class="col absolute-bottom q-py-sm">
-              <span class="q-px-xs">Vendedor</span>
-              <q-icon
-                class="q-px-xs"
-                name="chat"
-                color="green"
-              />
-
-              <q-icon
-                class="q-px-xs"
-                name="call"
-                color="primary"
-              />
-
-              <q-rating
-                v-model="stars"
-                :max="5"
-                size="18px"
-              />
-            </div>
-          </q-card-section>
-
-          <q-card-section class="col-12 col-md-8 q-pa-xs">
-            <div class="col text-h6 ellipsis bg-grey-3 q-pa-sm">
-              {{anuncio.titulo}}
-            </div>
-            <q-btn
-              fab
-              color="primary"
-              :label="'R$ ' + anuncio.valor"
-            />
-
-            <div class="text-subtitle1">
-              {{anuncio.tipo}}
-            </div>
-            <div class="text-subtitle1">
-              {{anuncio.modalidade}}
-            </div>
-            <div class="text-caption text-grey">
-              {{anuncio.descricao}}
-            </div>
-            <div class="col-auto text-grey justify-end text-caption q-pt-md row no-wrap items-center">
-              {{anuncio.updated}}
-
-            </div>
-
-            <q-card-actions class="justify-end">
-              <q-btn
-                color="orange"
-                no-caps
-                @click="verAnuncio(anuncio)"
-                label="Ver Anúncio"
-              />
-            </q-card-actions>
-
-          </q-card-section>
-
-        </q-card>
-
-      </div> -->
-      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-12 bg-grey-3  q-gutter-y-sm">
-        <div class="q-pa-sm q-ma-none">
-          <div class="row q-pa-xs bg-grey-1 col-12">
-
-            <div class="col text-left text-primary q-pa-sm">
-              <q-breadcrumbs>
-                <q-breadcrumbs-el
-                  label="Home"
-                  icon="home"
-                  to="/index"
-                />
-                <q-breadcrumbs-el :label="this.$route.name" />
-
-              </q-breadcrumbs>
-            </div>
-
-            <q-space />
-
-            <div class="col-4 q-pr-sm text-right">
-
-              <q-btn
-                flat
-                color="grey-9"
-                icon="view_list"
-              />
-              <q-btn
-                flat
-                color="grey-9"
-                icon="view_module"
-              />
-
-            </div>
-
-          </div>
-
-          <div class="row q-pa-xs bg-white col-12">
-            <div class="col-12 q-pr-sm text-right text-primary">
-              <span class="text-grey-9">Ordenar Por:</span>
-              <q-btn
-                outline
-                flat
-                label="Titulo"
-                class="q-px-sm"
-                @click="ordenar('titulo')"
-              />
-              <q-btn
-                flat
-                label="Valor"
-                class="q-px-sm"
-                @click="ordenar('valor')"
-              />
-              <q-btn
-                flat
-                label="Tipo"
-                class="q-px-sm"
-                @click="ordenar('tipo')"
-              />
-            </div>
-          </div>
-        </div>
-
+      <div class="row">
         <q-table
           grid
-          title="Anúncios"
           :data="data"
           :columns="columns"
-          row-key="id"
+          row-key="name"
           :filter="filter"
           binary-state-sort
           :pagination.sync="pagination"
@@ -311,173 +44,127 @@
             </q-tr>
           </template>
 
-          <template v-slot:item="props">
-            <!-- {{props.row}} -->
-            <div class="q-pa-xs col-12">
-              <q-card class="row">
-                <q-card-section
-                  class="col-12 col-md-4 q-pa-xs "
-                  style="border: 1px solid #ddd"
-                >
-                  <!-- <q-img
-                    :src="props.row.foto"
-                    :ratio="4/3"
-                    style="max-width: 300px; "
-                  /> -->
-                  <q-card-section class="text-center">
-                    <q-img
-                      :src="props.row.foto"
-                      class="center"
-                      :ratio="4/3"
-                      style="max-width: 300px; "
-                    >
-                      <div class="absolute-bottom-left text-subtitle2">
-                        <q-icon name="photo_camera" /> 4
-                      </div>
-                    </q-img>
-                  </q-card-section>
+          <template
+            v-slot:top
+            class="q-px-none"
+          >
+            <div class="q-gutter-x-xs col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <q-input
+                dense
+                outlined
+                debounce="300"
+                v-model="filter"
+                placeholder="Filtrar dados da tabela"
+                label="Filtrar dados da tabela"
+                title="Filtrar dados da tabela"
+                class="col-xs-12"
+                v-focus
+                tabindex="0"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </div>
+            <q-space />
 
-                </q-card-section>
+            <div class="q-gutter-x-sm ">
+              <q-tabs
+                v-model="tabOrdenacao"
+                inline-label
+                animated
+                swipeable
+                outside-arrows
+                mobile-arrows
+                class="text-primary text-right"
+              >
+                <span class="text-grey-9 q-px-xs">Ordenar Por: </span>
+                <q-tab
+                  name="titulo"
+                  label="Titulo"
+                  @click="ordenar('titulo')"
+                  class="q-px-sm-xs"
+                  role="button"
+                  aria-label="filtrar dados da tabela pelo título"
+                />|
+                <q-tab
+                  name="valor"
+                  label="Menor Valor"
+                  @click="ordenar('valor')"
+                  role="button"
+                  class="q-px-sm-xs"
+                  aria-label="filtrar dados da tabela por menor valor"
+                />|
+                <q-tab
+                  name="tipo"
+                  label="Tipo"
+                  @click="ordenar('tipo')"
+                  role="button"
+                  class="q-px-sm-xs"
+                  aria-label="filtrar dados da tabela por tipo"
+                />
 
-                <q-card-section class="col-12 col-md-8 q-pa-xs">
-                  <div class="col text-h6 ellipsis bg-grey-1 q-pa-sm">
-                    {{props.row.titulo}}
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="text-subtitle1">
-                        {{props.row.tipo}}
-                      </div>
-
-                    </div>
-
-                    <div class="col text-right">
-                      <q-btn
-                        flat
-                        size="large"
-                        class="q-pa-sm "
-                        color="primary"
-                        :label="'R$ ' + props.row.valor"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col">
-                      <div class="text-caption text-grey">
-                        {{props.row.descricao}}
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <q-separator />
-
-                  <div class="row">
-
-                    <div class="col-12 flex q-py-sm">
-                      <span class="q-px-xs">Vendedor</span>
-                      <q-icon
-                        class="q-px-sm"
-                        name="chat"
-                        color="green"
-                        style="top:3px"
-                      />
-
-                      <q-icon
-                        class="q-px-sm"
-                        name="call"
-                        color="primary"
-                        style="top:3px"
-                      />
-
-                      <q-rating
-                        v-model="stars"
-                        :max="5"
-                        size="18px"
-                      />
-                    </div>
-                  </div>
-
-                  <q-card-actions class="row q-pb-xs">
-                    <div class="col-left text-grey text-caption">
-                      {{props.row.modalidade}} |
-                      {{props.row.estado}} |
-                      {{props.row.updated}}
-                    </div>
-
-                    <div class="col text-right">
-                      <q-btn
-                        color="orange"
-                        flat
-                        no-caps
-                        @click="verAnuncio(props.row)"
-                        label="Ver Anúncio"
-                      />
-                    </div>
-                  </q-card-actions>
-
-                </q-card-section>
-
-              </q-card>
+              </q-tabs>
             </div>
           </template>
-          <template v-slot:top-right>
-            <q-input
-              dense
-              outlined
-              debounce="300"
-              v-model="filter"
-              placeholder=Filtrar
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
-          </template>
-        </q-table>
 
+          <template v-slot:item="props">
+            <div class="q-pa-xs">
+              <list-dados :anuncioList="props.row" />
+            </div>
+
+          </template>
+
+        </q-table>
       </div>
     </div>
-
-    <!-- <q-btn
-        @click="getAllUsers"
-        label="Buscar"
-        color="primary"
-        class="q-pa-md"
-      /> -->
-
   </div>
 
 </template>
-<style lang="sass" scoped>
-.my-card
-  width: 100%
-  height: 100%
-.q-table__grid-content .row
-  display: flex
-  flex-wrap: none
-</style>
 
 <script>
-import colunaFilter from 'src/components/menu/colunaFiltro'
 import mixinUtils from 'src/mixins/mixin-utils'
-import menuCards from 'src/components/menu/menuCards.vue';
-import tabsJson from 'src/dados/TabsIndex.json'
+import listDados from './list'
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
 
 export default {
+  meta: {
+    // sets document title
+    title: 'Anúncio de Imóveis',
+    // optional; sets final title as "Index Page - My Website", useful for multiple level meta
+    titleTemplate: title => `${title} - O Lugar Certo`,
+
+    // meta tags
+    meta: {
+      description: { name: 'description', content: 'O Lugar Certo' },
+
+      //habilitar ZOOM no celular
+      description: { name: 'viewport', content: 'width=device-width' },
+
+      keywords: { name: 'keywords', content: 'O Lugar Certo, olc' },
+      equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' },
+      // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+      ogTitle: {
+        name: 'og:title',
+        // optional; similar to titleTemplate, but allows templating with other meta properties
+        template (ogTitle) {
+          return `${ogTitle} - O Lugar Certo`
+        }
+      }
+    }
+
+  },
   mixins: [mixinUtils],
   components: {
-    colunaFilter,
-    menuCards
+    listDados
   },
   data () {
     return {
       sortBy: 'valor',
-      stars: 4,
+      tabOrdenacao: 'titulo',
+
       filter: '',
-      tabs: tabsJson,
+
       modelSingle: 'Apple',
       modelMultiple: ['Facebook'],
       options: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
@@ -504,23 +191,16 @@ export default {
 
       ],
 
-      data: [
-        // {
-        //   titulo: 'Frozen Yogurt',
-        //   descricao: 'A frozen dessert made with yogurt and sometimes other dairy products including non-dairy products',
-        //   calories: 159,
-        //   fat: 6.0,
-        //   carbs: 24,
-        //   protein: 4.0,
-        //   sodium: 87,
-        //   calcium: '14%',
-        //   iron: '1%'
-        // }     
-      ],
-      pagination: {
+      data: [],
 
-        descending: false
+
+      pagination: {
+        descending: false,
+
+        rowsPerPage: 10
       },
+
+
     }
   },
   mounted () {
@@ -590,27 +270,28 @@ export default {
       this.data = result
       console.log(this.data)
     },
-    verAnuncio (anuncio) {
-      console.log(anuncio)
-    },
 
     ordenar (value) {
       this.pagination.sortBy = value
     }
 
+  },
 
-
+  watch: {
+    // tipoOrdenacao (value) {
+    //   this.pagination.sortBy = value
+    //   console.log(value)
+    // }
   }
 }
 </script>
 
-<style>
-.my-table-details {
-  font-size: 0.85em;
-  font-style: italic;
-  max-width: 200px;
-  white-space: normal;
-  color: #555;
-  margin-top: 4px;
+<style lang="stylus">
+.q-table__grid-content.row {
+  justify-content: center;
+}
+
+.q-table__top.relative-position.row.items-center {
+  padding-left: 0px;
 }
 </style>

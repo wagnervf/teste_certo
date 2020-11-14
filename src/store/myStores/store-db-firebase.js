@@ -13,11 +13,11 @@ const actions = {
   addAnuncioImoveisVenda ({ }, payload) {
     let anuncioId = uid()
     let userId = firebaseAuth.currentUser.uid
-    console.log(firebaseAuth.currentUser)
 
     payload.id = anuncioId
     payload.user = userId
     let taskRef = firebaseDb.ref('olc_db/imoveis_venda/' + anuncioId)
+
     taskRef.set(payload).then(resposta => {
       console.log(resposta)
       notifyGenericPositive('Cadastrado Positivo!')

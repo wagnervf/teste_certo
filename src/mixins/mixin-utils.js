@@ -11,7 +11,7 @@ export default {
     },
 
     isMobile () {
-      return this.mobile 
+      return this.mobile
     },
     telaWidth () {
       return this.$q.screen.width
@@ -68,8 +68,18 @@ export default {
       this.$router.push('/profile').catch(err => { })
     },
 
+  },
 
+  //Inserir v-focus onde pretende deixar onfocus
 
+  directives: {
+    focus: {
+      // definição da diretiva
+      inserted: function (el) {
+        //console.log(el.innerHTML)
+        el.focus()
 
-  }
+      }
+    }
+  },
 }

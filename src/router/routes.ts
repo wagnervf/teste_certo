@@ -3,12 +3,13 @@ import { RouteConfig } from 'vue-router';
 const routes: RouteConfig[] = [
   {
     path: '/',
-    component: () => import('layouts/LayoutAZ.vue'),
+    component: () => import('layouts/LayoutTeste.vue'),
     children: [
-
-      // { path: '', component: () => import('pages/Users.vue') },
       { name: 'inicio', path: '', component: () => import('pages/Index.vue') },
       { name: 'index', path: '/index', component: () => import('pages/Index.vue') },
+      { name: 'categoria', path: '/categoria', component: () => import('pages/categorias/selecione-categoria.vue') },
+
+      // { path: '', component: () => import('pages/Users.vue') },
       { name: 'auto-pecas', path: '/auto-pecas', component: () => import('pages/autoPecas.vue') },
       { name: 'esportes', path: '/esportes', component: () => import('pages/esportes.vue') },
       { name: 'profile', path: '/profile', component: () => import('pages/Profile.vue') },
@@ -26,6 +27,14 @@ const routes: RouteConfig[] = [
 
     ],
   },
+  // {
+  //   path: '/',
+  //   component: () => import('layouts/LayoutTeste.vue'),
+  //   children: [
+  //     { name: 'inicio', path: '', component: () => import('pages/Index.vue') },
+  //     { name: 'index', path: '/index', component: () => import('pages/Index.vue') },
+  //   ]
+  // },
 
   // Always leave this as last one,
   // but you can also remove it

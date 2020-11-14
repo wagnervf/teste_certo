@@ -4,7 +4,7 @@
     "name": "imoveis",
     "label": "Imóveis",
     "icon": "house",
-    "to": "/imoveis"
+    "to": "/imoveis/novo"
   },
   {
     "id": 2,
@@ -25,7 +25,7 @@
     "name": "servicos",
     "label": "Serviços",
     "icon": "handyman",
-    "to": "/index"
+    "to": "/servicos"
   },
   {
     "id": 5,

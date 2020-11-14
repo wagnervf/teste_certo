@@ -7,17 +7,16 @@ let baseURL = 'https://viacep.com.br/ws/';
 
 export default {
 
-    async BuscarCEPService(value) {
+  async BuscarCEPService (value) {
     try {
-          
       const response = await axios.get(baseURL + value + '/json/')
       return response
-        } catch (error) {
+    } catch (error) {
       console.log(error)
-      notifyGenericNegative('CEP não econtrado!')
-           return null
-        }
+      notifyGenericNegative("CEP não encontrado! Informe o endereço do imóvel");
+      return null
+    }
 
 
-    },
+  },
 }
