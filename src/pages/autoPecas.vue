@@ -1,8 +1,6 @@
 <template>
   <div class="q-pa-none">
 
-    <latyouAnunciosMobile />
-
   </div>
 </template>
 
@@ -11,7 +9,6 @@ import tabsJson from '../dados/TabsIndex.json'
 import tabsEstados from '../dados/TabsEstados.json'
 import { mapState, mapActions } from 'vuex'
 import mixinUtils from 'src/mixins/mixin-utils'
-import latyouAnunciosMobile from 'src/components/anuncios/layoutAnunciosMobile'
 
 export default {
   name: 'Index',
@@ -19,7 +16,6 @@ export default {
   mixins: [mixinUtils],
 
   components: {
-    latyouAnunciosMobile
   },
 
   data () {

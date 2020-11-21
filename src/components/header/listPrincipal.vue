@@ -3,7 +3,7 @@
     <q-btn
       flat
       dense
-      icon="menu"
+      icon="account_circle"
       role="button"
       title="Menu"
       class="btnPadrao"
@@ -35,12 +35,12 @@
 
         <q-separator />
         <q-list class="q-ma-md textLinkMenu">
-
           <q-item
             clickable
             v-ripple
             active-class="game6"
             tabindex="0"
+            active
           >
             <q-item-section avatar>
               <q-icon name="list" />

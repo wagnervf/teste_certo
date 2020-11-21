@@ -21,6 +21,7 @@ const routes: RouteConfig[] = [
 
       { name: 'imoveis', path: '/imoveis', component: () => import('pages/categorias/imoveis/Imoveis.vue') },
       { name: 'novo-imovel', path: '/imoveis/novo', component: () => import('pages/categorias/imoveis/add.vue') },
+      { name: 'view-imovel', path: '/imoveis/view/:id', component: () => import('pages/categorias/imoveis/view.vue') },
 
 
       { name: 'administracao', path: 'pages/configuracoes', component: () => import('pages/configuracoes/administracao.vue') }

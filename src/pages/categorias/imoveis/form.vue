@@ -3,122 +3,141 @@
   <div>
     <q-form
       v-on:submit.prevent="onSubmit"
-      class="fit row wrap justify-center items-start content-start gucci1 justify-center"
+      class="fit row wrap justify-center items-start content-start gucci1"
       role="form"
     >
 
-      <q-card class="col-lg-10 col-xl-10 col-md-10 col-sm-12 col-xs-12">
-        <q-card-section
-          class="bg-grey-3 justify-center"
-          role="banner"
-          v-focus
-          tabindex="0"
-        >
-          <label class="text-capitalize text-grey">Categoria / Modalidade</label>
-          <q-breadcrumbs
-            role="link"
+      <div class="col-lg-10 col-xl-10 col-md-10 col-sm-12 col-xs-12 q-pa-md">
+        <q-breadcrumbs>
+          <q-breadcrumbs-el
+            label="Início"
             aria-label="Voltar para pagina anterior ou início"
-          >
-            <q-breadcrumbs-el
-              label="Início"
-              :to="'/index'"
-            />
-            <q-breadcrumbs-el
-              label="Imoveis"
-              :to="'/imoveis'"
-            />
-            <q-breadcrumbs-el label="Cadastro" />
-          </q-breadcrumbs>
-        </q-card-section>
+            :to="'/index'"
+            role="link"
+            class="linkSelecionado"
+          />
+          <q-breadcrumbs-el
+            label="Imoveis"
+            aria-label="Voltar para listagem de imóveis"
+            :to="'/imoveis'"
+            role="link"
+            class="linkSelecionado"
+          />
+          <q-breadcrumbs-el
+            role="link"
+            aria-label="Página atual"
+            label="Cadastro"
+          />
+        </q-breadcrumbs>
+      </div>
 
+      <div
+        class="justify-center col-lg-10 col-xl-10 col-md-10 col-sm-12 col-xs-12 q-pa-md shadow-1 bg-grey-2"
+        role="banner"
+        v-focus
+        tabindex="0"
+      >
+        <legend
+          class="text-h5"
+          style="margin: 0px auto"
+          tabindex="0"
+          title="Formulário de de cadastro do anúncio do imóvel"
+        >Cadastro do anúncio do Imóvel</legend>
+      </div>
+
+      <q-card class="col-lg-10 col-xl-10 col-md-10 col-sm-12 col-xs-12 q-pa-md">
         <q-card-section class="q-gutter-y-md">
-          <div class="text-center">
-            <h1 class="text-h5">Cadasto do Imóvel</h1>
-          </div>
-          <div class="row q-gutter-x-md q-pa-sm q-pl-none">
-            <q-card class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 q-pa-none">
-              <q-card-section class="text-subtitle2 font18 bg-grey-3"><label>Escolha o Tipo do imóvel</label></q-card-section>
-              <q-card-section>
-                <q-list
-                  v-for="tipo in tipos"
-                  :key="tipo.nome"
-                  bordered
-                  aria-label="Selecione o tipo do imóvel"
-                  title="Selecione o tipo do imóvel"
-                  padding
-                  class="rounded-borders text-grey-9 font18 q-py-none formItemList"
-                  role="list"
+          <div class="row q-gutter-md p-mb-md">
+            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12">
+              <div
+                class="text-subtitle2 font18 bg-grey-3 q-pa-md"
+                tabindex="0"
+                title="Escolha o Tipo do imóvel 5 opções"
+              >
+                <label>Escolha o Tipo do imóvel</label>
+              </div>
+
+              <q-list
+                v-for="tipo in tipos"
+                :key="tipo.nome"
+                bordered
+                title="Selecione o tipo do imóvel"
+                padding
+                class="rounded-borders text-grey-9 font18 q-py-none formItemList"
+                role="list"
+              >
+                <q-item
+                  clickable
+                  v-ripple
+                  :active="linkTipo === tipo"
+                  :title="tipo"
+                  :aria-label="tipo"
+                  @click="tipoSelecionado(tipo)"
+                  active-class="my-menu-link"
+                  :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+                  role="listitem"
+                  tabindex="0"
+                  class="font22"
                 >
-                  <q-item
-                    clickable
-                    v-ripple
-                    :active="linkTipo === tipo"
-                    :title="tipo"
-                    :aria-label="tipo"
-                    @click="tipoSelecionado(tipo)"
-                    active-class="my-menu-link"
-                    role="listitem"
-                    tabindex="0"
-                    class="font22"
+                  <q-item-section :aria-label="tipo">{{tipo}}</q-item-section>
+                  <q-item-section
+                    avatar
+                    v-if="linkTipo === tipo"
                   >
-                    <q-item-section :aria-label="tipo">{{tipo}}</q-item-section>
-                    <q-item-section
-                      avatar
-                      v-if="linkTipo === tipo"
-                    >
-                      <q-icon name="check" />
-                    </q-item-section>
-                  </q-item>
+                    <q-icon name="check" />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
 
-                </q-list>
-              </q-card-section>
-            </q-card>
+            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12">
+              <div
+                class="text-subtitle2 font18 bg-grey-3 q-pa-md shadow-1"
+                tabindex="0"
+              ><label>Vender ou Alugar</label></div>
 
-            <q-card class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-xs-12 q-pa-none justify-end">
-              <q-card-section class="text-subtitle2 font18 bg-grey-3"><label>Vender ou Alugar</label></q-card-section>
-              <q-card-section>
-                <q-list
-                  v-for="mod in modalidades"
-                  :key="mod.nome"
-                  bordered
-                  aria-label="Selecione a modalidade do imóvel vender ou alugar"
-                  title="Selecione a modalidade do imóvel vender ou alugar"
-                  padding
-                  class="rounded-borders text-grey-9 font18 q-py-none formItemList"
-                  role="list"
+              <q-list
+                v-for="mod in modalidades"
+                :key="mod.nome"
+                bordered
+                title="Selecione a modalidade do imóvel vender ou alugar"
+                padding
+                class="rounded-borders text-grey-9 font18 q-py-none formItemList"
+                role="list"
+              >
+                <q-item
+                  clickable
+                  v-ripple
+                  :active="linkModalidade === mod"
+                  :title="mod"
+                  :aria-label="mod"
+                  @click="modalidadeSelecionada(mod)"
+                  active-class="my-menu-link"
+                  role="listitem"
+                  tabindex="0"
+                  class="font22"
                 >
-                  <q-item
-                    clickable
-                    v-ripple
-                    :active="linkModalidade === mod"
-                    :title="mod"
-                    :aria-label="mod"
-                    @click="modalidadeSelecionada(mod)"
-                    active-class="my-menu-link"
-                    role="listitem"
-                    tabindex="0"
-                    class="font22"
+                  <q-item-section :aria-label="mod">{{mod}}</q-item-section>
+                  <q-item-section
+                    avatar
+                    v-if="linkModalidade === mod"
                   >
-                    <q-item-section :aria-label="mod">{{mod}}</q-item-section>
-                    <q-item-section
-                      avatar
-                      v-if="linkModalidade === mod"
-                    >
-                      <q-icon name="check" />
-                    </q-item-section>
-                  </q-item>
-
-                </q-list>
-              </q-card-section>
-            </q-card>
+                    <q-icon name="check" />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
           </div>
+          <!-- Tipo e modalidade -->
 
-          <div>
+          <div class="p-mt-md">
             <label class="text-subtitle2">Título</label>
             <q-input
               v-model="formData.titulo"
               ref="titulo"
               class="q-py-xs"
+              type="text"
+              required
               lazy-rules
               :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
               outlined
@@ -137,7 +156,7 @@
               ref="descricao"
               class="q-py-xs"
               lazy-rules
-              :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+              :rules="[(val) => (val && val.length > 0) || 'Ops! O título é obrigatório']"
               outlined
               type="textarea"
               clearable
@@ -152,8 +171,7 @@
             <q-uploader
               url="http://localhost:4444/upload"
               label="Selecione as fotos do anúncio"
-              title="Selecione as fotos do anúncio"
-              aria-label="Faça o upload das fotos do anúncio, até 10 fotos"
+              title="Insira as fotos do anúncio"
               ref="fotos"
               multiple
               batch
@@ -163,10 +181,9 @@
               @rejected="onRejected"
               class="full-width bg-grey-2"
               style="min-height: 200px"
-              role="document"
+              tabindex="0"
             >
             </q-uploader>
-
           </div>
           <!-- Fotos -->
 
@@ -179,10 +196,12 @@
               v-model="formData.cep"
               ref="cep"
               lazy-rules
-              :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+              :rules="[(val) => (val && val.length > 0) || 'Ops! O Cep é obrigatório']"
               class="text-h6"
               label="Informe o cep do imóvel"
               aria-placeholder="Após digitar o cep clique no botão pesquisar cep."
+              aria-required="Ops! O Cep é obrigatório"
+              required
               counter
               max-values="9"
               type="number"
@@ -256,7 +275,6 @@
                 ref="contato"
                 clearable
                 label="Informe o contato do anúnciante"
-                title="Informe o contato do anúnciante"
                 hint="(99)9999 - 999"
                 role="form"
               />
@@ -269,7 +287,6 @@
                 ref="contato"
                 clearable
                 label="Informe o contato do anúnciante"
-                title="Informe o contato do anúnciante"
                 hint="(99)9999999"
                 role="form"
               />
@@ -288,10 +305,10 @@
                 class="text-h6"
                 ref="valor"
                 label="Informe o valor do imóvel anunciado"
-                title="Informe o valor do imóvel anunciado"
                 role="form"
                 lazy-rules
-                :rules="[(val) => (val && val.length > 0) || 'Obrigatório']"
+                :rules="[(val) => (val && val.length > 0) || 'Ops! O Valor é obrigatório']"
+                required
                 clearable
               >
               </q-input>
@@ -330,6 +347,7 @@
                   v-model="formData.banheiros"
                   :options="options"
                   ref="banheiros"
+                  role="combobox"
                   label="Informe a número de banheiros"
                   title="Informe a número de banheiros"
                 />
@@ -341,6 +359,7 @@
                   dense
                   v-model="formData.area"
                   ref="area"
+                  role="form"
                   label="Informe a área do imóvel"
                   title="Informe a área do imóvel"
                 />
@@ -351,28 +370,36 @@
 
             <div class="row q-mx-sm">
               <label class="row col-12 q-py-xs q-ma-sm text-primary">Opções</label>
-              <q-toggle
+              <q-checkbox
                 name="piscina"
                 v-model="formData.piscina"
                 true-value="piscina"
-                label="Piscina"
+                label="Possui Piscina"
+                title="Possui Piscina"
+                aria-checked="Selecionado"
                 ref="piscina"
+                role="checkbox"
               />
 
-              <q-toggle
+              <q-checkbox
                 name="academia"
                 v-model="formData.academia"
                 true-value="academia"
-                label="Academia"
+                label="Possui Academia"
+                title="Possui Academia"
+                aria-selected="Selecionado"
                 ref="academia"
+                role="checkbox"
               />
 
-              <q-toggle
+              <q-checkbox
                 name="portaria"
                 v-model="formData.portaria"
                 true-value="portaria"
-                label="Portaria"
+                label="Possui Academia"
+                title="Possui Portaria"
                 ref="portaria"
+                role="checkbox"
               />
             </div>
             <!-- Opções do imóvel -->
@@ -382,11 +409,12 @@
             <div class="row col-12 q-mx-sm">
               <label class="row col-12 q-py-xs q-ma-sm text-primary">Condomínio</label>
               <div class="row">
-                <q-toggle
+                <q-checkbox
                   name="condominio"
                   ref="condominio"
                   v-model="formData.condominio"
                   label="Possui Condomínio"
+                  title="Possui Condomínio"
                 />
               </div>
             </div>
@@ -403,6 +431,8 @@
                 ref="valor_condominio"
                 type="number"
                 prefix="R$"
+                title="Valor Condomínio"
+                role="form"
                 clearable
               />
             </div>
@@ -463,8 +493,6 @@
 import { mapActions, mapGetters } from "vuex";
 import mixinUtils from "src/mixins/mixin-utils";
 import serviceCep from "src/services/cep/services-consulta-cep";
-import colunaFilter from 'src/components/menu/colunaFiltro'
-import menuCards from 'src/components/menu/menuCards'
 import tabsJson from 'src/dados/TabsIndex.json'
 import { date } from 'quasar'
 
@@ -480,24 +508,23 @@ export default {
   mixins: [mixinUtils],
 
   components: {
-    colunaFilter,
-    menuCards
+
   },
 
   data () {
     return {
       tabs: tabsJson,
       tab: 'informacoes',
-      linkCategoria: '',
+      linkTipo: '',
       linkModalidade: '',
       formData: {
         //  uid: "",
-        titulo: "",
-        valor: "",
         categoria: "imovel",
-        cep: "",
         modalidade: "",
         tipo: "",
+        titulo: "",
+        valor: "",
+        cep: "",
         piscina: false,
         academia: false,
         portaria: false,

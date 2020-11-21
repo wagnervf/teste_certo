@@ -9,7 +9,6 @@ import tabsJson from '../dados/TabsIndex.json'
 import tabsEstados from '../dados/TabsEstados.json'
 import { mapState, mapActions } from 'vuex'
 import mixinUtils from 'src/mixins/mixin-utils'
-import layoutTeste from 'src/components/anuncios/layoutAnunciosTeste'
 
 export default {
   name: 'Index',
@@ -17,7 +16,6 @@ export default {
   mixins: [mixinUtils],
 
   components: {
-    layoutTeste,
 
   },
 

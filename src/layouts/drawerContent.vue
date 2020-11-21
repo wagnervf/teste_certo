@@ -1,8 +1,7 @@
 <template>
   <div>
-
-    <div class="text-center justify-center q-pb-lg shadow-1">
-      <h2 class="game6 q-my-sm">
+    <div class=" justify-center q-px-sm">
+      <h2 class="game6 q-my-none">
         <q-btn
           flat
           dense
@@ -32,6 +31,7 @@
         v-ripple
         clickable
         role="menuitem"
+        active-class="activeColor"
       >
         <q-item-section avatar>
           <q-icon
@@ -39,7 +39,6 @@
             :name="link.icon"
           />
 
-          <i class="las la-battery-three-quarters"></i>
         </q-item-section>
         <q-item-section role="menuitem">
           <q-item-label role="link">{{ link.text }}</q-item-label>
@@ -49,14 +48,14 @@
       <q-item role="link">
         <q-item-section role="link">
           <q-btn
-            class="game6 text-capitalize q-pa-xs"
+            class="bg-game6 text-capitalize q-pa-xs"
             icon="add"
             size="large"
-            outline
             label="Inserir Anúncio"
             title="Inserir Anúncio"
+            push
+            role="button"
             tabindex="0"
-            role="link"
             :to="'/categoria'"
           />
         </q-item-section>
@@ -64,19 +63,26 @@
 
       <q-separator class="q-my-md" />
 
+      <q-item-label
+        header
+        class="text-weight-bold text-uppercase grey-9 bg-grey3"
+      >
+        <label>Categorias</label>
+      </q-item-label>
+
       <q-list
         v-for="list in listaMenus"
         :key="list.id"
         padding
         class="font18"
-        role="menu"
+        role="list"
       >
         <q-expansion-item
           group="somegroup"
           expand-icon="keyboard_arrow_right"
           expanded-icon="keyboard_arrow_down"
           expand-icon-class="text-grey-9"
-          role="menuitem"
+          role="listitem"
         >
           <template v-slot:header>
             <q-item-section avatar>
@@ -210,9 +216,9 @@ export default {
 
       leftDrawerOpen: false,
       links1: [
-        { icon: 'store_mall_directory', to: '/index', text: 'Todos Anúncios' },
-        { icon: 'notifications', text: 'Notificações' },
-        { icon: 'account_circle', text: 'Minha Conta' }
+        { icon: 'store_mall_directory', to: '/index', text: 'Todos Anúncios', active: true },
+        { icon: 'notifications', text: 'Notificações', active: false },
+        { icon: 'account_circle', text: 'Minha Conta', active: false }
       ],
       links2: [
         { icon: 'folder', text: 'Library' },
@@ -235,17 +241,12 @@ export default {
       buttons1: [
         { text: 'About' },
         { text: 'Press' },
-        { text: 'Copyright' },
-        { text: 'Contact us' },
-        { text: 'Creators' },
-        { text: 'Advertise' },
-        { text: 'Developers' }
+
+
       ],
       buttons2: [
         { text: 'Terms' },
-        { text: 'Privacy' },
-        { text: 'Policy & Safety' },
-        { text: 'Test new features' }
+
       ]
     }
   },
@@ -256,6 +257,9 @@ export default {
 </script>
 
 <style lang="sass">
+.activeColor
+  background-color: #bb21581c
+  color: #bb2158
 .YL
   &__toolbar-input-container
     min-width: 100px

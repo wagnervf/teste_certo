@@ -29,6 +29,7 @@
 
 <script>
 export default {
+  name: "ViewImovel",
   data () {
     return {
       slide: 1

@@ -1,123 +1,157 @@
 <template>
+  <div class="q-pa-xs">
 
-  <div class="q-pa-md fit row wrap  ">
-    <div class="q-pa-md-xs">
-      <div class="row">
-        <q-breadcrumbs>
-          <q-breadcrumbs-el
-            label="Home"
-            icon="home"
-            to="/index"
-          />
-          <q-breadcrumbs-el :label="this.$route.name" />
-        </q-breadcrumbs>
+    <div class="row q-py-xs items-start">
+      <q-breadcrumbs>
+        <q-breadcrumbs-el
+          label="Home"
+          icon="home"
+          to="/index"
+        />
+        <q-breadcrumbs-el :label="this.$route.name" />
+      </q-breadcrumbs>
 
+      <div class="row col justify-end">
+        <drawerRight />
       </div>
-      <div class="row">
-        <q-table
-          grid
-          :data="data"
-          :columns="columns"
-          row-key="name"
-          :filter="filter"
-          binary-state-sort
-          :pagination.sync="pagination"
-        >
-          <template v-slot:header="props">
-            <q-tr
-              :props="props"
-              class="q-px-none q-mx-none q-gutter-x-none"
-            >
-              <q-th
-                v-for="col in props.cols"
-                :key="col.name"
-                :props="props"
-                class="text-primary text-capitalize q-px-none q-mx-none"
-              >
-                <q-btn
-                  flat
-                  :label="col.label"
-                  class="q-px-md text-capitalize"
-                />
 
-              </q-th>
-            </q-tr>
-          </template>
-
-          <template
-            v-slot:top
-            class="q-px-none"
-          >
-            <div class="q-gutter-x-xs col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <q-input
-                dense
-                outlined
-                debounce="300"
-                v-model="filter"
-                placeholder="Filtrar dados da tabela"
-                label="Filtrar dados da tabela"
-                title="Filtrar dados da tabela"
-                class="col-xs-12"
-                v-focus
-                tabindex="0"
-              >
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
-            </div>
-            <q-space />
-
-            <div class="q-gutter-x-sm ">
-              <q-tabs
-                v-model="tabOrdenacao"
-                inline-label
-                animated
-                swipeable
-                outside-arrows
-                mobile-arrows
-                class="text-primary text-right"
-              >
-                <span class="text-grey-9 q-px-xs">Ordenar Por: </span>
-                <q-tab
-                  name="titulo"
-                  label="Titulo"
-                  @click="ordenar('titulo')"
-                  class="q-px-sm-xs"
-                  role="button"
-                  aria-label="filtrar dados da tabela pelo título"
-                />|
-                <q-tab
-                  name="valor"
-                  label="Menor Valor"
-                  @click="ordenar('valor')"
-                  role="button"
-                  class="q-px-sm-xs"
-                  aria-label="filtrar dados da tabela por menor valor"
-                />|
-                <q-tab
-                  name="tipo"
-                  label="Tipo"
-                  @click="ordenar('tipo')"
-                  role="button"
-                  class="q-px-sm-xs"
-                  aria-label="filtrar dados da tabela por tipo"
-                />
-
-              </q-tabs>
-            </div>
-          </template>
-
-          <template v-slot:item="props">
-            <div class="q-pa-xs">
-              <list-dados :anuncioList="props.row" />
-            </div>
-
-          </template>
-
-        </q-table>
-      </div>
     </div>
+
+    <!-- style="width: inherit;" -->
+    <q-tabs
+      v-model="tabOrdenacao"
+      inline-label
+      mobile-arrows
+      class="text-grey-9"
+      active-bg-color="game6"
+    >
+
+      <q-tab
+        name="Filtros"
+        label="Filtros"
+        role="button"
+        aria-label="filtrar dados da tabela"
+        class="tabsOrdenar"
+        icon="filter_list"
+      />
+      <q-tab
+        name="Venda"
+        label="Venda"
+        role="button"
+        aria-label="filtrar dados da tabela por Venda"
+        class="tabsOrdenar"
+      />
+
+      <q-tab
+        name="Alugar"
+        label="Alugar"
+        role="button"
+        aria-label="filtrar dados da tabela por Alugar"
+        class="tabsOrdenar"
+      />
+
+      <q-tab
+        name="Casa"
+        label="Casa"
+        role="button"
+        aria-label="filtrar dados da tabela por Casa"
+        class="tabsOrdenar"
+      />
+
+      <q-tab
+        name="Apartamento"
+        label="Apartamento"
+        role="button"
+        aria-label="filtrar dados da tabela por Apartamento"
+        class="tabsOrdenar"
+      />
+
+      <q-tab
+        name="titulo"
+        label="Titulo"
+        @click="ordenar('titulo')"
+        role="button"
+        aria-label="filtrar dados da tabela pelo título"
+        class="tabsOrdenar"
+      />
+      <q-tab
+        name="valor"
+        label="Menor Valor"
+        @click="ordenar('valor')"
+        role="button"
+        aria-label="filtrar dados da tabela por menor valor"
+        class="tabsOrdenar"
+      />
+      <q-tab
+        name="tipo"
+        label="Tipo"
+        @click="ordenar('tipo')"
+        role="button"
+        aria-label="filtrar dados da tabela por tipo"
+        class="tabsOrdenar"
+      />
+
+    </q-tabs>
+
+    <q-table
+      grid
+      :data="data"
+      :columns="columns"
+      row-key="name"
+      :filter="filter"
+      binary-state-sort
+      :pagination.sync="pagination"
+    >
+      <template v-slot:header="props">
+        <q-tr
+          :props="props"
+          class=""
+        >
+          <q-th
+            v-for="col in props.cols"
+            :key="col.name"
+            :props="props"
+            class="text-primary text-capitalize q-px-none q-mx-none"
+          >
+            <q-btn
+              flat
+              :label="col.label"
+              class="q-px-md text-capitalize"
+            />
+
+          </q-th>
+        </q-tr>
+      </template>
+
+      <template v-slot:top>
+
+        <q-toolbar class="q-px-sm">
+          <q-input
+            dense
+            outlined
+            debounce="300"
+            v-model="filter"
+            label="Filtrar dados da tabela"
+            v-focus
+            class="col-12"
+            tabindex="0"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </q-toolbar>
+
+      </template>
+
+      <template v-slot:item="props">
+
+        <list-dados :anuncioList="props.row" />
+
+      </template>
+
+    </q-table>
+
   </div>
 
 </template>
@@ -125,6 +159,7 @@
 <script>
 import mixinUtils from 'src/mixins/mixin-utils'
 import listDados from './list'
+import drawerRight from 'layouts/drawerRight'
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
 
 export default {
@@ -156,12 +191,13 @@ export default {
   },
   mixins: [mixinUtils],
   components: {
-    listDados
+    listDados,
+    drawerRight
   },
   data () {
     return {
       sortBy: 'valor',
-      tabOrdenacao: 'titulo',
+      tabOrdenacao: 'Venda',
 
       filter: '',
 
@@ -212,24 +248,25 @@ export default {
 
     getAllUsers () {
       let userTasks = firebaseDb.ref()
+
       // // Ler todos os dados dos users
       // userTasks.on('child_added', snapshot => {
       //   let tasks = snapshot.val()
       //   this.mapedUsers(Object.entries(tasks.users))
       // })
 
-      // let fb = firebaseDb.ref('olc_db')
-      // fb.child('imoveis_venda').once('value', function (userSnap) {
-      //   //  fb.child('permissions').once('value', function (mediaSnap) {
-      //   // extend function: https://gist.github.com/katowulf/6598238
-      //   console.log(({}, userSnap.val()));
-      //   this.data.push(({}, userSnap.val()));
-      //   // });
-      // });
+      let fb = firebaseDb.ref('olc_db')
+      fb.child('imoveis_venda').once('value', function (userSnap) {
+        //   //  fb.child('permissions').once('value', function (mediaSnap) {
+        //   // extend function: https://gist.github.com/katowulf/6598238
+        console.log(({}, userSnap.val()));
+        //   this.data.push(({}, userSnap.val()));
+        // });
+      });
 
       userTasks.on('child_added', snapshot => {
         let tasks = snapshot.val()
-
+        console.log(tasks)
         console.log(Object.entries(tasks.imoveis_venda))
         // this.data.push(tasks.imoveis_venda)
         this.mapedUsers(Object.entries(tasks.imoveis_venda))
@@ -286,12 +323,17 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style>
 .q-table__grid-content.row {
-  justify-content: center;
+  justify-content: center !important;
 }
-
-.q-table__top.relative-position.row.items-center {
-  padding-left: 0px;
+.q-table__top {
+  padding: 0px;
+}
+.q-tab__indicator.absolute-bottom {
+  display: none;
+}
+.q-tabs__content {
+  /* justify-content: space-around; */
 }
 </style>

@@ -16,9 +16,12 @@
           class="bg-game6 text-capitalize q-pa-sm"
           size="large"
           label="Ver Anúncios"
+          push
           role="button"
         />
         <h2 class="text-h6 ">Desapegue daquilo que você não é mais apegado.</h2>
+
+        <i class="las la-battery-three-quarters"></i>
       </q-banner>
     </section>
 
@@ -54,15 +57,77 @@
       </q-banner>
     </section>
 
-    <section class="justify-center row">
-      <div class="col-8 col-md-8 col-sm-12 col-xs-12 self-center">
-        <h2 class="text-center text-h6">Destaques</h2>
-        <carousel />
+    <section class="bg-grey-2">
+      <div
+        class="row justify-start"
+        style="margin-left: 10%"
+      >
+        <h3 class="gucci1 text-h6">Imóveis em Destaques</h3>
       </div>
+
+      <cardsDestaques />
+
+      <div
+        class="row justify-end"
+        style="margin-right: 10%"
+      >
+        <q-btn
+          class="text-capitalize"
+          flat
+          color="primary"
+          label="Ver tos anúncio de imóveis"
+          role="Ver tos anúncio de imóveis"
+          icon-right="read_more"
+          :to="'/imoveis'"
+        />
+      </div>
+
+    </section>
+
+    <q-separator />
+
+    <section class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 q-py-md bg-grey-1">
+      <div
+        class="row justify-end"
+        style="margin-right: 5% "
+      >
+        <q-btn
+          class="text-capitalize"
+          flat
+          outline
+          color="primary"
+          label="Ver tos anúncio de automóveis"
+          role="Ver tos anúncio de automóveis"
+        />
+      </div>
+
+      <cardsDestaques />
+
+    </section>
+
+    <q-separator />
+
+    <section class="justify-center col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 q-py-md">
+      <div
+        class="row justify-end"
+        style="margin-right: 5% "
+      >
+        <q-btn
+          class="text-capitalize"
+          flat
+          outline
+          color="primary"
+          label="Ver tos anúncio de Eletronicos"
+          role="Ver tos anúncio de Eletronicos"
+        />
+      </div>
+
+      <cardsDestaques />
+
     </section>
 
     <section class="text-center gucci1">
-      <q-banner class="shadow-1">
+      <q-banner class="shadow-1 bg-grey-1">
         <h1 class="gucci1 text-h3 ">Anunciar</h1>
         <q-btn
           class="bg-game6 text-capitalize"
@@ -75,7 +140,7 @@
         <figure>
           <q-img
             src="img/logo-olc.png"
-            style=" max-width: 150px"
+            style=" max-width: 110px"
             alt="Homem feliz caminhando. Ilustração"
           />
           <figcaption
@@ -92,9 +157,10 @@
   </q-page>
 </template>
 
+
 <script>
 
-import carousel from "src/components/novidades/carousel";
+import cardsDestaques from "src/components/novidades/cardsDestaques";
 export default {
   meta: {
     // sets document title
@@ -146,7 +212,7 @@ export default {
     }
   },
   components: {
-    carousel
+    cardsDestaques
   },
 
   methods: {

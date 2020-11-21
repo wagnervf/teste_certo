@@ -27,11 +27,13 @@
       show-if-above
       v-model="drawer"
       side="left"
-      bordered
+      elevated
       role="menubar"
     >
       <q-scroll-area class="fit">
+
         <drawerContent />
+
       </q-scroll-area>
     </q-drawer>
 
@@ -65,7 +67,8 @@ export default {
   data () {
     return {
       text: '',
-      drawer: false
+      drawer: false,
+      drawerRight: false
     }
   }
 }
