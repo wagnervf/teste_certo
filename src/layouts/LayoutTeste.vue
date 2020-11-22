@@ -1,25 +1,14 @@
 <template>
   <q-layout view="hHh lpR lFf">
-
-    <q-header
-      bordered
-      class="bg-white text-grey-9"
-    >
+    <q-header bordered class="bg-white text-grey-9">
       <q-toolbar>
-        <q-btn
-          dense
-          flat
-          round
-          icon="menu"
-          @click="drawer = !drawer"
-        />
+        <q-btn dense flat round icon="menu" @click="drawer = !drawer" />
 
         <logoPrincipal />
 
         <q-space />
 
         <listPrincipal />
-
       </q-toolbar>
     </q-header>
 
@@ -29,11 +18,10 @@
       side="left"
       elevated
       role="menubar"
+      :width="250"
     >
       <q-scroll-area class="fit">
-
         <drawerContent />
-
       </q-scroll-area>
     </q-drawer>
 
@@ -42,17 +30,16 @@
     </q-page-container>
 
     <footerPrincial />
-
   </q-layout>
 </template>
 
 
 
 <script>
-import mixinUtils from 'src/mixins/mixin-utils'
-import footerPrincial from 'src/components/footer'
-import listPrincipal from 'src/components/header/listPrincipal'
-import logoPrincipal from 'src/components/header/logoInicial'
+import mixinUtils from "src/mixins/mixin-utils";
+import footerPrincial from "src/components/footer";
+import listPrincipal from "src/components/header/listPrincipal";
+import logoPrincipal from "src/components/header/logoInicial";
 
 import drawerContent from "./drawerContent";
 export default {
@@ -61,15 +48,15 @@ export default {
     footerPrincial,
     listPrincipal,
     logoPrincipal,
-    drawerContent
+    drawerContent,
   },
 
-  data () {
+  data() {
     return {
-      text: '',
+      text: "",
       drawer: false,
-      drawerRight: false
-    }
-  }
-}
+      drawerRight: false,
+    };
+  },
+};
 </script>
