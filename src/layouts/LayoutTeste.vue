@@ -1,8 +1,18 @@
 <template>
   <q-layout view="hHh lpR lFf">
-    <q-header bordered class="bg-white text-grey-9">
+    <q-header
+      bordered
+      reveal
+      class="bg-white text-grey-9"
+    >
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="drawer = !drawer" />
+        <q-btn
+          dense
+          flat
+          round
+          icon="menu"
+          @click="drawer = !drawer"
+        />
 
         <logoPrincipal />
 
@@ -16,9 +26,9 @@
       show-if-above
       v-model="drawer"
       side="left"
-      elevated
       role="menubar"
       :width="250"
+      bordered
     >
       <q-scroll-area class="fit">
         <drawerContent />
@@ -26,7 +36,9 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <q-page>
+        <router-view />
+      </q-page>
     </q-page-container>
 
     <footerPrincial />
@@ -51,7 +63,7 @@ export default {
     drawerContent,
   },
 
-  data() {
+  data () {
     return {
       text: "",
       drawer: false,

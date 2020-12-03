@@ -4,6 +4,7 @@
     "name": "imoveis",
     "label": "Imóveis",
     "icon": "house",
+    "novo": "novo-imovel",
     "to": "/imoveis",
     "children": {
       "1.1": {

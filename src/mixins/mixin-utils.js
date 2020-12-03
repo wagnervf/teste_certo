@@ -1,5 +1,8 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { Screen } from 'quasar'
+import smoothscroll from 'smoothscroll-polyfill';
+
+
 
 export default {
   computed: {
@@ -68,17 +71,34 @@ export default {
       this.$router.push('/profile').catch(err => { })
     },
 
+
+    //http://iamdustan.com/smoothscroll/
+    scrollBottom () {
+      window.scroll({ top: 2500, left: 0, behavior: 'smooth' })
+    },
+
+    scrollTop () {
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    },
+
+    descer (value) {
+      window.scrollBy({ top: value, left: 0, behavior: 'smooth' });
+    },
+
+    subir100 () {
+      window.scrollBy({ top: -100, left: 0, behavior: 'smooth' });
+    }
+
+
   },
 
   //Inserir v-focus onde pretende deixar onfocus
-
   directives: {
     focus: {
       // definição da diretiva
       inserted: function (el) {
         //console.log(el.innerHTML)
         el.focus()
-
       }
     }
   },

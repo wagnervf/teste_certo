@@ -1,97 +1,101 @@
 <template>
-  <div class="q-pa-xs">
+  <q-page>
 
-    <div class="row q-py-xs items-start">
-      <q-breadcrumbs>
-        <q-breadcrumbs-el
-          label="Home"
-          icon="home"
-          to="/index"
-        />
-        <q-breadcrumbs-el :label="this.$route.name" />
-      </q-breadcrumbs>
-
-      <div class="row col justify-end">
-        <drawerRight />
-      </div>
-
+    <div class="row col justify-end">
+      <filterDialogBottom />
+      <!-- :openFiltro="filtro" -->
     </div>
 
-    <!-- style="width: inherit;" -->
-    <q-tabs
-      v-model="tabOrdenacao"
-      inline-label
-      mobile-arrows
-      class="text-grey-9"
-      active-bg-color="game6"
-    >
+    <q-toolbar class="toolbarImoveis">
 
-      <q-tab
-        name="Filtros"
-        label="Filtros"
-        role="button"
-        aria-label="filtrar dados da tabela"
-        class="tabsOrdenar"
-        icon="filter_list"
-      />
-      <q-tab
-        name="Venda"
-        label="Venda"
-        role="button"
-        aria-label="filtrar dados da tabela por Venda"
-        class="tabsOrdenar"
-      />
+      <div class="row col-12 font12">
+        <q-breadcrumbs>
+          <q-breadcrumbs-el
+            label="Home"
+            icon="home"
+            to="/index"
+          />
+          <q-breadcrumbs-el :label="this.$route.name" />
+        </q-breadcrumbs>
+      </div>
 
-      <q-tab
-        name="Alugar"
-        label="Alugar"
-        role="button"
-        aria-label="filtrar dados da tabela por Alugar"
-        class="tabsOrdenar"
-      />
+      <q-tabs
+        v-model="tabOrdenacao"
+        inline-label
+        mobile-arrows
+        outside-arrows
+        class="text-grey-9 q-py-sm bg-grey-1"
+        active-bg-color="game6"
+      >
+        <q-tab
+          name="Filtros"
+          label="Filtros"
+          role="button"
+          aria-label="filtrar dados da tabela"
+          class="tabsOrdenar"
+          icon="filter_list"
+          @click="openFilter()"
+        />
+        <q-tab
+          name="Venda"
+          label="Venda"
+          role="button"
+          aria-label="filtrar dados da tabela por Venda"
+          class="tabsOrdenar"
+        />
 
-      <q-tab
-        name="Casa"
-        label="Casa"
-        role="button"
-        aria-label="filtrar dados da tabela por Casa"
-        class="tabsOrdenar"
-      />
+        <q-tab
+          name="Alugar"
+          label="Alugar"
+          role="button"
+          aria-label="filtrar dados da tabela por Alugar"
+          class="tabsOrdenar"
+        />
 
-      <q-tab
-        name="Apartamento"
-        label="Apartamento"
-        role="button"
-        aria-label="filtrar dados da tabela por Apartamento"
-        class="tabsOrdenar"
-      />
+        <q-tab
+          name="Casa"
+          label="Casa"
+          role="button"
+          aria-label="filtrar dados da tabela por Casa"
+          class="tabsOrdenar"
+        />
 
-      <q-tab
-        name="titulo"
-        label="Titulo"
-        @click="ordenar('titulo')"
-        role="button"
-        aria-label="filtrar dados da tabela pelo título"
-        class="tabsOrdenar"
-      />
-      <q-tab
-        name="valor"
-        label="Menor Valor"
-        @click="ordenar('valor')"
-        role="button"
-        aria-label="filtrar dados da tabela por menor valor"
-        class="tabsOrdenar"
-      />
-      <q-tab
-        name="tipo"
-        label="Tipo"
-        @click="ordenar('tipo')"
-        role="button"
-        aria-label="filtrar dados da tabela por tipo"
-        class="tabsOrdenar"
-      />
+        <q-tab
+          name="Apartamento"
+          label="Apartamento"
+          role="button"
+          aria-label="filtrar dados da tabela por Apartamento"
+          class="tabsOrdenar"
+        />
 
-    </q-tabs>
+        <q-tab
+          name="titulo"
+          label="Titulo"
+          @click="ordenar('titulo')"
+          role="button"
+          aria-label="filtrar dados da tabela pelo título"
+          class="tabsOrdenar"
+        />
+        <q-tab
+          name="valor"
+          label="Menor Valor"
+          @click="ordenar('valor')"
+          role="button"
+          aria-label="filtrar dados da tabela por menor valor"
+          class="tabsOrdenar"
+        />
+        <q-tab
+          name="tipo"
+          label="Tipo"
+          @click="ordenar('tipo')"
+          role="button"
+          aria-label="filtrar dados da tabela por tipo"
+          class="tabsOrdenar"
+        />
+
+      </q-tabs>
+
+    </q-toolbar>
 
     <q-table
       grid
@@ -125,7 +129,10 @@
 
       <template v-slot:top>
 
-        <q-toolbar class="q-px-sm">
+        <q-toolbar
+          v-if="!telaXS"
+          class="q-px-md bg-grey-1 shadow-1"
+        >
           <q-input
             dense
             outlined
@@ -152,15 +159,16 @@
 
     </q-table>
 
-  </div>
+  </q-page>
 
 </template>
 
 <script>
 import mixinUtils from 'src/mixins/mixin-utils'
 import listDados from './list'
-import drawerRight from 'layouts/drawerRight'
+import filterDialogBottom from 'layouts/filterDialogBottom'
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
+import { mapActions } from 'vuex'
 
 export default {
   meta: {
@@ -192,15 +200,13 @@ export default {
   mixins: [mixinUtils],
   components: {
     listDados,
-    drawerRight
+    filterDialogBottom
   },
   data () {
     return {
       sortBy: 'valor',
       tabOrdenacao: 'Venda',
-
       filter: '',
-
       modelSingle: 'Apple',
       modelMultiple: ['Facebook'],
       options: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
@@ -228,15 +234,12 @@ export default {
       ],
 
       data: [],
-
-
       pagination: {
         descending: false,
 
         rowsPerPage: 10
       },
-
-
+      filtro: false
     }
   },
   mounted () {
@@ -244,7 +247,6 @@ export default {
   },
 
   methods: {
-
 
     getAllUsers () {
       let userTasks = firebaseDb.ref()
@@ -310,7 +312,13 @@ export default {
 
     ordenar (value) {
       this.pagination.sortBy = value
-    }
+    },
+
+    openFilter () {
+      // this.filtro = 1;
+      //emit em filterDialobBottom fica ouvindo se recebe o comando
+      this.$root.$emit('open-filter', true)
+    },
 
   },
 
@@ -331,9 +339,40 @@ export default {
   padding: 0px;
 }
 .q-tab__indicator.absolute-bottom {
-  display: none;
+  /* display: none; */
 }
-.q-tabs__content {
+.q-tab__content {
+  /* padding: 0px !important; */
+  /* font-size: initial; */
   /* justify-content: space-around; */
+}
+q-tab__label {
+  font-size: 12px;
+}
+
+.q-tabs--horizontal .q-tabs__arrow--right {
+  top: 8%;
+}
+.q-tabs--horizontal .q-tabs__arrow--left {
+  top: 8%;
+}
+
+.q-tabs--horizontal .q-tabs__arrow {
+  height: fit-content;
+  /* border: 1px solid #344973; */
+  color: #bb2158;
+  background-color: #fff;
+  border-radius: 50%;
+  min-width: auto;
+  width: 44px;
+  height: 44px;
+  font-size: 44px;
+}
+
+.q-tabs--horizontal .q-tabs__arrow:focus,
+.q-tabs__arrow:hover {
+  background-color: #bb2158;
+  color: #fff;
+  border: 1px solid #fff;
 }
 </style>

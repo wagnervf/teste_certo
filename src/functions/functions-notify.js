@@ -56,6 +56,7 @@ export function notifyGenericNegative (mensagem) {
     progress: true,
     type: 'negative',
     message: mensagem
+
   })
 
 }

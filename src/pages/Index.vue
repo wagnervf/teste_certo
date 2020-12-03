@@ -4,11 +4,13 @@
       href="index/#conteudoPrincipal"
       id="conteudoPrincipal"
       class="pularNavegacao"
-      >Pular para conteúdo principal</a
-    >
+    >Pular para conteúdo principal</a>
 
-    <section class="text-center gucci1">
-      <q-banner class="bg-grey-1" id="conteudoPrincipal">
+    <section class="text-center ">
+      <q-banner
+        class="bg-grey-1"
+        id="conteudoPrincipal"
+      >
         <h1 class="gucci1 text-h3">Anúncios</h1>
         <q-btn
           class="bg-game6 text-capitalize q-pa-sm"
@@ -23,7 +25,30 @@
       </q-banner>
     </section>
 
-    <section class="bg-white text-center gucci1 q-pa-md q-mb-lg">
+    <q-separator />
+
+    <section>
+      <div class="row justify-start q-pl-sm">
+        <h3 class="gucci1 text-h6">Imóveis em Destaques</h3>
+      </div>
+      <div class="row q-pb-sm">
+        <q-btn
+          class="text-capitalize q-mb-xs"
+          flat
+          color="primary"
+          label="Ver tos anúncio de imóveis"
+          role="Ver tos anúncio de imóveis"
+          icon-right="read_more"
+          :to="'/imoveis'"
+        />
+      </div>
+
+      <cardsDestaques />
+    </section>
+
+    <q-separator />
+
+    <section class="bg-white text-center">
       <q-banner>
         <div class="row fit justify-center q-mb-lg">
           <div class="col-6 col-md-4 q-mx-md">
@@ -58,11 +83,13 @@
       </q-banner>
     </section>
 
-    <section class="bg-grey-2">
+    <q-separator />
+
+    <section>
       <div class="row justify-start q-pl-sm">
         <h3 class="gucci1 text-h6">Imóveis em Destaques</h3>
       </div>
-      <div class="row">
+      <div class="row q-pb-sm">
         <q-btn
           class="text-capitalize q-mb-xs"
           flat
@@ -77,46 +104,8 @@
       <cardsDestaques />
     </section>
 
-    <q-separator />
-
-    <section
-      class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 q-py-md bg-grey-1"
-    >
-      <div class="row justify-end" style="margin-right: 5%">
-        <q-btn
-          class="text-capitalize"
-          flat
-          outline
-          color="primary"
-          label="Ver tos anúncio de automóveis"
-          role="Ver tos anúncio de automóveis"
-        />
-      </div>
-
-      <cardsDestaques />
-    </section>
-
-    <q-separator />
-
-    <section
-      class="justify-center col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 q-py-md"
-    >
-      <div class="row justify-end" style="margin-right: 5%">
-        <q-btn
-          class="text-capitalize"
-          flat
-          outline
-          color="primary"
-          label="Ver tos anúncio de Eletronicos"
-          role="Ver tos anúncio de Eletronicos"
-        />
-      </div>
-
-      <cardsDestaques />
-    </section>
-
-    <section class="text-center gucci1">
-      <q-banner class="shadow-1 bg-grey-1">
+    <section class="text-center">
+      <q-banner>
         <h1 class="gucci1 text-h3">Anunciar</h1>
         <q-btn
           class="bg-game6 text-capitalize"
@@ -171,7 +160,7 @@ export default {
       ogTitle: {
         name: "og:title",
         // optional; similar to titleTemplate, but allows templating with other meta properties
-        template(ogTitle) {
+        template (ogTitle) {
           return `${ogTitle} - O Lugar Certo`;
         },
       },
@@ -209,12 +198,10 @@ export default {
   },
 
   methods: {
-    myTweak(offset) {
+    myTweak (offset) {
       return { minHeight: offset ? `calc(100vh - ${offset}px)` : "100vh" };
     },
   },
 };
 </script>
 
-<style>
-</style>

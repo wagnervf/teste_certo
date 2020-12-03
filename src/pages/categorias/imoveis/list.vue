@@ -22,6 +22,7 @@
         role="link"
         alt=""
         aria-label="Imagem clicável para ver o anúncio completo"
+        style="border-radius: 10px 10px 0px 0px"
       >
         <div class="absolute-bottom-left text-subtitle2">
           <q-icon name="photo_camera" /> 4
@@ -29,21 +30,18 @@
       </q-img>
     </q-card-section>
 
+    <q-card-section class="q-pa-xs">
+      <h2 class="tituloAnuncio q-my-xs q-py-xs">{{anuncioList.titulo}} </h2>
+
+      <div class="subTituloAnuncio">
+        {{anuncioList.tipo}} | {{anuncioList.modalidade}}
+      </div>
+    </q-card-section>
+
     <q-card-section
       class="q-pa-sm"
-      style="height: 130px;"
+      style="height: 70px;"
     >
-      <h2 class="text-h6 q-my-xs">{{anuncioList.titulo}}
-        <q-badge
-          align="top"
-          class="q-pa-xs"
-        >{{anuncioList.modalidade}}</q-badge>
-      </h2>
-
-      <!-- <div class="text-subtitle1 bg-grey-3">
-        {{anuncioList.tipo}}
-      </div> -->
-
       <span class="resumoAnuncio">
         {{anuncioList.descricao}}
       </span>
@@ -61,12 +59,12 @@
 
     <q-card-actions
       tabindex="-1"
-      class="q-px-xs"
+      class="q-px-none"
     >
       <div class="vendedor">
         <!-- <span class="q-px-none">Vendedor</span> -->
         <q-icon
-          class="q-px-sm"
+          class="q-px-none"
           name="person_pin"
           title="Vendedor"
           size="x-large"
@@ -118,13 +116,12 @@
 .my-card
   width: 24%
   max-width: 255px
-  min-width: 170px
-  max-height: 450px
+  min-width: 175px
+  max-height: 430px
   //min-height: 430px
   cursor: pointer
-  margin: 0 auto
-
-  margin-bottom: 8px
+  margin: 10px 5px 10px 5px
+  border-radius: 10px 5px 10px 5px
 
 .my-card:focus
 .my-card:hover

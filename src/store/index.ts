@@ -6,6 +6,7 @@ import Vuex from "vuex"
 import store_auth from "./myStores/store-auth"
 import store_plataform from "./myStores/store_plataform"
 import store_db_firebase from "./myStores/store-db-firebase"
+import store_utils from "./myStores/store-utils"
 //import store_db_anuncios from "./myStores/store-db-anuncios"
 
 /*
@@ -27,6 +28,7 @@ export default (function () {
       store_auth,
       store_plataform,
       store_db_firebase,
+      store_utils
     },
 
     // enable strict mode (adds overhead!)

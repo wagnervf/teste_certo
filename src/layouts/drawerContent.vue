@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="justify-center q-px-sm">
+    <div class=" justify-center q-px-sm">
       <h2 class="game6 q-my-none">
         <q-btn
           flat
@@ -15,9 +15,14 @@
       </h2>
 
       <searchPrincipal />
+
     </div>
 
-    <q-list padding class="font16" role="menu">
+    <q-list
+      padding
+      class="font18"
+      role="menu"
+    >
       <q-item
         v-for="link in links1"
         :key="link.text"
@@ -29,7 +34,11 @@
         active-class="activeColor"
       >
         <q-item-section avatar>
-          <q-icon color="grey" :name="link.icon" />
+          <q-icon
+            color="grey"
+            :name="link.icon"
+          />
+
         </q-item-section>
         <q-item-section role="menuitem">
           <q-item-label role="link">{{ link.text }}</q-item-label>
@@ -65,7 +74,7 @@
         v-for="list in listaMenus"
         :key="list.id"
         padding
-        class="font16 q-py-none"
+        class="font16"
         role="list"
       >
         <q-expansion-item
@@ -77,14 +86,21 @@
         >
           <template v-slot:header>
             <q-item-section avatar>
-              <q-avatar color="grey-3" :icon="list.icon" />
+              <q-avatar
+                color="grey-3"
+                :icon="list.icon"
+              />
             </q-item-section>
             <q-item-section role="menuitem">
               <q-item-label role="lomk">{{ list.label }}</q-item-label>
             </q-item-section>
           </template>
 
-          <q-list v-for="listC in list.children" :key="listC.name" role="menu">
+          <q-list
+            v-for="listC in list.children"
+            :key="listC.name"
+            role="menu"
+          >
             <q-item
               clickable
               v-ripple
@@ -94,11 +110,14 @@
               role="menuitem"
             >
               <q-item-section role="menuitem">
-                <q-item-label role="link">{{ listC.label }}</q-item-label>
-                <q-item-label caption>{{ listC.description }}</q-item-label>
+                <q-item-label role="link">{{listC.label}}</q-item-label>
+                <q-item-label caption>{{listC.description}}</q-item-label>
               </q-item-section>
               <q-item-section avatar>
-                <q-icon color="primary" name="arrow_right" />
+                <q-icon
+                  color="primary"
+                  name="arrow_right"
+                />
               </q-item-section>
             </q-item>
           </q-list>
@@ -107,13 +126,24 @@
 
       <q-separator class="q-mt-md q-mb-xs" />
 
-      <q-item-label header class="text-weight-bold text-uppercase">
+      <q-item-label
+        header
+        class="text-weight-bold text-uppercase"
+      >
         More from Youtube
       </q-item-label>
 
-      <q-item v-for="link in links3" :key="link.text" v-ripple clickable>
+      <q-item
+        v-for="link in links3"
+        :key="link.text"
+        v-ripple
+        clickable
+      >
         <q-item-section avatar>
-          <q-icon color="grey" :name="link.icon" />
+          <q-icon
+            color="grey"
+            :name="link.icon"
+          />
         </q-item-section>
         <q-item-section>
           <q-item-label>{{ link.text }}</q-item-label>
@@ -122,9 +152,17 @@
 
       <q-separator class="q-my-md" />
 
-      <q-item v-for="link in links4" :key="link.text" v-ripple clickable>
+      <q-item
+        v-for="link in links4"
+        :key="link.text"
+        v-ripple
+        clickable
+      >
         <q-item-section avatar>
-          <q-icon color="grey" :name="link.icon" />
+          <q-icon
+            color="grey"
+            :name="link.icon"
+          />
         </q-item-section>
         <q-item-section>
           <q-item-label>{{ link.text }}</q-item-label>
@@ -158,60 +196,64 @@
         </div>
       </div>
     </q-list>
+
   </div>
 </template>
 
 <script>
-import { fabYoutube } from "@quasar/extras/fontawesome-v5";
-import searchPrincipal from "src/components/header/searchPrincipal";
-import listaMenus from "src/dados/listaMenus.json";
+import { fabYoutube } from '@quasar/extras/fontawesome-v5'
+import searchPrincipal from 'src/components/header/searchPrincipal'
+import listaMenus from 'src/dados/listaMenus.json'
 
 export default {
   components: {
-    searchPrincipal,
+    searchPrincipal
   },
-  name: "Drawer",
-  data() {
+  name: 'Drawer',
+  data () {
     return {
       listaMenus: listaMenus,
 
       leftDrawerOpen: false,
       links1: [
-        {
-          icon: "store_mall_directory",
-          to: "/index",
-          text: "Todos Anúncios",
-          active: true,
-        },
-        { icon: "notifications", text: "Notificações", active: false },
-        { icon: "account_circle", text: "Minha Conta", active: false },
+        { icon: 'store_mall_directory', to: '/index', text: 'Todos Anúncios', active: true },
+        { icon: 'notifications', text: 'Notificações', active: false },
+        { icon: 'account_circle', text: 'Minha Conta', active: false }
       ],
       links2: [
-        { icon: "folder", text: "Library" },
-        { icon: "restore", text: "History" },
-        { icon: "watch_later", text: "Watch later" },
-        { icon: "thumb_up_alt", text: "Liked videos" },
+        { icon: 'folder', text: 'Library' },
+        { icon: 'restore', text: 'History' },
+        { icon: 'watch_later', text: 'Watch later' },
+        { icon: 'thumb_up_alt', text: 'Liked videos' }
       ],
       links3: [
-        { icon: fabYoutube, text: "YouTube Premium" },
-        { icon: "local_movies", text: "Movies & Shows" },
-        { icon: "videogame_asset", text: "Gaming" },
-        { icon: "live_tv", text: "Live" },
+        { icon: fabYoutube, text: 'YouTube Premium' },
+        { icon: 'local_movies', text: 'Movies & Shows' },
+        { icon: 'videogame_asset', text: 'Gaming' },
+        { icon: 'live_tv', text: 'Live' }
       ],
       links4: [
-        { icon: "settings", text: "Settings" },
-        { icon: "flag", text: "Report history" },
-        { icon: "help", text: "Help" },
-        { icon: "feedback", text: "Send feedback" },
+        { icon: 'settings', text: 'Settings' },
+        { icon: 'flag', text: 'Report history' },
+        { icon: 'help', text: 'Help' },
+        { icon: 'feedback', text: 'Send feedback' }
       ],
-      buttons1: [{ text: "About" }, { text: "Press" }],
-      buttons2: [{ text: "Terms" }],
-    };
+      buttons1: [
+        { text: 'About' },
+        { text: 'Press' },
+
+
+      ],
+      buttons2: [
+        { text: 'Terms' },
+
+      ]
+    }
   },
-  created() {
-    this.fabYoutube = fabYoutube;
-  },
-};
+  created () {
+    this.fabYoutube = fabYoutube
+  }
+}
 </script>
 
 <style lang="sass">

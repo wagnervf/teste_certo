@@ -20,7 +20,7 @@ const routes: RouteConfig[] = [
       //{ path: '/auth', component: () => import('pages/Auth/Auth.vue') }
 
       { name: 'imoveis', path: '/imoveis', component: () => import('pages/categorias/imoveis/Imoveis.vue') },
-      { name: 'novo-imovel', path: '/imoveis/novo', component: () => import('pages/categorias/imoveis/add.vue') },
+      { name: 'novo-imovel', path: '/imoveis/novo', component: () => import('pages/categorias/imoveis/addForm.vue') },
       { name: 'view-imovel', path: '/imoveis/view/:id', component: () => import('pages/categorias/imoveis/view.vue') },
 
 
@@ -28,14 +28,17 @@ const routes: RouteConfig[] = [
 
     ],
   },
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/LayoutTeste.vue'),
-  //   children: [
-  //     { name: 'inicio', path: '', component: () => import('pages/Index.vue') },
-  //     { name: 'index', path: '/index', component: () => import('pages/Index.vue') },
-  //   ]
-  // },
+
+  {
+    path: '/',
+    component: () => import('layouts/LayoutClean.vue'),
+    children: [
+      { name: 'esporte', path: '/esporte', component: () => import('pages/esportes.vue') },
+
+
+
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it
