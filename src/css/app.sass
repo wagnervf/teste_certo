@@ -2,6 +2,12 @@
   //border-bottom: 1px solid #283041
   background-color: #2955D9
   background: #2955D9
+.w-header
+  height: 45px!important
+
+.w-header .q-toolbar
+  height: 45px!important
+  top: -3px
 
 .q-page
   max-width: 1024px
@@ -46,9 +52,6 @@
   color: #fff
 .linkActive
   border-bottom: 2px solid
-
-.q-item__section.column.q-item__section--main.justify-center:hover
-  //color: #bb2158
 
 .pularNavegacao,
 .pularNavegacao:active,
@@ -114,61 +117,8 @@
   position: absolute
   width: 1px
 
-.formItemList
-  font-size: 16px
-  color: #005cb7
-
-  .formItemList
-.q-item:focus,
-.q-item:hover
-  border-bottom: 1px solid #005cb7
-  line-height: 0.2em
-
-.vendedor
-  display: inline-block !important
-  justify-content: flex-start
-  align-items: center
-  color: #26A69A
-  flex-wrap: wrap
-
-.vendedor:focus,
-.vendedor:hover
-  //background-color: #8827101A
-  cursor: pointer
-  color: #bb2158
-
-.resumoAnuncio
-  font-size: 0.75rem
-  font-weight: 400
-  line-height: 1.25rem
-  letter-spacing: 0.03333em
-  color: #5e5e5e !important
-  text-transform: capitalize
-
-.tituloAnuncio
-  color: #344973
-  font-size: 16px
-  font-weight: unset
-  text-transform: capitalize
-  padding: 2px
-  padding-left: 0px
-  margin-left: 0px
-  margin: 2px
-  letter-spacing: 1px
-  line-height: 1.00rem
-
-.subTituloAnuncio
-  color: #bb2158
-  font-size: 12px
-  font-weight: normal
-  text-transform: capitalize
-  padding: 2px
-  padding-left: 5px
-  margin-left: 0px
-  margin-bottom: 10px
-  margin: 2px
-  letter-spacing: 1px
-  line-height: 0.75rem
+.w-border
+  border: 1px solid #ddd
 
 .q-tab
   min-height: auto
@@ -176,10 +126,10 @@
 .toolbarImoveis
   align-items: start
   flex-wrap: wrap
-  background-color: #fafafa
+
   padding: 5px
   display: inline-block
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12)
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12)
 
 .optionGroupFiltros
   text-align: center
@@ -192,62 +142,9 @@
 .optionGroupFiltros .q-radio .q-radio__label
   padding: 0px
 
-.w-card
-  height: 220px
-  width: 210px
-  text-align: center
-  justify-items: center
-  background-color: #FFF
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2)
-  padding: 20px
-  margin: 5px
-  z-index: 0
-  border-radius: 10px
-  cursor: pointer
-
-.w-card a
-  text-decoration: none!important
-  color: #344973
-
 .w-avatar
   margin: 10% auto
   justify-content: center
-
-@media screen and (max-width: 768px)
-  .w-card
-    height: 180px
-    width: 160px
-    padding: 3px
-
-.w-card:focus
-.w-card:hover
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1)
-  color: #bb2158
-
-.w-card-selecionada
-  color: #bb2158
-  border: 3px solid #bb2158!important
-  border-radius: 10px
-  height: 225px
-  width: 210px
-  text-align: center
-  justify-items: center
-  background-color: #FFF
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2)
-  padding: 10px
-  z-index: 0
-  cursor: pointer
-
-@media screen and (max-width: 768px)
-  .w-card-selecionada
-    height: 185px
-    width: 165px
-    padding: 3px
-
-.w-card-selecionada a
-  text-decoration: none!important
-  color: #344973
 
 .iconCheck
   position: absolute
@@ -335,3 +232,66 @@
 .breadcrumbs-w a
   color: $blue-9!important
   pointer-events: auto
+
+.botoesIniciais
+  font-size: 18px
+  text-transform: capitalize
+  font-weight: 500
+  padding: 8px
+  color: #bb2158
+
+.stepUpload
+  border: 1px solid #ddd
+  padding: 5px
+  min-height: 500px
+  margin-top: 10px
+  margin-bottom: 10px
+
+.w-upload
+  width: 70%
+  margin: 0 auto
+  min-height: 400px
+
+.q-uploader
+  max-height: fit-content
+
+@media screen and (max-width: 768px)
+  .w-upload
+    width: 100%
+
+.w-upload .q-uploader
+  min-height: 600px
+
+.w-upload .q-uploader__file--img
+  color: #fff
+  display: inline-block
+  width: 250px
+  height: 200px
+  // margin: 0 auto
+  background-position: 50% 50%
+  background-size: cover
+  background-repeat: no-repeat
+
+@media screen and ( mix-width: $breakpoint-sm-max  )
+  .imgThumbnail
+    width: 250px
+    height: 200px
+
+.w-upload .q-item__section--thumbnail img
+  width: 130px
+  height: 100%
+  display: block
+  justify-content: left
+
+.btnUpload
+  font-size: 50px
+  display: block
+  color: #80808063
+  margin-top: 5%
+.btnUpload p
+  font-size: 12px
+  margin: 0
+  height: 20px
+
+.btnUpload .q-btn__content
+  display: block

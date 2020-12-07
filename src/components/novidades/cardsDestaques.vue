@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md q-pt-none fit">
+  <div class="q-pb-md q-pt-xs fit">
     <q-tabs
       v-model="tabOrdenacao"
       inline-label

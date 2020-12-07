@@ -4,6 +4,7 @@
       v-if="!telaXS"
       flat
       dense
+      size="large"
       label="O Lugar Certo"
       role="button"
       title="O Lugar Certo"
@@ -17,7 +18,7 @@
       v-if="telaXS"
       flat
       dense
-      size="x-large"
+      size="large"
       label="OLC"
       role="button"
       title="OLC"

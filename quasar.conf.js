@@ -30,7 +30,9 @@ module.exports = configure(function (/* ctx */) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
       'app.sass',
-      'footer.sass',
+      'screen-control.sass',
+      'footer.css',
+      'cards-anuncios.sass',
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras

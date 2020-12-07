@@ -1,9 +1,10 @@
 <template>
-  <q-layout view="hHh lpR lFf">
+  <q-layout view="hHh lpR fff">
     <q-header
       bordered
       reveal
-      class="bg-white text-grey-9"
+      dense
+      class="w-header bg-white text-grey-9"
     >
       <q-toolbar>
         <q-btn
@@ -14,11 +15,11 @@
           @click="drawer = !drawer"
         />
 
-        <logoPrincipal />
+        <header-logo-inicial />
 
         <q-space />
 
-        <listPrincipal />
+        <header-user-login />
       </q-toolbar>
     </q-header>
 
@@ -28,6 +29,7 @@
       side="left"
       role="menubar"
       :width="250"
+      :breakpoint="700"
       bordered
     >
       <q-scroll-area class="fit">
@@ -41,7 +43,9 @@
       </q-page>
     </q-page-container>
 
-    <footerPrincial />
+    <q-footer>
+      <footer-princial />
+    </q-footer>
   </q-layout>
 </template>
 
@@ -49,17 +53,17 @@
 
 <script>
 import mixinUtils from "src/mixins/mixin-utils";
-import footerPrincial from "src/components/footer";
-import listPrincipal from "src/components/header/listPrincipal";
-import logoPrincipal from "src/components/header/logoInicial";
+import footerPrincial from "src/components/estrutura/footer-principal";
+import headerUserLogin from "src/components/estrutura/header-user-login";
+import headerLogoInicial from "src/components/estrutura/header-logo-inicial";
 
 import drawerContent from "./drawerContent";
 export default {
   mixins: [mixinUtils],
   components: {
     footerPrincial,
-    listPrincipal,
-    logoPrincipal,
+    headerUserLogin,
+    headerLogoInicial,
     drawerContent,
   },
 

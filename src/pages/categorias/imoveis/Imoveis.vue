@@ -24,7 +24,8 @@
         inline-label
         mobile-arrows
         outside-arrows
-        class="text-grey-9 q-py-sm bg-grey-1"
+        indicator-color="transparent"
+        class="text-grey-9 q-py-sm"
         active-bg-color="game6"
       >
         <q-tab
@@ -105,6 +106,7 @@
       :filter="filter"
       binary-state-sort
       :pagination.sync="pagination"
+      class="w-table-anuncios"
     >
       <template v-slot:header="props">
         <q-tr
@@ -128,32 +130,63 @@
       </template>
 
       <template v-slot:top>
+        <q-separator />
 
-        <q-toolbar
-          v-if="!telaXS"
-          class="q-px-md bg-grey-1 shadow-1"
-        >
-          <q-input
-            dense
-            outlined
-            debounce="300"
-            v-model="filter"
-            label="Filtrar dados da tabela"
-            v-focus
-            class="col-12"
-            tabindex="0"
-          >
-            <template v-slot:append>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-        </q-toolbar>
+        <div class="row col-12 q-pa-sm ">
+          <h6 class="q-pa-none q-ma-none">Anúncios de Imóveis</h6>
+        </div>
+
+        <div class="row col-12 q-pa-none">
+          <div class="col">
+            <q-toolbar v-if="filterAtivo">
+              <q-input
+                dense
+                outlined
+                debounce="300"
+                v-model="filter"
+                label="Filtrar dados da tabela"
+                v-focus
+                class="col-11"
+                tabindex="0"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </q-toolbar>
+          </div>
+          <div class="col-2 col-sm-4 col-xs-4 text-right q-pr-md">
+            <q-btn
+              class="q-px-none"
+              icon="filter_alt"
+              title="Filtrar dados"
+              flat
+              @click="filterAtivo = !filterAtivo"
+            />
+
+            <q-btn
+              class="q-px-none"
+              icon="view_module"
+              title="Visualizar em Grid"
+              color="primary"
+              flat
+            />
+
+            <q-btn
+              class="q-px-none"
+              icon="view_list"
+              title="Visualizar em Lista"
+              flat
+            />
+
+          </div>
+        </div>
 
       </template>
 
       <template v-slot:item="props">
 
-        <list-dados :anuncioList="props.row" />
+        <cards-anuncios :anuncioList="props.row" />
 
       </template>
 
@@ -165,7 +198,7 @@
 
 <script>
 import mixinUtils from 'src/mixins/mixin-utils'
-import listDados from './list'
+import cardsAnuncios from './cards-anuncios'
 import filterDialogBottom from 'layouts/filterDialogBottom'
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
 import { mapActions } from 'vuex'
@@ -199,14 +232,16 @@ export default {
   },
   mixins: [mixinUtils],
   components: {
-    listDados,
+    cardsAnuncios,
     filterDialogBottom
   },
   data () {
     return {
       sortBy: 'valor',
+
       tabOrdenacao: 'Venda',
       filter: '',
+      filterAtivo: false,
       modelSingle: 'Apple',
       modelMultiple: ['Facebook'],
       options: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
@@ -371,8 +406,6 @@ q-tab__label {
 
 .q-tabs--horizontal .q-tabs__arrow:focus,
 .q-tabs__arrow:hover {
-  background-color: #bb2158;
-  color: #fff;
-  border: 1px solid #fff;
+  border: 1px solid #bb2158;
 }
 </style>

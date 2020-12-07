@@ -2,6 +2,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { Screen } from 'quasar'
 import smoothscroll from 'smoothscroll-polyfill';
 
+import { date } from 'quasar'
+import serviceLocalizacao from "src/services/localizacao/services-consulta-localizacao";
+import { notifyGenericPositive, notifyGenericNegative } from 'src/functions/functions-notify'
 
 
 export default {
@@ -87,7 +90,25 @@ export default {
 
     subir100 () {
       window.scrollBy({ top: -100, left: 0, behavior: 'smooth' });
+    },
+
+    getLocalizacao () {
+      navigator.geolocation.getCurrentPosition(position => {
+
+        this.getEnderecoLocalizacao(position.coords.latitude, position.coords.longitude)
+
+      }, erro => {
+        console.log(erro)
+        notifyGenericNegative('Localização bloqueada pelo navegador!')
+      }, { timeout: 7000 })
+    },
+
+    getEnderecoLocalizacao (latitude, longitute) {
+      serviceLocalizacao.BuscarLocalizacaoService(latitude, longitute).then((resposta) => {
+        console.log(resposta)
+      })
     }
+
 
 
   },
@@ -102,4 +123,10 @@ export default {
       }
     }
   },
+
+  filters: {
+    dataFormatada (value) {
+      return date.formatDate(value, 'D/M/YYYY')
+    }
+  }
 }

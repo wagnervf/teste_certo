@@ -28,16 +28,16 @@
     <q-separator />
 
     <section>
-      <div class="row justify-start q-pl-sm">
+      <div class="row justify-center q-pa-md">
         <h3 class="gucci1 text-h6">Imóveis em Destaques</h3>
       </div>
-      <div class="row q-pb-sm">
+      <div class="q-pa-xs text-right">
         <q-btn
-          class="text-capitalize q-mb-xs"
+          class="text-capitalize q-mb-none"
           flat
           color="primary"
-          label="Ver tos anúncio de imóveis"
-          role="Ver tos anúncio de imóveis"
+          label="Ver todos anúncio de imóveis"
+          role="Ver todos anúncio de imóveis"
           icon-right="read_more"
           :to="'/imoveis'"
         />
@@ -54,8 +54,7 @@
           <div class="col-6 col-md-4 q-mx-md">
             <h1 class="gucci1 text-h3">Lorem ipsum dolor sit amet</h1>
             <p class="gucci1 text-h5">
-              officia reprehenderit iusto optio suscipit, veritatis voluptatum
-              delectus minus illum deserunt laboriosam praesentium.
+              Desapegue daquilo que você não é mais apegado.
             </p>
           </div>
 
@@ -66,7 +65,7 @@
           >
             <figure>
               <q-img
-                src="img/homem.png"
+                src="img/penguin.svg"
                 style="max-width: 150px"
                 alt="Homem feliz caminhando. Ilustração"
               />
@@ -85,52 +84,6 @@
 
     <q-separator />
 
-    <section>
-      <div class="row justify-start q-pl-sm">
-        <h3 class="gucci1 text-h6">Imóveis em Destaques</h3>
-      </div>
-      <div class="row q-pb-sm">
-        <q-btn
-          class="text-capitalize q-mb-xs"
-          flat
-          color="primary"
-          label="Ver tos anúncio de imóveis"
-          role="Ver tos anúncio de imóveis"
-          icon-right="read_more"
-          :to="'/imoveis'"
-        />
-      </div>
-
-      <cardsDestaques />
-    </section>
-
-    <section class="text-center">
-      <q-banner>
-        <h1 class="gucci1 text-h3">Anunciar</h1>
-        <q-btn
-          class="bg-game6 text-capitalize"
-          push
-          size="large"
-          label="Anunciar"
-          role="Anunciar"
-        />
-        <h2 class="text-h6">Desapegue daquilo que você não é mais apegado.</h2>
-        <figure>
-          <q-img
-            src="img/logo-olc.png"
-            style="max-width: 110px"
-            alt="Homem feliz caminhando. Ilustração"
-          />
-          <figcaption
-            class="text-caption"
-            id="tituloDestaque1"
-            style="visibility: hidden"
-          >
-            Homem feliz caminhando. Ilustração
-          </figcaption>
-        </figure>
-      </q-banner>
-    </section>
   </q-page>
 </template>
 

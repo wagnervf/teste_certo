@@ -1,21 +1,20 @@
 <template>
   <div>
-    <div class=" justify-center q-px-sm">
-      <h2 class="game6 q-my-none">
-        <q-btn
-          flat
-          dense
-          label="O Lugar Certo"
-          role="link"
-          title="O Lugar Certo"
-          :to="'/index'"
-          tabindex="0"
-          class="text-h5 text-weight-bold"
+    <div class="justify-center q-pa-sm">
+      <figure class="text-center">
+        <q-img
+          src="img/pinguin_s.jpg"
+          style="max-width: 110px; width: 90px;"
+          alt="Logo do site o lugar certo"
         />
-      </h2>
-
-      <searchPrincipal />
-
+        <figcaption
+          class="text-caption"
+          id="tituloDestaque1"
+          style="visibility: hidden; height: 5px;"
+        >
+          Logo do site o lugar certo
+        </figcaption>
+      </figure>
     </div>
 
     <q-list
@@ -23,7 +22,7 @@
       class="font18"
       role="menu"
     >
-      <q-item
+      <!-- <q-item
         v-for="link in links1"
         :key="link.text"
         exact
@@ -33,7 +32,10 @@
         role="menuitem"
         active-class="activeColor"
       >
-        <q-item-section avatar>
+        <q-item-section
+          avatar
+          style="min-width:0px"
+        >
           <q-icon
             color="grey"
             :name="link.icon"
@@ -43,21 +45,45 @@
         <q-item-section role="menuitem">
           <q-item-label role="link">{{ link.text }}</q-item-label>
         </q-item-section>
+      </q-item> -->
+
+      <q-item role="link">
+        <q-item-section role="link">
+          <q-btn
+            outline
+            dense
+            label="Todos Anúncios"
+            role="link"
+            icon="store_mall_directory"
+            title="Todos Anúncios"
+            :to="'/index'"
+            tabindex="0"
+            size="large"
+            class="botoesIniciais"
+          />
+        </q-item-section>
       </q-item>
 
       <q-item role="link">
         <q-item-section role="link">
           <q-btn
-            class="bg-game6 text-capitalize q-pa-xs"
+            class="botoesIniciais"
+            outline
+            dense
             icon="add"
             size="large"
             label="Inserir Anúncio"
             title="Inserir Anúncio"
-            push
             role="button"
             tabindex="0"
             :to="'/categoria'"
           />
+        </q-item-section>
+      </q-item>
+
+      <q-item role="link">
+        <q-item-section role="link">
+          <header-search-inicial />
         </q-item-section>
       </q-item>
 
@@ -67,14 +93,14 @@
         header
         class="text-weight-bold text-uppercase grey-9 bg-grey3"
       >
-        <label>Categorias</label>
+        <label class="game6">Categorias</label>
       </q-item-label>
 
       <q-list
         v-for="list in listaMenus"
         :key="list.id"
         padding
-        class="font16"
+        class="font16 q-py-none"
         role="list"
       >
         <q-expansion-item
@@ -202,12 +228,12 @@
 
 <script>
 import { fabYoutube } from '@quasar/extras/fontawesome-v5'
-import searchPrincipal from 'src/components/header/searchPrincipal'
+import headerSearchInicial from 'src/components/estrutura/header-search-inicial'
 import listaMenus from 'src/dados/listaMenus.json'
 
 export default {
   components: {
-    searchPrincipal
+    headerSearchInicial
   },
   name: 'Drawer',
   data () {
@@ -217,8 +243,8 @@ export default {
       leftDrawerOpen: false,
       links1: [
         { icon: 'store_mall_directory', to: '/index', text: 'Todos Anúncios', active: true },
-        { icon: 'notifications', text: 'Notificações', active: false },
-        { icon: 'account_circle', text: 'Minha Conta', active: false }
+        // { icon: 'notifications', text: 'Notificações', active: false },
+        // { icon: 'account_circle', text: 'Minha Conta', active: false }
       ],
       links2: [
         { icon: 'folder', text: 'Library' },

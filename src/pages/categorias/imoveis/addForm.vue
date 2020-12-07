@@ -2,6 +2,16 @@
   <div>
     <breadcrumbs :breadcrumbs="breadcrumbs" />
 
+    <q-btn
+      color="purple"
+      size="large"
+      outline
+      @click="getLocalizacao()"
+      label="Localização"
+      class="q-my-sm full-width text-capitalize"
+      icon="my_location"
+    />
+
     <q-form
       v-on:submit.prevent="onSubmit"
       class="wrap justify-center items-start content-start gucci1"
@@ -38,7 +48,7 @@
             </div>
             <q-card
               bordered
-              :class="imovelSelecionado === imovel.name ? 'w-card-selecionada' : 'w-card'"
+              :class="imovelSelecionado === imovel.name ? 'w-card-selecionada' : 'w-card-selecione-modalidade'"
               class="shadow-1"
               v-for="imovel in tipos"
               :key="imovel.id"
@@ -290,58 +300,6 @@
             </div>
             <!-- cep -->
 
-            <div class="row">
-              <div class="col">
-                <label class="text-subtitle2">Contato</label>
-                <q-input
-                  class="col"
-                  type="number"
-                  outlined
-                  v-model="formData.contato"
-                  ref="contato"
-                  clearable
-                  label="Informe o contato do anúnciante"
-                  hint="(99)9999 - 999"
-                  role="form"
-                />
-
-                <q-input
-                  class="col"
-                  type="number"
-                  outlined
-                  v-model="formData.contato"
-                  ref="contato"
-                  clearable
-                  label="Informe o contato do anúnciante"
-                  hint="(99)9999999"
-                  role="form"
-                />
-              </div>
-            </div>
-            <!-- Contato -->
-
-            <div class="row col-12">
-              <label class="text-primary text-h6">Valor</label>
-              <div class="col-12">
-                <q-input
-                  outlined
-                  v-model="formData.valor"
-                  type="number"
-                  prefix="R$"
-                  class="text-h6"
-                  ref="valor"
-                  label="Informe o valor do imóvel anunciado"
-                  role="form"
-                  lazy-rules
-                  :rules="[(val) => (val && val.length > 0) || 'Ops! O Valor é obrigatório']"
-                  required
-                  clearable
-                >
-                </q-input>
-              </div>
-            </div>
-            <!-- Valor -->
-
             <q-expansion-item
               expand-separator
               icon="pool"
@@ -392,16 +350,16 @@
                 </div>
               </div>
               <!-- Detalhes do imóvel -->
-              <q-separator class="q-my-md" />
+              <q-separator class="q-my-sm" />
 
               <div class="row q-mx-sm">
-                <label class="row col-12 q-py-xs q-ma-sm text-primary">Opções</label>
+                <label class="row col-12 q-py-none q-ma-sm text-primary">O imóvel possui</label>
                 <q-checkbox
                   name="piscina"
                   v-model="formData.piscina"
                   true-value="piscina"
-                  label="Possui Piscina"
-                  title="Possui Piscina"
+                  label="Piscina"
+                  title="Piscina"
                   aria-checked="Selecionado"
                   ref="piscina"
                   role="checkbox"
@@ -411,8 +369,8 @@
                   name="academia"
                   v-model="formData.academia"
                   true-value="academia"
-                  label="Possui Academia"
-                  title="Possui Academia"
+                  label="Academia"
+                  title="Academia"
                   aria-selected="Selecionado"
                   ref="academia"
                   role="checkbox"
@@ -422,15 +380,15 @@
                   name="portaria"
                   v-model="formData.portaria"
                   true-value="portaria"
-                  label="Possui Academia"
-                  title="Possui Portaria"
+                  label="Portaria"
+                  title="Portaria"
                   ref="portaria"
                   role="checkbox"
                 />
               </div>
               <!-- Opções do imóvel -->
 
-              <q-separator class="q-my-md" />
+              <q-separator class="q-my-sm" />
 
               <div class="row col-12 q-mx-sm">
                 <label class="row col-12 q-py-xs q-ma-sm text-primary">Condomínio</label>
@@ -464,9 +422,61 @@
               </div>
               <!-- Condomínio -->
 
-            </q-expansion-item>
-          </div>
+            </q-expansion-item> <!-- Opções do Imóvel -->
 
+            <div class="row">
+              <div class="col">
+                <label class="text-subtitle2">Contato</label>
+                <q-input
+                  class="col"
+                  type="number"
+                  outlined
+                  v-model="formData.contato"
+                  ref="contato"
+                  clearable
+                  label="Informe o contato do anúnciante"
+                  hint="(99)9999 - 999"
+                  role="form"
+                />
+
+                <q-input
+                  class="col"
+                  type="number"
+                  outlined
+                  v-model="formData.contato"
+                  ref="contato"
+                  clearable
+                  label="Informe o contato do anúnciante"
+                  hint="(99)9999999"
+                  role="form"
+                />
+              </div>
+            </div>
+            <!-- Contato -->
+
+            <div class="row col-12">
+              <label class="text-primary text-h6">Valor do anúncio</label>
+              <div class="col-12">
+                <q-input
+                  outlined
+                  v-model="formData.valor"
+                  type="number"
+                  prefix="R$"
+                  class="text-h6"
+                  ref="valor"
+                  label="Informe o valor do imóvel anunciado"
+                  role="form"
+                  lazy-rules
+                  :rules="[(val) => (val && val.length > 0) || 'Ops! O Valor é obrigatório']"
+                  required
+                  clearable
+                >
+                </q-input>
+              </div>
+            </div>
+            <!-- Valor -->
+
+          </div>
         </q-step> <!-- Step 2 -->
 
         <q-step
@@ -474,13 +484,13 @@
           title="Anexar as Fotos"
           caption="3/3"
           icon="camera_alt"
-          style="min-height:900px; background: #f1f1f18a;"
-          class="stepAnexarFoto"
+          class="stepUpload"
         >
           <div class="text-center">
             <label class="text-h6 q-my-md">Fotos do anúncio</label>
             <q-uploader
               url="http://localhost:4444/upload"
+              :factory="factoryFn"
               label="Selecione as fotos do anúncio"
               title="Insira as fotos do anúncio"
               ref="fotos"
@@ -490,10 +500,73 @@
               auto-upload
               accept=".jpg, image/*"
               @rejected="onRejected"
-              class="full-width bg-grey-2 q-my-md"
-              style="min-height: 900px"
+              class="w-upload"
               tabindex="0"
             >
+              <template v-slot:list="scope">
+
+                <q-btn
+                  v-if="scope.canAddFiles"
+                  type="a"
+                  icon="cloud_upload"
+                  flat
+                  class="btnUpload"
+                >
+                  <q-uploader-add-trigger />
+                  <p>Clique aqui</p>
+                  <p>ou</p>
+                  <p>Arraste aqui uma imagem</p>
+                </q-btn>
+
+                <q-list separator>
+
+                  <q-item
+                    v-for="file in scope.files"
+                    :key="file.name"
+                  >
+                    <q-item-section
+                      class="imgThumbnail"
+                      v-if="file.__img"
+                      thumbnail
+                    >
+                      <img :src="file.__img.src">
+                    </q-item-section>
+
+                    <q-item-section>
+                      <q-item-label class="full-width ellipsis">
+                        {{ file.name }}
+                      </q-item-label>
+
+                      <q-item-label caption>
+                        Status: {{ file.__status }}
+                      </q-item-label>
+
+                      <q-item-label caption>
+                        {{ file.__sizeLabel }} / {{ file.__progressLabel }}
+                      </q-item-label>
+                    </q-item-section>
+
+                    <q-item-section
+                      top
+                      side
+                      style="justify-content: center"
+                    >
+                      <q-btn
+                        color="red-10"
+                        aria-label="Remover item"
+                        size="12px"
+                        flat
+                        dense
+                        round
+                        icon="delete"
+                        @click="scope.removeFile(file)"
+                        style="margin: 0 auto"
+                      /><span class="text-red-10 font12">Remover</span>
+                    </q-item-section>
+                  </q-item>
+
+                </q-list>
+              </template>
             </q-uploader>
           </div>
         </q-step>
@@ -557,7 +630,7 @@ import mixinUtils from "src/mixins/mixin-utils";
 import serviceCep from "src/services/cep/services-consulta-cep";
 import tabsJson from 'src/dados/TabsIndex.json'
 import { date } from 'quasar'
-import breadcrumbs from 'src/components/breadcrumbs'
+import breadcrumbs from 'src/components/estrutura/breadcrumbs'
 
 
 import {
@@ -601,10 +674,11 @@ export default {
         bairro: "",
         logradouro: "",
         ddd: "",
+        fotosAnuncio: [],
         created: '',
         updated: ''
       },
-      step: 1,
+      step: 3,
       // listaMenus: listaMenus,
       linkTipo: '',
       linkModalidade: '',
@@ -704,6 +778,14 @@ export default {
       // if (!this.$refs.tipo.hasError && !this.$refs.modalidade.hasError) {
       //this.addAnuncioImoveisVenda(this.formData)
       //  }
+    },
+
+    factoryFn (files) {
+      console.log(files)
+      return {
+        url: 'http://localhost:4444/upload',
+        method: 'POST'
+      }
     },
 
     filterFn (val, update) {

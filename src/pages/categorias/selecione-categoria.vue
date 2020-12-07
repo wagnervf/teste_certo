@@ -2,56 +2,59 @@
   <div>
     <breadcrumbs :breadcrumbs="breadcrumbs" />
 
-    <div class="row q-ma-xs">
+    <div class="justify-center bg-grey-1 q-pa-md">
       <div
-        class="text-center col-12"
+        class="q-ma-xs q-pa-xs text-center col-12"
         role="banner"
         tabindex="0"
       >
         <h1
-          v-focus
           tabindex="0"
           class="text-h5"
           aria-label="Selecione uma das categoria abaixo"
         >Selecione a categoria que pretende anunciar</h1>
       </div>
+
+      <div class="flex justify-center">
+        <q-card
+          bordered
+          :class="imovelSelecionado === imovel.name ? 'w-card-selecionada' : 'w-card-selecione-modalidade'"
+          class="shadow-1"
+          v-for="imovel in listaMenus"
+          :key="imovel.id"
+          @click="catergoriaSelecionada(imovel)"
+          tabindex="0"
+          role="link"
+          @keypress="catergoriaSelecionada(imovel)"
+        >
+          <h3 class="text-h6 q-ma-none">{{imovel.label}}</h3>
+          <q-card-section>
+            <q-icon
+              size="4em"
+              :name="imovel.icon"
+              :aria-placeholder="imovel.label"
+              role="img"
+              class="w-avatar"
+            />
+            <figcaption class="escondeVisualmente">{{imovel.label}}</figcaption>
+          </q-card-section>
+
+          <q-separator inset />
+          <q-card-section class="q-pa-xs">
+            <q-item-label role="link">{{ imovel.children.description }}</q-item-label>
+          </q-card-section>
+
+        </q-card>
+
+      </div>
     </div>
 
-    <div class="justify-center col-12 flex bg-grey-1 q-pa-none">
+    <q-separator />
 
-      <q-card
-        bordered
-        :class="imovelSelecionado === imovel.name ? 'w-card-selecionada' : 'w-card'"
-        class="shadow-1"
-        v-for="imovel in listaMenus"
-        :key="imovel.id"
-        @click="catergoriaSelecionada(imovel)"
-        tabindex="0"
-        role="link"
-        @keypress="catergoriaSelecionada(imovel)"
-      >
-        <h3 class="text-h6 q-ma-none">{{imovel.label}}</h3>
-        <q-card-section>
-          <q-icon
-            size="4em"
-            :name="imovel.icon"
-            :aria-placeholder="imovel.label"
-            role="img"
-            class="w-avatar"
-          />
-          <figcaption class="escondeVisualmente">{{imovel.label}}</figcaption>
-        </q-card-section>
-
-        <q-separator inset />
-        <q-card-section class="q-pa-xs">
-          <q-item-label role="link">{{ imovel.children.description }}</q-item-label>
-        </q-card-section>
-
-      </q-card>
-
-    </div>
-
-    <div class="row col-10 content-center q-ma-md">
+    <div
+      class="row col-10 content-center q-ma-md"
+      style="height: 100px;"
+    >
       <q-btn
         @click="avancar()"
         color="primary"
@@ -90,7 +93,7 @@
 import mixinUtils from 'src/mixins/mixin-utils'
 import categorias from 'src/dados/TabsIndex.json'
 import listaMenus from 'src/dados/listaMenus.json'
-import breadcrumbs from 'src/components/breadcrumbs'
+import breadcrumbs from 'src/components/estrutura/breadcrumbs'
 
 
 export default {
@@ -133,7 +136,7 @@ export default {
       this.banner = false
       console.log(value)
       //mixin-utils
-      this.scrollBottom()
+      this.descer(700)
 
 
     },
